@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Pocket Whales.unity
+- path: Assets/Scenes/OpeningMenu.unity
   isLoaded: 1
   isActive: 1
