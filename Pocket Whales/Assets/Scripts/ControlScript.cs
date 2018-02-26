@@ -4,26 +4,26 @@ using UnityEngine;
 
 public class ControlScript : MonoBehaviour {
 
-	public GameObject player1;
+	public GameObject player1; //the player controlled whale
 
-	public GameObject player2;
+	public GameObject player2; //the AI whale
 
-	public bool canMove;
+	public bool canMove; //is the current whale able to move
 
-	public int turn;
+	public int turn; //keeps track of who's turn it is
 
 	public bool looping;
 
-	public int moveTime;
+	public int moveTime; //how long the whale can move for
 
-	public float moveSpeed;
+	public float moveSpeed; //how fast the whale can move
 
 	void Start()
 	{
 		canMove = true;
 		looping = false;
 	}
-
+		
 	public void SwitchPlayerControl() 
 	{
 		print("Turn: " + turn);
