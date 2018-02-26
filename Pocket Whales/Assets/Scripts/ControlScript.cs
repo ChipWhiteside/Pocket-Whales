@@ -4,13 +4,19 @@ using UnityEngine;
 
 public class ControlScript : MonoBehaviour {
 
+	public GameObject player1;
 
+	public GameObject player2;
 
+	public bool canMove;
 
+	public int turn;
 
 	public bool looping;
 
+	public int moveTime;
 
+	public float moveSpeed;
 
 	void Start()
 	{

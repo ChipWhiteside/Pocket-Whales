@@ -36,7 +36,8 @@ public class PlayerController : MonoBehaviour {
 		whaleIdle = Resources.Load<Sprite> ("Whale_Idle");
 		controller = GameObject.Find("Controller");
 		control = controller.GetComponent<ControlScript>();
-		//InvokeRepeating("LaunchTestProjectile", 2.0f, 0.3f); //for the sight line
+		InvokeRepeating("LaunchTestProjectile", 0.3f, 0.2f); //for the sight line
+		//Time.timeScale = 0.5f;
 	}
 
 	void Update ()
@@ -68,19 +69,27 @@ public class PlayerController : MonoBehaviour {
 		}
 	}
 
-	/*void LaunchTestProjectile()
+	/*
+	 * Fires a test shot every .2 seconds that dissapears after .5 seconds.
+	 * */
+	void LaunchTestProjectile()
 	{
-		print("repeating");
 		if(playerNo == control.turn)
 		{
 			Vector3 pos = new Vector3 (0, 1, 0);
-			GameObject splash = Instantiate (testProjectile, transform.position + pos, transform.rotation);
-			splash.SetActive (true);
-			Rigidbody2D splashrb = splash.GetComponent<Rigidbody2D> ();
+			GameObject fakeSplash = Instantiate (testProjectile, transform.position + pos, transform.rotation);
+			fakeSplash.SetActive (true);
+			Rigidbody2D splashrb = fakeSplash.GetComponent<Rigidbody2D> ();
 			Vector3 dir = Quaternion.AngleAxis(angle, Vector3.forward) * Vector3.right;
 			splashrb.AddForce(dir*force);
+			StartCoroutine(DestroyObject(fakeSplash));
 		}
-	}*/
+	}
+
+	IEnumerator DestroyObject(GameObject obj) {
+		yield return new WaitForSeconds(0.5f);
+		Destroy (obj);
+	}
 
 	IEnumerator LaunchAnimation() {
 		yield return new WaitForSeconds(0.5f);
