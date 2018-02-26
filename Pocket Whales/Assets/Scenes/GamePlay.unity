@@ -2324,6 +2324,12 @@ Prefab:
       propertyPath: playerNo
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114532874599239776, guid: e46a770b57fe04b959dbf9ce3ac300dd,
+        type: 2}
+      propertyPath: testProjectile
+      value: 
+      objectReference: {fileID: 1111976580973110, guid: feec19ba61a4446efa328bc321dc8b77,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e46a770b57fe04b959dbf9ce3ac300dd, type: 2}
   m_IsPrefabParent: 0
@@ -2632,6 +2638,12 @@ Prefab:
       propertyPath: playerNo
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 114532874599239776, guid: e46a770b57fe04b959dbf9ce3ac300dd,
+        type: 2}
+      propertyPath: testProjectile
+      value: 
+      objectReference: {fileID: 1111976580973110, guid: feec19ba61a4446efa328bc321dc8b77,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e46a770b57fe04b959dbf9ce3ac300dd, type: 2}
   m_IsPrefabParent: 0
