@@ -22,6 +22,7 @@ public class ControlScript : MonoBehaviour {
 	{
 		canMove = true;
 		looping = false;
+		turn = 1;
 	}
 		
 	public void SwitchPlayerControl() 
@@ -64,5 +65,16 @@ public class ControlScript : MonoBehaviour {
 		}
 		looping = false;
 		rb.velocity = new Vector2 (0, 0);
+	}
+
+	public IEnumerator Pause(int p)
+	{
+		Time.timeScale = 0.1f;
+		float pauseEndTime = Time.realtimeSinceStartup + 1;
+		while (Time.realtimeSinceStartup < pauseEndTime)
+		{
+			yield return 0;
+		}
+		Time.timeScale = 1;
 	}
 }

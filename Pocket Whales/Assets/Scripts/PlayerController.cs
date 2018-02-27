@@ -26,7 +26,9 @@ public class PlayerController : MonoBehaviour {
 
 	public float angle;
 
-	public int playerNo;
+	public int playerNo; // 1 is the player, 2 is the computer
+
+	private bool compMoved = false;
 
 	void Start ()
 	{
@@ -42,7 +44,10 @@ public class PlayerController : MonoBehaviour {
 
 	void Update ()
 	{
-		if (Input.GetKeyDown ("space") && playerNo == control.turn && !control.looping) {
+			
+		if ((Input.GetKeyDown ("space") && control.turn == 1 && !control.looping) || (control.turn == 2 && !control.looping && compMoved)) {
+			if (control.turn == 2)
+				control.Pause (30);
 			print("space key was pressed");
 			Vector3 pos = new Vector3 (0, 1, 0);
 			GameObject splash = Instantiate (projectile, transform.position + pos, transform.rotation); //projectile gets same position and rotation as whale
@@ -53,8 +58,17 @@ public class PlayerController : MonoBehaviour {
 			Vector3 dir = Quaternion.AngleAxis(angle, Vector3.forward) * Vector3.right;
 			splashrb.AddForce(dir*force);
 			control.SwitchPlayerControl();
+			compMoved = false;
 		}
 			
+	}
+
+	/*
+	 * Wait: pauses decision for 1 second(s) to make it feel like player reflexes even though its AI
+	*/
+	IEnumerator waitForTime()
+	{
+		yield return new WaitForSeconds(1);
 	}
 
 	void FixedUpdate ()
@@ -67,11 +81,23 @@ public class PlayerController : MonoBehaviour {
 			if (playerNo == control.turn && control.canMove)
 				control.MoveL (rb);
 		}
+		if (control.turn == 2 && control.canMove) {
+			control.Pause (20);
+			float dir = Random.Range (0, 2);
+			if (dir == 0)
+				control.MoveR (rb);
+			else
+				control.MoveL (rb);
+			compMoved = true;
+		}
 	}
 
+	void shoot() {
+
+	}
 	/*
 	 * Fires a test shot every .2 seconds that dissapears after .5 seconds.
-	 * */
+	 * 
 	void LaunchTestProjectile()
 	{
 		if(playerNo == control.turn)
@@ -85,7 +111,7 @@ public class PlayerController : MonoBehaviour {
 			StartCoroutine(DestroyObject(fakeSplash));
 		}
 	}
-
+*/
 	IEnumerator DestroyObject(GameObject obj) {
 		yield return new WaitForSeconds(0.5f);
 		Destroy (obj);
