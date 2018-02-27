@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ControlScript : MonoBehaviour {
 
+<<<<<<< HEAD
 	public GameObject player1; //the player controlled whale
 
 	public GameObject player2; //the AI whale
@@ -17,6 +18,21 @@ public class ControlScript : MonoBehaviour {
 	public int moveTime; //how long the whale can move for
 
 	public float moveSpeed; //how fast the whale can move
+=======
+	public GameObject player1;
+
+	public GameObject player2;
+
+	public bool canMove;
+
+	public int turn;
+
+	public bool looping;
+
+	public int moveTime;
+
+	public float moveSpeed;
+>>>>>>> d6aa0420e0a9d38a972633de2929c22739447253
 
 	void Start()
 	{
