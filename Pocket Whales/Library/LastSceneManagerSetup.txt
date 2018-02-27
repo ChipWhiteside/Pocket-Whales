@@ -1,8 +1,4 @@
 sceneSetups:
-<<<<<<< HEAD
 - path: Assets/Scenes/Settings.unity
-=======
-- path: Assets/Scenes/Mulitplayer.unity
->>>>>>> f172b4d0b2262108aea8acda535036f2f73a3a83
   isLoaded: 1
   isActive: 1
