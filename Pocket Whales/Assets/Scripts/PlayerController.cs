@@ -45,9 +45,7 @@ public class PlayerController : MonoBehaviour {
 	void Update ()
 	{
 			
-		if ((Input.GetKeyDown ("space") && control.turn == 1 && !control.looping) || (control.turn == 2 && !control.looping && compMoved)) {
-			if (control.turn == 2)
-				control.Pause (30);
+		if (Input.GetKeyDown ("space") && control.turn == playerNo && !control.looping) {
 			print("space key was pressed");
 			Vector3 pos = new Vector3 (0, 1, 0);
 			GameObject splash = Instantiate (projectile, transform.position + pos, transform.rotation); //projectile gets same position and rotation as whale
@@ -80,15 +78,6 @@ public class PlayerController : MonoBehaviour {
 		if (Input.GetKeyDown ("left")) {
 			if (playerNo == control.turn && control.canMove)
 				control.MoveL (rb);
-		}
-		if (control.turn == 2 && control.canMove) {
-			control.Pause (20);
-			float dir = Random.Range (0, 2);
-			if (dir == 0)
-				control.MoveR (rb);
-			else
-				control.MoveL (rb);
-			compMoved = true;
 		}
 	}
 

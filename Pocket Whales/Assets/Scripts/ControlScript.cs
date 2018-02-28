@@ -18,6 +18,8 @@ public class ControlScript : MonoBehaviour {
 
 	public float moveSpeed; //how fast the whale can move
 
+	public bool isCompGame; //if this is a player vs. comp game
+
 	void Start()
 	{
 		canMove = true;
@@ -25,15 +27,24 @@ public class ControlScript : MonoBehaviour {
 		turn = 1;
 	}
 		
+	/*
+	 * id: 0 for a multiplayer game (player vs player) 1 for a computer game (player vs computer) 
+	*/
 	public void SwitchPlayerControl() 
 	{
 		print("Turn: " + turn);
 		if (turn == 1) {
 			player1.GetComponent<PlayerController> ().enabled = false;
 			turn = 2;
-			player2.GetComponent<PlayerController> ().enabled = true;
+			if (isCompGame)
+				player2.GetComponent<CompController> ().enabled = true;
+			else
+				player2.GetComponent<PlayerController> ().enabled = true;
 		} else if (turn == 2) {
-			player2.GetComponent<PlayerController> ().enabled = false;
+			if (isCompGame)
+				player2.GetComponent<CompController> ().enabled = false;
+			else
+				player2.GetComponent<PlayerController> ().enabled = false;
 			turn = 1;
 			player1.GetComponent<PlayerController> ().enabled = true;
 		}
