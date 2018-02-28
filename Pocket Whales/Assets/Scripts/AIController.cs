@@ -58,8 +58,7 @@ public class AIController : MonoBehaviour {
 			Rigidbody2D splashrb = splash.GetComponent<Rigidbody2D> ();
 			Vector3 dir = Quaternion.AngleAxis(angle, Vector3.forward) * Vector3.right;
 			splashrb.AddForce(dir*force);
-			control.SwitchPlayerControl();
-			compMoved = false;
+			StartCoroutine (WaitUntilInactive(splash, splashrb, control));
 		}
 			
 	}
@@ -90,6 +89,24 @@ public class AIController : MonoBehaviour {
 			else
 				control.MoveL (rb);
 			compMoved = true;
+		}
+	}
+
+	/*
+	 * Switches player control once the splash is finished acting
+	 */
+	IEnumerator WaitUntilInactive(GameObject obj, Rigidbody2D rb, ControlScript control) 
+	{
+		while (true) {
+			yield return new WaitForSeconds(1.0f); //check once a second to see if the turn has ended
+			print("is sleeping?");
+			if (rb.IsSleeping ()) {
+				Destroy (obj);
+				print ("Destroyed");
+				control.SwitchPlayerControl ();
+				compMoved = false;
+				yield break;
+			}
 		}
 	}
 

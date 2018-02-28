@@ -38,7 +38,7 @@ public class PlayerController : MonoBehaviour {
 		whaleIdle = Resources.Load<Sprite> ("Whale_Idle");
 		controller = GameObject.Find("Controller");
 		control = controller.GetComponent<ControlScript>();
-		InvokeRepeating("LaunchTestProjectile", 0.3f, 0.2f); //for the sight line
+		//InvokeRepeating("LaunchTestProjectile", 0.3f, 0.2f); //for the sight line
 		//Time.timeScale = 0.5f;
 	}
 
@@ -55,8 +55,8 @@ public class PlayerController : MonoBehaviour {
 			Rigidbody2D splashrb = splash.GetComponent<Rigidbody2D> ();
 			Vector3 dir = Quaternion.AngleAxis(angle, Vector3.forward) * Vector3.right;
 			splashrb.AddForce(dir*force);
-			control.SwitchPlayerControl();
-			compMoved = false;
+			control.TakeControl (control.turn);
+			StartCoroutine (WaitUntilInactive(splash, splashrb, control));
 		}
 			
 	}
@@ -81,6 +81,24 @@ public class PlayerController : MonoBehaviour {
 		}
 	}
 
+	/*
+	 * Switches player control once the splash is finished acting
+	 */
+	IEnumerator WaitUntilInactive(GameObject obj, Rigidbody2D rb, ControlScript control) 
+	{
+		while (true) {
+			yield return new WaitForSeconds(1.0f); //check once a second to see if the turn has ended
+			print("is sleeping?");
+			if (rb.IsSleeping ()) {
+				Destroy (obj);
+				print ("Destroyed");
+				control.SwitchPlayerControl ();
+				compMoved = false;
+				yield break;
+			}
+		}
+	}
+
 	void shoot() {
 
 	}
@@ -101,10 +119,13 @@ public class PlayerController : MonoBehaviour {
 		}
 	}
 */
+
+	/*
 	IEnumerator DestroyObject(GameObject obj) {
 		yield return new WaitForSeconds(0.5f);
 		Destroy (obj);
 	}
+	*/
 
 	IEnumerator LaunchAnimation() {
 		yield return new WaitForSeconds(0.5f);

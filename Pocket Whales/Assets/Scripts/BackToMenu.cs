@@ -9,4 +9,9 @@ public class BackToMenu : MonoBehaviour {
     {
         SceneManager.LoadScene("MainMenu");
     }
+
+	public void About()
+	{
+		SceneManager.LoadScene("AboutGame");
+	}
 }

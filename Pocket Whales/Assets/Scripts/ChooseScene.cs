@@ -20,7 +20,7 @@ public class ChooseScene : MonoBehaviour {
 	}
 
 	public void SinglePlayer () {
-		SceneManager.LoadScene("SinglePlayer");
+		SceneManager.LoadScene("CompGame");
 	}
 
     public void Multiplayer () {

@@ -33,14 +33,14 @@ public class ControlScript : MonoBehaviour {
 	public void SwitchPlayerControl() 
 	{
 		print("Turn: " + turn);
-		if (turn == 1) {
+		if (turn == 1 | turn == 11) {
 			player1.GetComponent<PlayerController> ().enabled = false;
 			turn = 2;
 			if (isCompGame)
 				player2.GetComponent<CompController> ().enabled = true;
 			else
 				player2.GetComponent<PlayerController> ().enabled = true;
-		} else if (turn == 2) {
+		} else if (turn == 2 | turn == 22) {
 			if (isCompGame)
 				player2.GetComponent<CompController> ().enabled = false;
 			else
@@ -50,6 +50,16 @@ public class ControlScript : MonoBehaviour {
 		}
 		canMove = true;
 		print("Turn After: " + turn);
+	}
+
+	/*
+	 * No player can move until SwitchPlayerControl is called again
+	 */
+	public void TakeControl(int player) {
+		if (turn == 1)
+			turn = 11; //arbitrary values to remember which players turn was last
+		else
+			turn = 22;
 	}
 
 	public void MoveR(Rigidbody2D rb) 
