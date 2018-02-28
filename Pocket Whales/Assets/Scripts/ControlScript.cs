@@ -57,7 +57,7 @@ public class ControlScript : MonoBehaviour {
 	 */
 	public void TakeControl(int player) {
 		if (turn == 1)
-			turn = 11; //arbitrary values to remember which players turn was last
+			turn = 11; //arbitrary values to remember which players turn was last but keep control away from players
 		else
 			turn = 22;
 	}
