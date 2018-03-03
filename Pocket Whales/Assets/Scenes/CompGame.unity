@@ -2166,7 +2166,7 @@ MonoBehaviour:
   testProjectile: {fileID: 1111976580973110, guid: feec19ba61a4446efa328bc321dc8b77,
     type: 2}
   launchScript: {fileID: 0}
-  initialAngle: 90
+  initialAngle: 115
   playerNo: 2
 --- !u!1 &1772208203
 GameObject:

@@ -48,7 +48,10 @@ public class CompController : MonoBehaviour {
 	{
 			
 		if (control.turn == 2 && !control.looping && compMoved) {
+			
 			FireProjectile ();
+
+	
 			/*
 			//Pause (100000f);
 			//yield WaitForSeconds (0.25);
@@ -176,7 +179,7 @@ public class CompController : MonoBehaviour {
 		float yOffset = transform.position.y - p.y;
 		print ("yoffset = " + yOffset);
 
-		float initialVelocity = (-1 * (-1 / Mathf.Cos(angle))) * Mathf.Sqrt((0.5f * gravity * Mathf.Pow(distance, 2)) / (-1 * (distance * Mathf.Tan(angle) + yOffset)));
+		float initialVelocity = -1 * (-1 * (-1 / Mathf.Cos(angle))) * Mathf.Sqrt((0.5f * gravity * Mathf.Pow(distance, 2)) / (-1 * (distance * Mathf.Tan(angle) + yOffset)));
 		print ("Mathf.Cos(angle) = " + Mathf.Cos (angle).ToString("n#.########################"));
 		print ("Mathf.Sqrt((0.5f * gravity * Mathf.Pow(distance, 2)) = " + Mathf.Sqrt((0.5f * gravity * Mathf.Pow(distance, 2))));
 		print ("(distance * Mathf.Tan(angle) + yOffset) = " + (distance * Mathf.Tan (angle) + yOffset).ToString("##################"));
@@ -193,7 +196,7 @@ public class CompController : MonoBehaviour {
 		print ("Splashrb.mass = " + splashrb.mass);
 
 		// Fire!
-		splashrb.AddForce(finalVelocity * splashrb.mass/*, ForceMode2D.Impulse*/);
+		splashrb.AddForce(finalVelocity * splashrb.mass, ForceMode2D.Impulse);
 		control.TakeControl (control.turn);
 		StartCoroutine (WaitUntilInactive(splash, splashrb, control));
 
