@@ -20,11 +20,16 @@ public class ControlScript : MonoBehaviour {
 
 	public bool isCompGame; //if this is a player vs. comp game
 
+	public bool playerHit; //if the last shot from the computer whale hit the player
+
+	public GameObject angleAimPoint; //how the AI will choose an angle
+
 	void Start()
 	{
 		canMove = true;
 		looping = false;
 		turn = 1;
+		playerHit = false;
 	}
 		
 	/*
