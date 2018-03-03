@@ -102,6 +102,13 @@ public class PlayerController : MonoBehaviour {
 	void shoot() {
 
 	}
+
+	void OnTriggerEnter() {
+		Destroy(projectile);
+		control.playerHit = true;
+		print ("playerHit = true");
+	}
+
 	/*
 	 * Fires a test shot every .2 seconds that dissapears after .5 seconds.
 	 * 
