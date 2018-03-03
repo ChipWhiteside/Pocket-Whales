@@ -2161,11 +2161,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   force: 1250
+  playerWhale: {fileID: 1126147967}
   projectile: {fileID: 1723537388005514, guid: 5e94264c4d13a4c3fa3e87a1148afa99, type: 2}
   testProjectile: {fileID: 1111976580973110, guid: feec19ba61a4446efa328bc321dc8b77,
     type: 2}
   launchScript: {fileID: 0}
-  angle: 135
+  initialAngle: 90
   playerNo: 2
 --- !u!1 &1772208203
 GameObject:

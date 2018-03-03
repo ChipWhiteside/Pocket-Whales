@@ -32,7 +32,7 @@ public class ControlScript : MonoBehaviour {
 	*/
 	public void SwitchPlayerControl() 
 	{
-		print("Turn: " + turn);
+		//print("Turn: " + turn);
 		if (turn == 1 | turn == 11) {
 			player1.GetComponent<PlayerController> ().enabled = false;
 			turn = 2;
@@ -49,7 +49,7 @@ public class ControlScript : MonoBehaviour {
 			player1.GetComponent<PlayerController> ().enabled = true;
 		}
 		canMove = true;
-		print("Turn After: " + turn);
+		//print("Turn After: " + turn);
 	}
 
 	/*
