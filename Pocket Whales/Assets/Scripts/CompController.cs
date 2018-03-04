@@ -12,7 +12,7 @@ public class CompController : MonoBehaviour {
 
 	private Sprite whaleIdle;
 
-	public float force;
+	//public float force;
 
 	public GameObject playerWhale;
 
@@ -32,8 +32,8 @@ public class CompController : MonoBehaviour {
 
 	private bool compMoved;
 
-	private float rangeLeft = -4f; //inclusive
-	private float rangeRight = 5f; //exclusive
+	private float rangeLeft = -6f; //inclusive
+	private float rangeRight = 7f; //exclusive
 
 	public GameObject angleAimPoint; //how the AI will find the angle to shoot to make it over the mountain
 
@@ -204,12 +204,17 @@ public class CompController : MonoBehaviour {
 		// Planar distance between objects
 		float distance = Vector3.Distance(planarTarget, planarPostion);
 
-		/*
+
 		if (control.playerHit) {
 			rangeLeft -= 2;
 			rangeRight += 2;
+		} else {
+			if (rangeLeft < 0 && rangeRight > 1) {
+				rangeLeft += 2;
+				rangeRight -= 2;
+			}
 		}
-		*/
+		print ("Range: [" + rangeLeft + "," + rangeRight + "]");
 
 		//give a range around the whale where the AI will hit
 		distance = (distance + Random.Range(rangeLeft, rangeRight));

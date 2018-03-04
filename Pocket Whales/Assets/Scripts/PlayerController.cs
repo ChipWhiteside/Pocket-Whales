@@ -103,7 +103,7 @@ public class PlayerController : MonoBehaviour {
 
 	}
 
-	void OnTriggerEnter() {
+	void OnTriggerEnter(Collider projectile) {
 		Destroy(projectile);
 		control.playerHit = true;
 		print ("playerHit = true");

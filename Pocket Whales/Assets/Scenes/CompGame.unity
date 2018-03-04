@@ -1273,31 +1273,6 @@ GameObject:
   m_PrefabParentObject: {fileID: 1605709086953494, guid: e46a770b57fe04b959dbf9ce3ac300dd,
     type: 2}
   m_PrefabInternal: {fileID: 1858410437}
---- !u!61 &1126147968
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1126147967}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 29.320002, y: 12.04}
-    newSize: {x: 29.320002, y: 12.04}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 40, y: 30}
-  m_EdgeRadius: 0
 --- !u!1 &1170289554
 GameObject:
   m_ObjectHideFlags: 0
@@ -2287,7 +2262,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 328795f087a3944fab270fdfd1305e7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  force: 1250
   playerWhale: {fileID: 1126147967}
   projectile: {fileID: 1723537388005514, guid: 5e94264c4d13a4c3fa3e87a1148afa99, type: 2}
   testProjectile: {fileID: 1111976580973110, guid: feec19ba61a4446efa328bc321dc8b77,
