@@ -923,6 +923,7 @@ MeshRenderer:
   m_PrefabInternal: {fileID: 0}
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
   m_GameObject: {fileID: 1064762182}
   m_Enabled: 1
@@ -1151,6 +1152,8 @@ MeshRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
 >>>>>>> 5231d30d8c81ae0a140ba26d2052fca005afe5a4
+=======
+>>>>>>> parent of eb6ba64... Merge branch 'developer' of https://github.com/ChipWhiteside/Pocket-Whales into developer
 =======
 >>>>>>> parent of eb6ba64... Merge branch 'developer' of https://github.com/ChipWhiteside/Pocket-Whales into developer
   m_GameObject: {fileID: 1190302887}

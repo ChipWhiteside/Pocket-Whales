@@ -33,12 +33,15 @@ public class CompController : MonoBehaviour {
 	private bool compMoved;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	private float rangeLeft = -6f; //inclusive
 	private float rangeRight = 7f; //exclusive
 
 	public GameObject angleAimPoint; //how the AI will find the angle to shoot to make it over the mountain
 
 
+=======
+>>>>>>> parent of eb6ba64... Merge branch 'developer' of https://github.com/ChipWhiteside/Pocket-Whales into developer
 =======
 >>>>>>> parent of eb6ba64... Merge branch 'developer' of https://github.com/ChipWhiteside/Pocket-Whales into developer
 	void Start ()
@@ -184,6 +187,7 @@ public class CompController : MonoBehaviour {
 		// Planar distance between objects
 		float distance = Vector3.Distance(planarTarget, planarPostion);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 
 		if (control.playerHit) {
@@ -200,6 +204,8 @@ public class CompController : MonoBehaviour {
 		//give a range around the whale where the AI will hit
 		distance = (distance + Random.Range(rangeLeft, rangeRight));
 
+=======
+>>>>>>> parent of eb6ba64... Merge branch 'developer' of https://github.com/ChipWhiteside/Pocket-Whales into developer
 =======
 >>>>>>> parent of eb6ba64... Merge branch 'developer' of https://github.com/ChipWhiteside/Pocket-Whales into developer
 		print ("distance = " + distance);

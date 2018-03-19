@@ -103,6 +103,7 @@ public class PlayerController : MonoBehaviour {
 
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	void OnTriggerEnter(Collider projectile) {
 		Destroy(projectile);
@@ -110,6 +111,8 @@ public class PlayerController : MonoBehaviour {
 		print ("playerHit = true");
 	}
 
+=======
+>>>>>>> parent of eb6ba64... Merge branch 'developer' of https://github.com/ChipWhiteside/Pocket-Whales into developer
 =======
 >>>>>>> parent of eb6ba64... Merge branch 'developer' of https://github.com/ChipWhiteside/Pocket-Whales into developer
 	/*
