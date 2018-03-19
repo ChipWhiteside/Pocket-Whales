@@ -102,6 +102,7 @@ public class PlayerController : MonoBehaviour {
 	void shoot() {
 
 	}
+<<<<<<< HEAD
 
 	void OnTriggerEnter(Collider projectile) {
 		Destroy(projectile);
@@ -109,6 +110,8 @@ public class PlayerController : MonoBehaviour {
 		print ("playerHit = true");
 	}
 
+=======
+>>>>>>> parent of eb6ba64... Merge branch 'developer' of https://github.com/ChipWhiteside/Pocket-Whales into developer
 	/*
 	 * Fires a test shot every .2 seconds that dissapears after .5 seconds.
 	 * 

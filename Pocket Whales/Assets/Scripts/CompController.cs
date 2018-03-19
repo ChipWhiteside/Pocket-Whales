@@ -26,18 +26,21 @@ public class CompController : MonoBehaviour {
 
 	public LaunchSplash launchScript;
 
-	private float initialAngle;
+	public float initialAngle;
 
 	public int playerNo; // 1 is the player, 2 is the computer
 
 	private bool compMoved;
 
+<<<<<<< HEAD
 	private float rangeLeft = -6f; //inclusive
 	private float rangeRight = 7f; //exclusive
 
 	public GameObject angleAimPoint; //how the AI will find the angle to shoot to make it over the mountain
 
 
+=======
+>>>>>>> parent of eb6ba64... Merge branch 'developer' of https://github.com/ChipWhiteside/Pocket-Whales into developer
 	void Start ()
 	{
 		rb = GetComponent<Rigidbody2D> ();
@@ -156,30 +159,7 @@ public class CompController : MonoBehaviour {
 		sr.sprite = whaleIdle;
 	}
 
-	void CalculateAngle() {
-		Vector3 box = angleAimPoint.transform.position;
-
-		/*
-		Vector3 boxPos = new Vector3(box.x, 0, box.z);
-		Vector3 compWhalePos = new Vector3(transform.position.x, 0, transform.position.z);
-
-		// Planar distance between objects
-		float distance = Vector3.Distance(boxPos, compWhalePos);
-		*/
-
-		float xDistance = Mathf.Abs (box.x - transform.position.x);
-		float yDistance = Mathf.Abs (box.y - transform.position.y);
-		print ("xDistance = " + xDistance);
-		print ("yDistance = " + yDistance);
-
-		initialAngle = (180 * Mathf.Deg2Rad) -Mathf.Atan (yDistance/xDistance);
-		print ("initalAngle = " + initialAngle * Mathf.Rad2Deg);
-
-	}
-
 	void FireProjectile() {
-
-		CalculateAngle ();
 		//Transform target;
 
 		//float initialAngle;
@@ -194,7 +174,7 @@ public class CompController : MonoBehaviour {
 
 		float gravity = Physics.gravity.magnitude;
 		// Selected angle in radians
-		float angle = initialAngle/* * Mathf.Deg2Rad*/;
+		float angle = initialAngle * Mathf.Deg2Rad;
 		print ("angle = " + angle);
 
 		// Positions of this object and the target on the same plane
@@ -203,6 +183,7 @@ public class CompController : MonoBehaviour {
 
 		// Planar distance between objects
 		float distance = Vector3.Distance(planarTarget, planarPostion);
+<<<<<<< HEAD
 
 
 		if (control.playerHit) {
@@ -219,6 +200,8 @@ public class CompController : MonoBehaviour {
 		//give a range around the whale where the AI will hit
 		distance = (distance + Random.Range(rangeLeft, rangeRight));
 
+=======
+>>>>>>> parent of eb6ba64... Merge branch 'developer' of https://github.com/ChipWhiteside/Pocket-Whales into developer
 		print ("distance = " + distance);
 		// Distance along the y axis between objects
 		float yOffset = transform.position.y - p.y;
