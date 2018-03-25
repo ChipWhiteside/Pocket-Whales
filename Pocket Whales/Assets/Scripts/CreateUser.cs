@@ -37,7 +37,7 @@ public class CreateUser : MonoBehaviour {
 				Debug.Log ("passwords dont match");
 			else {
 				Debug.Log ("calling Create User");
-				createUser(Username, Password);
+				StartCoroutine(createUser(Username, Password));
 			}
 		}
 		else
