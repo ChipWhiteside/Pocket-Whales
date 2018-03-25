@@ -19,10 +19,12 @@ public class ControlScript : MonoBehaviour {
 	public float moveSpeed; //how fast the whale can move
 
 	public bool isCompGame; //if this is a player vs. comp game
+	public bool playerHit;
 
 	void Start()
 	{
 		canMove = true;
+		playerHit = false;
 		looping = false;
 		turn = 1;
 	}

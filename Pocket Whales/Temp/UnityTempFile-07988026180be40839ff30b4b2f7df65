@@ -100,6 +100,7 @@
 -define:UNITY_2017
 -define:PLATFORM_ARCH_64
 -define:UNITY_64
+-define:UNITY_ANALYTICS
 -define:ENABLE_AUDIO
 -define:ENABLE_CACHING
 -define:ENABLE_CLOTH
@@ -185,14 +186,18 @@
 -define:UNITY_EDITOR_OSX
 -define:ENABLE_NATIVE_ARRAY_CHECKS
 -define:UNITY_TEAM_LICENSE
+'Assets/EmptyClass.cs'
 'Assets/Scripts/About.cs'
 'Assets/Scripts/AIController.cs'
 'Assets/Scripts/BackToMenu.cs'
 'Assets/Scripts/ChooseScene.cs'
 'Assets/Scripts/CompController.cs'
 'Assets/Scripts/ControlScript.cs'
+'Assets/Scripts/CreateUser.cs'
+'Assets/Scripts/dbConnect.cs'
 'Assets/Scripts/LaunchSplash.cs'
 'Assets/Scripts/LittleMovement.cs'
+'Assets/Scripts/Login.cs'
 'Assets/Scripts/movement.cs'
 'Assets/Scripts/PlayerController.cs'
 'Assets/Scripts/VolumeScript.cs'
