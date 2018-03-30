@@ -5,12 +5,29 @@ using System.Text.RegularExpressions;
 using UnityEngine.UI;
 
 public class CreateUser : MonoBehaviour {
+	/*
+	 * game object for user entry of username
+	 */
 	public GameObject username ;
+	/*
+	 * game object for user entry of password
+	 */
 	public GameObject password ;
+	/*
+	 * game object for user entry of password to ensure they can remember it
+	 */
 	public GameObject confirmPassword;
-
+	/*
+	 * string version of username
+	 */
 	private string Username;
+	/*
+	 * 
+	 */
 	private string Password;
+	/*
+	 * 
+	 */
 	private string ConfirmPassword;
 
 	// Use this for initialization
@@ -49,7 +66,7 @@ public class CreateUser : MonoBehaviour {
 		WWWForm form = new WWWForm();
 		form.AddField ("username", Username);
 		form.AddField ("password", Password);
-		WWW www = new WWW ("http://localhost/makeUser.php", form);
+		WWW www = new WWW ("https://csweb.wheaton.edu/~pocketwhales/makeUser.php", form);
 		yield return www;
 		Debug.Log (www.text);
 	}
