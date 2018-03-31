@@ -32,3 +32,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Register.unity
     guid: 590904bf229a54b6f8565d6294d54497
+  - enabled: 1
+    path: Assets/Scenes/SinglePlayer.unity
+    guid: 8f402c6fd9d9c45fbac1b76b3d300509
