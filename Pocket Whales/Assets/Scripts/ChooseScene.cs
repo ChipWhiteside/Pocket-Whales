@@ -32,4 +32,7 @@ public class ChooseScene : MonoBehaviour {
 	public void Register(){
 		SceneManager.LoadScene ("Register");
 	}
+	public void SinglePlayerMenu(){
+		SceneManager.LoadScene ("SinglePlayerMenu");
+	}
 }

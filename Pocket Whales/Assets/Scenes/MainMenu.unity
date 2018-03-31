@@ -190,7 +190,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2118310710}
-        m_MethodName: SinglePlayer
+        m_MethodName: SinglePlayerMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -783,6 +783,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b264156c61a341099f46c5606904b1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  volume: {fileID: 0}
+  myMusic: {fileID: 0}
+  volumeText: {fileID: 0}
 --- !u!1 &916823982
 GameObject:
   m_ObjectHideFlags: 0
