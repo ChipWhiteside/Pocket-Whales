@@ -6,8 +6,8 @@ using UnityEngine.UI;
 using System.Text.RegularExpressions;
 
 public class GameManager : MonoBehaviour {
-
-	public string username;
+	public Scene currentScene;
+	public static string username;
 	public static GameManager instance = null;
 	// Use this for initialization
 
@@ -28,8 +28,13 @@ public class GameManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		
-		if (username != "")
-			Debug.Log (username);
+		currentScene = SceneManager.GetActiveScene ();
+		if (currentScene.name == "MainMenu" && username != "") {
+			Text welcomeText = GameObject.Find ("HelloText").GetComponent<Text> ();
+			welcomeText.text = "Hello " + username + "!";
+
+		}
+	
 		
 	}
 

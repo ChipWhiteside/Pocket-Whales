@@ -73,6 +73,12 @@ public class CreateUser : MonoBehaviour {
 		form.AddField ("password", Password);
 		WWW www = new WWW ("https://csweb.wheaton.edu/~pocketwhales/makeUser.php", form);
 		yield return www;
+		string reply = www.text;
+		if (reply.Contains("1")) {
+			Debug.Log ("in ");
+			GameManager.username = Username;
+
+		}
 		Debug.Log (www.text);
 	}
 }

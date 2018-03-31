@@ -11,7 +11,7 @@ public class Loader : MonoBehaviour {
 	}
 	
 	public IEnumerator LoadUp(){
-		yield return new WaitForSeconds (5);
+		yield return new WaitForSeconds (2);
 		if (GameManager.instance == null)
 			Instantiate (gameManager);
 	}

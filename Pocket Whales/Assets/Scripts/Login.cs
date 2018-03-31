@@ -83,11 +83,12 @@ public class Login : MonoBehaviour {
 
 		//what does the server say?
 		string reply = www.text;
-		Debug.Log (reply);
-		if (reply == "gooooooood!!") {
+	
+		if (reply.Contains("1")) {
 			Debug.Log ("in ");
-			GameManager.instance.username = Username;
+			GameManager.username = Username;
 
 		}
+		Debug.Log (reply);
 	}
 }

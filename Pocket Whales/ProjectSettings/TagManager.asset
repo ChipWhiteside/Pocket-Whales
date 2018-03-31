@@ -7,6 +7,7 @@ TagManager:
   - music
   - slider
   - Volume Text
+  - Hello
   layers:
   - Default
   - TransparentFX
