@@ -26,4 +26,10 @@ public class ChooseScene : MonoBehaviour {
     public void Multiplayer () {
 		SceneManager.LoadScene("Multiplayer");
 	}
+	public void Profile(){
+		SceneManager.LoadScene ("Login");
+	}
+	public void Register(){
+		SceneManager.LoadScene ("Register");
+	}
 }

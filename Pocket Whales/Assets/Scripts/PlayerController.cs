@@ -46,7 +46,7 @@ public class PlayerController : MonoBehaviour {
 	{
 			
 		if (Input.GetKeyDown ("space") && control.turn == playerNo && !control.looping) {
-			print("space key was pressed");
+			//print("space key was pressed");
 			Vector3 pos = new Vector3 (0, 1, 0);
 			GameObject splash = Instantiate (projectile, transform.position + pos, transform.rotation); //projectile gets same position and rotation as whale
 			splash.SetActive (true);
@@ -88,10 +88,10 @@ public class PlayerController : MonoBehaviour {
 	{
 		while (true) {
 			yield return new WaitForSeconds(1.0f); //check once a second to see if the turn has ended
-			print("is sleeping?");
+			//print("is sleeping?");
 			if (rb.IsSleeping ()) {
 				Destroy (obj);
-				print ("Destroyed");
+				//print ("Destroyed");
 				control.SwitchPlayerControl ();
 				compMoved = false;
 				yield break;
@@ -102,6 +102,15 @@ public class PlayerController : MonoBehaviour {
 	void shoot() {
 
 	}
+
+
+	void OnTriggerEnter(Collider projectile) {
+		Destroy(projectile);
+		control.playerHit = true;
+		print ("playerHit = true");
+	}
+
+
 	/*
 	 * Fires a test shot every .2 seconds that dissapears after .5 seconds.
 	 * 

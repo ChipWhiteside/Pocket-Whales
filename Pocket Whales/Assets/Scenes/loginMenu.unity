@@ -206,6 +206,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d064e55ea44984140b779856b0b89571, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inputUserName: 
-  inputPassword: 
-  CreateUserURL: http://localhost/pocketwhales.php
