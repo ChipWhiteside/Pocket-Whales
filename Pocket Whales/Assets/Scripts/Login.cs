@@ -6,6 +6,7 @@ using System.Text.RegularExpressions;
 
 
 public class Login : MonoBehaviour {
+	public GameManager game;
 	/*
 	 * This will hold the user name that the player inputs
 	 * 
@@ -38,8 +39,7 @@ public class Login : MonoBehaviour {
 	void Update () {
 
 		// convert cgame object to string and save it
-		Username = username.GetComponent<InputField> ().text;
-		Password = password.GetComponent<InputField> ().text;
+
 
 		/*if (Input.GetKeyDown (KeyCode.L)) {
 			if(Username != "" && Password != "")
@@ -53,8 +53,13 @@ public class Login : MonoBehaviour {
 	 * 
 	 */
 	void checkEntries(){
-		if (Username != "" && Password != "")
+		if (Username != "" && Password != "") {
+			Username = username.GetComponent<InputField> ().text;
+			Password = password.GetComponent<InputField> ().text;
+
 			StartCoroutine (login (Username, Password));
+
+		}
 		else
 			Debug.Log ("No info");
 	}
@@ -78,5 +83,9 @@ public class Login : MonoBehaviour {
 
 		//what does the server say?
 		Debug.Log (www.text);
+		if (www.text == "gooooooood!!")
+			game.username = Username;
+
+
 	}
 }

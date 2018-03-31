@@ -24,7 +24,9 @@ public class Music : MonoBehaviour {
 		if (music.Length > 1)
 			Destroy (this.gameObject); //destroy any other music 
 		DontDestroyOnLoad (this.gameObject); //dont destroy this other one
-
+		volumeText = null;
+		volume = null;
+		myMusic = null;
 
 
 	}
@@ -49,10 +51,10 @@ public class Music : MonoBehaviour {
 			Text[] texts = Text.FindObjectsOfType (typeof (Text)) as Text[];
 			//identify the one we want
 			volumeText = texts [1];
-
+			//udjust accordingly
+			myMusic.volume = volume.value;
+			volumeText.text = "Volume: " + ((int)(volume.value * 100)).ToString();
 		}
-		//udjust accordingly
-		 myMusic.volume = volume.value;
-		volumeText.text = "Volume: " + ((int)(volume.value * 100)).ToString();
+	
 	}
 }

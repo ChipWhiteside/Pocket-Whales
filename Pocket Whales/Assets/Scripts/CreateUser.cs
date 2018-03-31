@@ -33,6 +33,11 @@ public class CreateUser : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		
+		Username = null;
+
+		Password = null;
+
+		ConfirmPassword = null;
 	}
 	
 	// Update is called once per frame

@@ -338,7 +338,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 81315796}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0df3bde41a08ae547ac2104bf501b76a, type: 3}
+  m_Script: {fileID: 11500000, guid: d84903653a5ab4f6283435ef2eb4a1f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &145748130
@@ -1141,7 +1141,7 @@ GameObject:
   - component: {fileID: 1298875943}
   - component: {fileID: 1298875942}
   m_Layer: 5
-  m_Name: Button
+  m_Name: BackButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
