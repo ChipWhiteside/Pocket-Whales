@@ -6,7 +6,7 @@ using System.Text.RegularExpressions;
 
 
 public class Login : MonoBehaviour {
-	public GameManager game;
+	
 	/*
 	 * This will hold the user name that the player inputs
 	 * 
@@ -82,10 +82,12 @@ public class Login : MonoBehaviour {
 		yield return www;
 
 		//what does the server say?
-		Debug.Log (www.text);
-		if (www.text == "gooooooood!!")
-			game.username = Username;
+		string reply = www.text;
+		Debug.Log (reply);
+		if (reply == "gooooooood!!") {
+			Debug.Log ("in ");
+			GameManager.instance.username = Username;
 
-
+		}
 	}
 }

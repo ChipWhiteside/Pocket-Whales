@@ -935,7 +935,6 @@ GameObject:
   - component: {fileID: 1078308095}
   - component: {fileID: 1078308094}
   - component: {fileID: 1078308093}
-  - component: {fileID: 1078308098}
   - component: {fileID: 1078308097}
   m_Layer: 0
   m_Name: Main Camera
@@ -1021,18 +1020,6 @@ MonoBehaviour:
   game: {fileID: 0}
   username: {fileID: 0}
   password: {fileID: 0}
---- !u!114 &1078308098
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1078308092}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d84903653a5ab4f6283435ef2eb4a1f6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  username: 
 --- !u!1 &1190590258
 GameObject:
   m_ObjectHideFlags: 0
@@ -1391,7 +1378,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1078308098}
+      - m_Target: {fileID: 114632010914240144, guid: b4208dd2b19084793a014c36b2460aa2,
+          type: 2}
         m_MethodName: MainMenu
         m_Mode: 1
         m_Arguments:
@@ -1581,7 +1569,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1078308098}
+      - m_Target: {fileID: 114632010914240144, guid: b4208dd2b19084793a014c36b2460aa2,
+          type: 2}
         m_MethodName: Register
         m_Mode: 1
         m_Arguments:

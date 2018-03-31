@@ -189,7 +189,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2118310710}
+      - m_Target: {fileID: 114632010914240144, guid: b4208dd2b19084793a014c36b2460aa2,
+          type: 2}
         m_MethodName: SinglePlayerMenu
         m_Mode: 1
         m_Arguments:
@@ -616,7 +617,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2118310710}
+      - m_Target: {fileID: 114632010914240144, guid: b4208dd2b19084793a014c36b2460aa2,
+          type: 2}
         m_MethodName: Multiplayer
         m_Mode: 1
         m_Arguments:
@@ -862,7 +864,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2118310710}
+      - m_Target: {fileID: 114632010914240144, guid: b4208dd2b19084793a014c36b2460aa2,
+          type: 2}
         m_MethodName: Settings
         m_Mode: 1
         m_Arguments:
@@ -1393,7 +1396,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2118310710}
+      - m_Target: {fileID: 114632010914240144, guid: b4208dd2b19084793a014c36b2460aa2,
+          type: 2}
         m_MethodName: Profile
         m_Mode: 1
         m_Arguments:
@@ -1450,7 +1454,6 @@ GameObject:
   - component: {fileID: 2118310708}
   - component: {fileID: 2118310707}
   - component: {fileID: 2118310706}
-  - component: {fileID: 2118310710}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1521,15 +1524,3 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2118310710
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2118310705}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d84903653a5ab4f6283435ef2eb4a1f6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  username: 

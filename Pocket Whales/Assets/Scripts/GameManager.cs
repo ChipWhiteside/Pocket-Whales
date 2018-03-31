@@ -8,17 +8,22 @@ using System.Text.RegularExpressions;
 public class GameManager : MonoBehaviour {
 
 	public string username;
-
+	public static GameManager instance = null;
 	// Use this for initialization
 
 	void Awake(){
 
 		username = "";
+		if (instance == null) {
+			instance = this;
+		} else if (instance != null) {
+			DestroyObject (gameObject);
 
+		}
+		DontDestroyOnLoad (gameObject);
+		MainMenu();
 	}
-	void Start () {
-		
-	}
+
 	
 	// Update is called once per frame
 	void Update () {
