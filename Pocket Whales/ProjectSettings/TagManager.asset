@@ -17,8 +17,8 @@ TagManager:
   - UI
   - 
   - 
-  - 
-  - 
+  - Clouds
+  - Ground
   - 
   - 
   - 
@@ -42,6 +42,12 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Ground
+    uniqueID: 3269074947
+    locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Clouds
+    uniqueID: 89161893
     locked: 0

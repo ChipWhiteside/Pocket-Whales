@@ -39,12 +39,12 @@ public class ControlScript : MonoBehaviour {
 			player1.GetComponent<PlayerController> ().enabled = false;
 			turn = 2;
 			if (isCompGame)
-				player2.GetComponent<CompController> ().enabled = true;
+				player2.GetComponent<SmartCompController> ().enabled = true;
 			else
 				player2.GetComponent<PlayerController> ().enabled = true;
 		} else if (turn == 2 | turn == 22) {
 			if (isCompGame)
-				player2.GetComponent<CompController> ().enabled = false;
+				player2.GetComponent<SmartCompController> ().enabled = false;
 			else
 				player2.GetComponent<PlayerController> ().enabled = false;
 			turn = 1;
