@@ -12,7 +12,9 @@ public class CompController : MonoBehaviour {
 
 	private Sprite whaleIdle;
 
-	public float force;
+	//public float force;
+
+	public GameObject playerWhale;
 
 	public GameObject projectile;
 
@@ -24,11 +26,19 @@ public class CompController : MonoBehaviour {
 
 	private LaunchSplash launchScript;
 
-	public float angle;
+	public float initialAngle;
 
 	public int playerNo; // 1 is the player, 2 is the computer
 
 	private bool compMoved;
+
+
+	private float rangeLeft = -6f; //inclusive
+	private float rangeRight = 7f; //exclusive
+
+	public GameObject angleAimPoint; //how the AI will find the angle to shoot to make it over the mountain
+
+
 
 	void Start ()
 	{
@@ -46,6 +56,11 @@ public class CompController : MonoBehaviour {
 	{
 			
 		if (control.turn == 2 && !control.looping && compMoved) {
+			
+			FireProjectile ();
+
+	
+			/*
 			//Pause (100000f);
 			//yield WaitForSeconds (0.25);
 			Vector3 pos = new Vector3 (0, 1, 0);
@@ -54,10 +69,11 @@ public class CompController : MonoBehaviour {
 			sr.sprite = whaleActive;
 			StartCoroutine(LaunchAnimation());
 			Rigidbody2D splashrb = splash.GetComponent<Rigidbody2D> ();
-			Vector3 dir = Quaternion.AngleAxis(angle, Vector3.forward) * Vector3.right;
+			Vector3 dir = Quaternion.AngleAxis(initialAngle, Vector3.forward) * Vector3.right;
 			splashrb.AddForce(dir*force);
 			control.TakeControl (control.turn);
 			StartCoroutine (WaitUntilInactive(splash, splashrb, control));
+			*/
 		}
 			
 	}
@@ -90,10 +106,10 @@ public class CompController : MonoBehaviour {
 	{
 		while (true) {
 			yield return new WaitForSeconds(1.0f); //check once a second to see if the turn has ended
-			print("is sleeping?");
+			//print("is sleeping?");
 			if (rb.IsSleeping ()) {
 				Destroy (obj);
-				print ("Destroyed");
+				//print ("Destroyed");
 				control.SwitchPlayerControl ();
 				compMoved = false;
 				yield break;
@@ -140,6 +156,76 @@ public class CompController : MonoBehaviour {
 	IEnumerator LaunchAnimation() {
 		yield return new WaitForSeconds(0.5f);
 		sr.sprite = whaleIdle;
+	}
+
+	void FireProjectile() {
+		//Transform target;
+
+		//float initialAngle;
+		Vector3 pos = new Vector3 (0, 1, 0); //position of the computer whale
+		GameObject splash = Instantiate (projectile, transform.position + pos, transform.rotation); //projectile gets same position and rotation as whale
+		splash.SetActive (true);
+		Rigidbody2D splashrb = splash.GetComponent<Rigidbody2D> ();
+
+		var rigid = GetComponent<Rigidbody>();
+
+		Vector3 p = playerWhale.transform.position;
+
+		float gravity = Physics.gravity.magnitude;
+		// Selected angle in radians
+		float angle = initialAngle * Mathf.Deg2Rad;
+		print ("angle = " + angle);
+
+		// Positions of this object and the target on the same plane
+		Vector3 planarTarget = new Vector3(p.x, 0, p.z);
+		Vector3 planarPostion = new Vector3(transform.position.x, 0, transform.position.z);
+
+		// Planar distance between objects
+		float distance = Vector3.Distance(planarTarget, planarPostion);
+
+
+		if (control.playerHit) {
+			rangeLeft -= 2;
+			rangeRight += 2;
+		} else {
+			if (rangeLeft < 0 && rangeRight > 1) {
+				rangeLeft += 2;
+				rangeRight -= 2;
+			}
+		}
+		print ("Range: [" + rangeLeft + "," + rangeRight + "]");
+
+		//give a range around the whale where the AI will hit
+		distance = (distance + Random.Range(rangeLeft, rangeRight));
+
+		print ("distance = " + distance);
+		// Distance along the y axis between objects
+		float yOffset = transform.position.y - p.y;
+		print ("yoffset = " + yOffset);
+
+		float initialVelocity = -1 * (-1 * (-1 / Mathf.Cos(angle))) * Mathf.Sqrt((0.5f * gravity * Mathf.Pow(distance, 2)) / (-1 * (distance * Mathf.Tan(angle) + yOffset)));
+		print ("Mathf.Cos(angle) = " + Mathf.Cos (angle).ToString("n#.########################"));
+		print ("Mathf.Sqrt((0.5f * gravity * Mathf.Pow(distance, 2)) = " + Mathf.Sqrt((0.5f * gravity * Mathf.Pow(distance, 2))));
+		print ("(distance * Mathf.Tan(angle) + yOffset) = " + (distance * Mathf.Tan (angle) + yOffset).ToString("##################"));
+	
+		print ("InitialVelocity = " + initialVelocity);
+
+		Vector3 velocity = new Vector3(0, initialVelocity * Mathf.Sin(angle), initialVelocity * Mathf.Cos(angle));
+		print ("Velocity = " + velocity);
+
+		// Rotate our velocity to match the direction between the two objects
+		float angleBetweenObjects = Vector3.Angle(Vector3.forward, planarTarget - planarPostion);
+		Vector3 finalVelocity = Quaternion.AngleAxis(angleBetweenObjects, Vector3.up) * velocity;
+		print ("Final Velocity = " + finalVelocity);
+		print ("Splashrb.mass = " + splashrb.mass);
+
+		// Fire!
+		splashrb.AddForce(finalVelocity * splashrb.mass, ForceMode2D.Impulse);
+		control.TakeControl (control.turn);
+		StartCoroutine (WaitUntilInactive(splash, splashrb, control));
+
+
+
 	}
 
 
