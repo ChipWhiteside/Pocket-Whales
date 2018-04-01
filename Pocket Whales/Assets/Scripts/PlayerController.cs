@@ -22,7 +22,7 @@ public class PlayerController : MonoBehaviour {
 
 	private ControlScript control;
 
-	public LaunchSplash launchScript;
+	private LaunchSplash launchScript;
 
 	public float angle;
 
