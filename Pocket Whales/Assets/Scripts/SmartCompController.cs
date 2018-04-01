@@ -32,8 +32,8 @@ public class SmartCompController : MonoBehaviour {
 
 	private bool compMoved;
 
-	private float rangeLeft = -6f; //inclusive
-	private float rangeRight = 6f; //inclusive
+	private float rangeLeft = -3f; //inclusive
+	private float rangeRight = 3f; //inclusive
 
 	public GameObject angleAimPoint; //how the AI will find the angle to shoot to make it over the mountain
 
@@ -46,8 +46,6 @@ public class SmartCompController : MonoBehaviour {
 		whaleIdle = Resources.Load<Sprite> ("Whale_Idle");
 		controller = GameObject.Find("Controller");
 		control = controller.GetComponent<ControlScript>();
-		//InvokeRepeating("LaunchTestProjectile", 0.3f, 0.2f); //for the sight line
-		//Time.timeScale = 0.5f;
 	}
 
 	void Update ()
@@ -59,28 +57,15 @@ public class SmartCompController : MonoBehaviour {
 			splash.SetActive (true);
 			Rigidbody2D splashrb = splash.GetComponent<Rigidbody2D> ();
 
-			Vector3 vector = CalculateTrajectoryVelocity(transform.position, playerWhale.transform.position, 5);
+			float rangeX = Random.Range (rangeLeft, rangeRight);
+			Vector3 range = new Vector3 (rangeX, 0, 0);
+			print ("rangeX = " + rangeX);
+			Vector3 vector = CalculateTrajectoryVelocity(transform.position, playerWhale.transform.position + range, 5);
 			splashrb.velocity = vector; //FIRE!
 			control.TakeControl (control.turn);
 			StartCoroutine (WaitUntilInactive(splash, splashrb, control));
 
 			//FireProjectile ();
-
-
-			/*
-			//Pause (100000f);
-			//yield WaitForSeconds (0.25);
-			Vector3 pos = new Vector3 (0, 1, 0);
-			GameObject splash = Instantiate (projectile, transform.position + pos, transform.rotation); //projectile gets same position and rotation as whale
-			splash.SetActive (true);
-			sr.sprite = whaleActive;
-			StartCoroutine(LaunchAnimation());
-			Rigidbody2D splashrb = splash.GetComponent<Rigidbody2D> ();
-			Vector3 dir = Quaternion.AngleAxis(initialAngle, Vector3.forward) * Vector3.right;
-			splashrb.AddForce(dir*force);
-			control.TakeControl (control.turn);
-			StartCoroutine (WaitUntilInactive(splash, splashrb, control));
-			*/
 		}
 
 	}
@@ -96,7 +81,7 @@ public class SmartCompController : MonoBehaviour {
 	void FixedUpdate ()
 	{
 		if (control.turn == 2 && control.canMove) {
-			Pause (4);
+			waitForTime();
 			float dir = Random.Range (0, 2);
 			if (dir == 0)
 				control.MoveR (rb);
@@ -122,10 +107,6 @@ public class SmartCompController : MonoBehaviour {
 				yield break;
 			}
 		}
-	}
-
-	void shoot() {
-
 	}
 
 	public IEnumerator Pause(float p)
@@ -164,10 +145,6 @@ public class SmartCompController : MonoBehaviour {
 		yield return new WaitForSeconds(0.5f);
 		sr.sprite = whaleIdle;
 	}
-		
-
-
-
 
 	Vector3 CalculateTrajectoryVelocity(Vector3 origin, Vector3 target, float t)
 	{
@@ -178,10 +155,8 @@ public class SmartCompController : MonoBehaviour {
 	}
 
 
-
-
-
-	void FireProjectile() {
+	/*
+	 * void FireProjectile() {
 		//Transform target;
 
 		//float initialAngle;
@@ -207,7 +182,6 @@ public class SmartCompController : MonoBehaviour {
 
 		float distance = Vector3.Distance(planarTarget, planarPostion); //distance between objects
 
-		/*
 		//increases the hit range if the computer his the player whale last shot, decreases if comp missed;
 		if (control.playerHit) {
 			rangeLeft -= 2;
@@ -218,7 +192,7 @@ public class SmartCompController : MonoBehaviour {
 				rangeRight -= 2;
 			}
 		}
-		*/
+		
 
 		print ("Range: [" + rangeLeft + "," + rangeRight + "]");
 
@@ -253,15 +227,5 @@ public class SmartCompController : MonoBehaviour {
 		control.TakeControl (control.turn);
 		StartCoroutine (WaitUntilInactive(splash, splashrb, control));
 	}
-
-
-
-	/*void OnTriggerEnter(Collider other)
-	{
-		if (other.gameObject.CompareTag("Pick Up")) {
-			other.gameObject.SetActive (false);
-			count++;
-		}
-	}*/
-
+	*/
 }
