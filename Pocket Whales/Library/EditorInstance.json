@@ -1,4 +1,12 @@
 {
+<<<<<<< HEAD
+<<<<<<< HEAD
+	"process_id" : 706,
+=======
+	"process_id" : 33388,
+>>>>>>> developer
+=======
 	"process_id" : 64333,
+>>>>>>> master
 	"version" : "2017.3.1f1"
 }
