@@ -1,11 +1,20 @@
 fileFormatVersion: 2
 <<<<<<< HEAD
+<<<<<<< HEAD
 guid: 4e0d02cc70f064bc5b84beac2d53ec09
 timeCreated: 1522205791
 =======
 guid: 5e0acbd27bddc4c96a79ca88ca92adb0
 timeCreated: 1522204567
 >>>>>>> developer
+=======
+guid: 5e0acbd27bddc4c96a79ca88ca92adb0
+timeCreated: 1522204567
+=======
+guid: 4e0d02cc70f064bc5b84beac2d53ec09
+timeCreated: 1522205791
+>>>>>>> Cam
+>>>>>>> master
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName: {}
