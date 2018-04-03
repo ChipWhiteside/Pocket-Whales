@@ -1700,6 +1700,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cloudsAllowed: 0
+  time: 0
   originCloud: {fileID: 0}
 --- !u!114 &1298794063
 MonoBehaviour:
@@ -1713,6 +1714,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cloudsAllowed: 0
+  time: 0
   originCloud: {fileID: 0}
 --- !u!1001 &1414407869
 Prefab:
@@ -3010,6 +3012,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cloudsAllowed: 5
+  time: 10
   originCloud: {fileID: 307960551}
 --- !u!1 &1974287023
 GameObject:
