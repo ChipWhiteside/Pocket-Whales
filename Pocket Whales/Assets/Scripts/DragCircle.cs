@@ -89,17 +89,25 @@ public class DragCircle : MonoBehaviour {
 	}
 
 	public void SwitchTurn() {
-		turnStarted = false;
 		transform.position = whale.transform.position;
+		if (isCompGame) {
+			if (gameObject.activeSelf) {
+				gameObject.SetActive (false);
+				print ("deactivate");
+			} else {
+				gameObject.SetActive (true);
+				print ("activate");
+			}
+		}
+		turnStarted = false;
 		SwitchWhale ();
 	}
 
 	void SwitchWhale() {
-		if (currentWhale == whale)
-			currentWhale = whale2;
-		else if (currentWhale == whale2)
-			currentWhale = whale;
+			if (currentWhale == whale)
+				currentWhale = whale2;
+			else if (currentWhale == whale2)
+				currentWhale = whale;
 	}
-
 
 }
