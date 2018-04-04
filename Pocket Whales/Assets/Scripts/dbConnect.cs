@@ -9,7 +9,7 @@ public class dbConnect : MonoBehaviour
 	// Use this for initialization
 	IEnumerator Start ()
 	{
-		WWW itemData = new WWW ("http://localhost/pocketwhalesDB.php");
+		WWW itemData = new WWW ("https://csweb.wheaton.edu/~pocketwhales/pocketwhalesDB.php");
 		yield return itemData;
 		string itemsDataString = itemData.text;
 		print (itemsDataString);
