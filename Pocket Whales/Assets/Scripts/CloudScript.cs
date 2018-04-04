@@ -49,13 +49,13 @@ public class CloudScript : MonoBehaviour {
 		}
 	}
 
-	public void setValues(float speed, float scale, float height) {
+	public void setValues(float xVal, float speed, float scale, float height) {
 		this.speed = speed;
 		this.scale = scale;
 		this.height = height;
-		transform.position = new Vector3(rightBoundary, height, 0.0f);
+		transform.position = new Vector3(xVal, height, 0.0f);
 		transform.localScale += new Vector3 (scale, scale, scale);
-		targetPosition = new Vector3(-50f, height,0);
+		targetPosition = new Vector3(-60f, height,0);
 		valuesSet = true;
 	}
 }

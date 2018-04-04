@@ -15,12 +15,15 @@ public class CloudManager : MonoBehaviour {
 	public GameObject originCloud; //the origional cloud
 
 	void Start () {
-		time = Random.Range (10f, 18f);
+		time = Random.Range (4f, 18f);
 		numClouds = 0;
-		cloudsAllowed = Random.Range (5f, 20f);
+		cloudsAllowed = Random.Range (7f, 20f);
 		print ("Clouds Allowed: " + cloudsAllowed);
 		timeStore = time;
 		cloudStart = new Vector3(60f, Random.Range (10f, 27f), 0f);
+
+		createCloud ();
+		createCloud ();
 	}
 
 	/*
@@ -32,7 +35,7 @@ public class CloudManager : MonoBehaviour {
 	}
 
 	void Update () {
-		//originCloud.transform.position = 
+		originCloud.transform.position = cloudStart;
 
 		if (time > 0) {
 			time -= (Time.deltaTime);
@@ -45,10 +48,12 @@ public class CloudManager : MonoBehaviour {
 				GameObject newCloud = Instantiate(originCloud, cloudStart, originCloud.transform.rotation);
 				numClouds++;
 				CloudScript newCloudScript = newCloud.GetComponent<CloudScript> ();
-				newCloudScript.setValues (Random.Range (1f, 5f), Random.Range (.3f, .6f), Random.Range (12f, 30f));
+				newCloudScript.setValues (newCloud.transform.position.x, Random.Range (1f, 5f), Random.Range (.3f, .6f), Random.Range (12f, 30f));
 				//Cloud newCloud = new Cloud (speed, scale, height);
 			}	
 		}
+
+
 
 		/*
 		//StartCoroutine (waitForTime (Random.Range(4f, 10f)));
@@ -65,5 +70,12 @@ public class CloudManager : MonoBehaviour {
 			//Cloud newCloud = new Cloud (speed, scale, height);
 		}
 		*/
+	}
+
+	void createCloud () {
+		GameObject newCloud = Instantiate(originCloud, new Vector3(Random.Range(-40f, 40f), Random.Range(12f, 30f)), originCloud.transform.rotation);
+		numClouds++;
+		CloudScript newCloudScript = newCloud.GetComponent<CloudScript> ();
+		newCloudScript.setValues (newCloud.transform.position.x, Random.Range (1f, 5f), Random.Range (.3f, .6f), Random.Range (12f, 30f));
 	}
 }
