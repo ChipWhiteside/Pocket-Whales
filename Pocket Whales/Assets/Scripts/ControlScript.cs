@@ -19,7 +19,12 @@ public class ControlScript : MonoBehaviour {
 	public float moveSpeed; //how fast the whale can move
 
 	public bool isCompGame; //if this is a player vs. comp game
+
 	public bool playerHit;
+
+	public GameObject dragCircle;
+
+	private DragCircle dCircleScript;
 
 	void Start()
 	{
@@ -27,6 +32,7 @@ public class ControlScript : MonoBehaviour {
 		playerHit = false;
 		looping = false;
 		turn = 1;
+		dCircleScript = dragCircle.GetComponent<DragCircle> ();
 	}
 		
 	/*
@@ -50,6 +56,7 @@ public class ControlScript : MonoBehaviour {
 			turn = 1;
 			player1.GetComponent<PlayerController> ().enabled = true;
 		}
+		dCircleScript.SwitchTurn ();
 		canMove = true;
 		//print("Turn After: " + turn);
 	}

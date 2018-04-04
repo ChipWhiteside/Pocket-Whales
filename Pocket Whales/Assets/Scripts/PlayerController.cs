@@ -45,20 +45,6 @@ public class PlayerController : MonoBehaviour {
 	void Update ()
 	{
 			
-		if (Input.GetKeyDown ("space") && control.turn == playerNo && !control.looping) {
-			//print("space key was pressed");
-			Vector3 pos = new Vector3 (0, 1, 0);
-			GameObject splash = Instantiate (projectile, transform.position + pos, transform.rotation); //projectile gets same position and rotation as whale
-			splash.SetActive (true);
-			sr.sprite = whaleActive;
-			StartCoroutine(LaunchAnimation());
-			Rigidbody2D splashrb = splash.GetComponent<Rigidbody2D> ();
-			Vector3 dir = Quaternion.AngleAxis(angle, Vector3.forward) * Vector3.right;
-			splashrb.AddForce(dir*force);
-			control.TakeControl (control.turn);
-			StartCoroutine (WaitUntilInactive(splash, splashrb, control));
-		}
-			
 	}
 
 	/*
@@ -99,8 +85,21 @@ public class PlayerController : MonoBehaviour {
 		}
 	}
 
-	void shoot() {
-
+	public void Launch(float angle, float power) {
+		if (control.turn == playerNo && !control.looping) {
+			print ("Launching");
+			//print("space key was pressed");
+			Vector3 pos = new Vector3 (0, 1, 0);
+			GameObject splash = Instantiate (projectile, transform.position + pos, transform.rotation); //projectile gets same position and rotation as whale
+			splash.SetActive (true);
+			sr.sprite = whaleActive;
+			StartCoroutine(LaunchAnimation());
+			Rigidbody2D splashrb = splash.GetComponent<Rigidbody2D> ();
+			Vector3 dir = Quaternion.AngleAxis(angle, Vector3.forward) * Vector3.right;
+			splashrb.AddForce(dir*power);
+			control.TakeControl (control.turn);
+			StartCoroutine (WaitUntilInactive(splash, splashrb, control));
+		}
 	}
 
 
