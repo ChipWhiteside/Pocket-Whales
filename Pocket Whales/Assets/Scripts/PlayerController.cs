@@ -28,7 +28,7 @@ public class PlayerController : MonoBehaviour {
 
 	public int playerNo; // 1 is the player, 2 is the computer
 
-	private bool compMoved = false;
+	//private bool compMoved = false;
 
 	void Start ()
 	{
@@ -93,7 +93,7 @@ public class PlayerController : MonoBehaviour {
 				Destroy (obj);
 				print ("Destroyed");
 				control.SwitchPlayerControl ();
-				compMoved = false;
+				//compMoved = false;
 				yield break;
 			}
 		}

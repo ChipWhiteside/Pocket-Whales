@@ -4,18 +4,23 @@ using UnityEngine;
 
 public class CloudManager : MonoBehaviour {
 
-	public int cloudsAllowed; //number of clouds allowed on screen
+	public float cloudsAllowed; //number of clouds allowed on screen
 
-	public float time; //amount of time we want to wait between cloud spawns
+	private float time; //amount of time we want to wait between cloud spawns
 	private float timeStore; 
 
-	private int numClouds; //number of clouds in the game
+	public int numClouds; //number of clouds in the game
+	private Vector3 cloudStart;
 
 	public GameObject originCloud; //the origional cloud
 
 	void Start () {
+		time = Random.Range (10f, 18f);
 		numClouds = 0;
+		cloudsAllowed = Random.Range (5f, 20f);
+		print ("Clouds Allowed: " + cloudsAllowed);
 		timeStore = time;
+		cloudStart = new Vector3(60f, Random.Range (10f, 27f), 0f);
 	}
 
 	/*
@@ -27,21 +32,22 @@ public class CloudManager : MonoBehaviour {
 	}
 
 	void Update () {
+		//originCloud.transform.position = 
+
 		if (time > 0) {
-			time -= Time.deltaTime;
+			time -= (Time.deltaTime);
 		} else {
-			print ("Kaitie is the cutest person eva");
+			time = timeStore;
+			//print ("In else statment");
 			//yield return new WaitForSeconds(7.0f); //check once every 7 seconds to see if the turn has ended
 			if (numClouds < cloudsAllowed) {
-				GameObject newCloud = Instantiate (originCloud);
-				Cloud newCloudScript = GameObject.Find("newCloud").GetComponent<Cloud>();
-				float speed = Random.Range (.7f, 1.2f);
-				float scale = Random.Range (.3f, .6f);
-				float height = Random.Range (10f, 27f);
-				newCloudScript.setValues (speed, scale, height);
+				Vector3 pos = new Vector3 (0, 1, 0);
+				GameObject newCloud = Instantiate(originCloud, cloudStart, originCloud.transform.rotation);
+				numClouds++;
+				CloudScript newCloudScript = newCloud.GetComponent<CloudScript> ();
+				newCloudScript.setValues (Random.Range (1f, 5f), Random.Range (.3f, .6f), Random.Range (12f, 30f));
 				//Cloud newCloud = new Cloud (speed, scale, height);
 			}	
-			time = timeStore;
 		}
 
 		/*

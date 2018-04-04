@@ -8,7 +8,7 @@ public class SmartCompController : MonoBehaviour {
 
 	private SpriteRenderer sr;
 
-	private Sprite whaleActive;
+	//private Sprite whaleActive;
 
 	private Sprite whaleIdle;
 
@@ -42,7 +42,7 @@ public class SmartCompController : MonoBehaviour {
 	{
 		rb = GetComponent<Rigidbody2D> ();
 		sr = GetComponent<SpriteRenderer> ();
-		whaleActive = Resources.Load<Sprite>("Whale_Active");
+		//whaleActive = Resources.Load<Sprite>("Whale_Active");
 		whaleIdle = Resources.Load<Sprite> ("Whale_Idle");
 		controller = GameObject.Find("Controller");
 		control = controller.GetComponent<ControlScript>();
