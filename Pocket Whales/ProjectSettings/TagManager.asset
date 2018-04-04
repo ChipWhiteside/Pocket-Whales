@@ -19,7 +19,7 @@ TagManager:
   - 
   - Clouds
   - Ground
-  - 
+  - DragCircle
   - 
   - 
   - 
@@ -50,4 +50,7 @@ TagManager:
     locked: 0
   - name: Clouds
     uniqueID: 89161893
+    locked: 0
+  - name: SpriteGround
+    uniqueID: 1864561567
     locked: 0
