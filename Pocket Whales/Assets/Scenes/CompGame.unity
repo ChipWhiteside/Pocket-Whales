@@ -113,6 +113,11 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &190825229 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1306315079287684, guid: fc6a775179ed24294ac0e5db8d6ba3cb,
+    type: 2}
+  m_PrefabInternal: {fileID: 1128084671}
 --- !u!1 &307960551 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1356444123991094, guid: 9df05fe1f223049efba81af1fbc7c6fc,
@@ -522,6 +527,53 @@ GameObject:
   m_PrefabParentObject: {fileID: 1605709086953494, guid: e46a770b57fe04b959dbf9ce3ac300dd,
     type: 2}
   m_PrefabInternal: {fileID: 1858410437}
+--- !u!1001 &1128084671
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4697397903059942, guid: fc6a775179ed24294ac0e5db8d6ba3cb, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4697397903059942, guid: fc6a775179ed24294ac0e5db8d6ba3cb, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4697397903059942, guid: fc6a775179ed24294ac0e5db8d6ba3cb, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4697397903059942, guid: fc6a775179ed24294ac0e5db8d6ba3cb, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4697397903059942, guid: fc6a775179ed24294ac0e5db8d6ba3cb, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4697397903059942, guid: fc6a775179ed24294ac0e5db8d6ba3cb, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4697397903059942, guid: fc6a775179ed24294ac0e5db8d6ba3cb, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4697397903059942, guid: fc6a775179ed24294ac0e5db8d6ba3cb, type: 2}
+      propertyPath: m_RootOrder
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 114819203498236516, guid: fc6a775179ed24294ac0e5db8d6ba3cb,
+        type: 2}
+      propertyPath: control
+      value: 
+      objectReference: {fileID: 1966771510}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: fc6a775179ed24294ac0e5db8d6ba3cb, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &1190302887
 GameObject:
   m_ObjectHideFlags: 0
@@ -914,24 +966,16 @@ Prefab:
       propertyPath: m_RootOrder
       value: 17
       objectReference: {fileID: 0}
-    - target: {fileID: 1624230167930312, guid: 4d5c6be3458164393aa6e724e9769fc2, type: 2}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 23110311098767038, guid: 4d5c6be3458164393aa6e724e9769fc2,
-        type: 2}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: f67f28ca70de24569bf82561fb0c7e6c, type: 2}
-    - target: {fileID: 1624230167930312, guid: 4d5c6be3458164393aa6e724e9769fc2, type: 2}
-      propertyPath: m_TagString
-      value: Splash
-      objectReference: {fileID: 0}
-    - target: {fileID: 114076355723608078, guid: 4d5c6be3458164393aa6e724e9769fc2,
+    - target: {fileID: 114036697518127432, guid: 4d5c6be3458164393aa6e724e9769fc2,
         type: 2}
       propertyPath: control
       value: 
       objectReference: {fileID: 1966771510}
+    - target: {fileID: 114036697518127432, guid: 4d5c6be3458164393aa6e724e9769fc2,
+        type: 2}
+      propertyPath: sprinklerSplash
+      value: 
+      objectReference: {fileID: 190825229}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4d5c6be3458164393aa6e724e9769fc2, type: 2}
   m_IsPrefabParent: 0

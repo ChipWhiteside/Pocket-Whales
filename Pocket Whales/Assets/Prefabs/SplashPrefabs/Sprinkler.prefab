@@ -23,14 +23,14 @@ GameObject:
   - component: {fileID: 23110311098767038}
   - component: {fileID: 58673924164266950}
   - component: {fileID: 50631070664462034}
-  - component: {fileID: 114076355723608078}
+  - component: {fileID: 114036697518127432}
   m_Layer: 0
   m_Name: Sprinkler
-  m_TagString: Untagged
+  m_TagString: Splash
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4896593818323212
 Transform:
   m_ObjectHideFlags: 1
@@ -58,7 +58,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: f67f28ca70de24569bf82561fb0c7e6c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -120,7 +120,7 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
---- !u!114 &114076355723608078
+--- !u!114 &114036697518127432
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -131,3 +131,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9a227edde62a44f7a356e2ee045e686, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  control: {fileID: 0}
+  sprinklerSplash: {fileID: 0}

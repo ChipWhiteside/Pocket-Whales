@@ -53,6 +53,12 @@ public class SmartCompController : MonoBehaviour {
 
 		if (control.turn == 2 && !control.looping && compMoved) {
 			Vector3 pos = new Vector3 (0, 1, 0); //position of the computer whale but one up
+
+			gameObject.GetComponent<Rigidbody2D> ().isKinematic = true; //so the whale doesn't move or get hit during its turn
+			gameObject.GetComponent<Collider2D> ().enabled = false;
+			gameObject.GetComponent<Rigidbody2D> ().velocity = Vector3.zero;
+			gameObject.GetComponent<Rigidbody2D> ().freezeRotation = true;
+
 			GameObject splash = Instantiate (projectile, transform.position + pos, transform.rotation); //projectile gets same position and rotation as whale
 			splash.SetActive (true);
 			Rigidbody2D splashrb = splash.GetComponent<Rigidbody2D> ();
@@ -63,7 +69,6 @@ public class SmartCompController : MonoBehaviour {
 			Vector3 vector = CalculateTrajectoryVelocity(transform.position, playerWhale.transform.position + range, 5);
 			splashrb.velocity = vector; //FIRE!
 			control.TakeControl (control.turn);
-			StartCoroutine (WaitUntilInactive(splash, splashrb, control));
 
 			//FireProjectile ();
 		}
@@ -90,25 +95,7 @@ public class SmartCompController : MonoBehaviour {
 			compMoved = true;
 		}
 	}
-
-	/*
-	 * Switches player control once the splash is finished acting
-	 */
-	IEnumerator WaitUntilInactive(GameObject obj, Rigidbody2D rb, ControlScript control) 
-	{
-		while (true) {
-			yield return new WaitForSeconds(1.0f); //check once a second to see if the turn has ended
-			//print("is sleeping?");
-			if (rb.IsSleeping ()) {
-				Destroy (obj);
-				//print ("Destroyed");
-				control.SwitchPlayerControl ();
-				compMoved = false;
-				yield break;
-			}
-		}
-	}
-
+		
 	public IEnumerator Pause(float p)
 	{
 		Time.timeScale = 0.1f;

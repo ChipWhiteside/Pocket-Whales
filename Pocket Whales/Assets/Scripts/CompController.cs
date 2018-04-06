@@ -99,24 +99,6 @@ public class CompController : MonoBehaviour {
 		}
 	}
 
-	/*
-	 * Switches player control once the splash is finished acting
-	 */
-	IEnumerator WaitUntilInactive(GameObject obj, Rigidbody2D rb, ControlScript control) 
-	{
-		while (true) {
-			yield return new WaitForSeconds(1.0f); //check once a second to see if the turn has ended
-			//print("is sleeping?");
-			if (rb.IsSleeping ()) {
-				Destroy (obj);
-				//print ("Destroyed");
-				control.SwitchPlayerControl ();
-				compMoved = false;
-				yield break;
-			}
-		}
-	}
-
 	void shoot() {
 
 	}
@@ -222,10 +204,6 @@ public class CompController : MonoBehaviour {
 		// Fire!
 		splashrb.AddForce(finalVelocity * splashrb.mass, ForceMode2D.Impulse);
 		control.TakeControl (control.turn);
-		StartCoroutine (WaitUntilInactive(splash, splashrb, control));
-
-
-
 	}
 
 

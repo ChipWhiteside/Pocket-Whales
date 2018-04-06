@@ -70,6 +70,12 @@ public class PlayerController : MonoBehaviour {
 	public void Launch(float angle, float power) {
 		if (control.turn == playerNo && !control.looping) {
 			Vector3 pos = new Vector3 (0, 1, 0);
+
+			gameObject.GetComponent<Rigidbody2D> ().isKinematic = true; //so the whale doesn't move or get hit during its turn
+			gameObject.GetComponent<Collider2D> ().enabled = false;
+			gameObject.GetComponent<Rigidbody2D> ().velocity = Vector3.zero;
+			gameObject.GetComponent<Rigidbody2D> ().freezeRotation = true;
+
 			GameObject splash = Instantiate (projectile, transform.position + pos, transform.rotation); //projectile gets same position and rotation as whale
 			splash.SetActive (true);
 			sr.sprite = whaleActive;

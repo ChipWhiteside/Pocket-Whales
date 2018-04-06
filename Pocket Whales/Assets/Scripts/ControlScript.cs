@@ -42,19 +42,22 @@ public class ControlScript : MonoBehaviour {
 	{
 		//print("Turn: " + turn);
 		if (turn == 1 | turn == 11) {
-			player1.GetComponent<PlayerController> ().enabled = false;
-			turn = 2;
 			if (isCompGame)
 				player2.GetComponent<SmartCompController> ().enabled = true;
-			else
+			else {
 				player2.GetComponent<PlayerController> ().enabled = true;
+			}
+			player1.GetComponent<PlayerController> ().enabled = false;
+			turn = 2;
 		} else if (turn == 2 | turn == 22) {
-			if (isCompGame)
+			if (isCompGame) {
 				player2.GetComponent<SmartCompController> ().enabled = false;
-			else
+			} else {
 				player2.GetComponent<PlayerController> ().enabled = false;
-			turn = 1;
+			}
 			player1.GetComponent<PlayerController> ().enabled = true;
+			turn = 1;
+
 		}
 		dCircleScript.SwitchTurn ();
 		canMove = true;

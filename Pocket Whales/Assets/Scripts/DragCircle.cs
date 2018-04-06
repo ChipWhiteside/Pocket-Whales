@@ -91,6 +91,9 @@ public class DragCircle : MonoBehaviour {
 	}
 
 	public void SwitchTurn() {
+		currentWhale.GetComponent<Rigidbody2D> ().isKinematic = false;
+		currentWhale.GetComponent<Collider2D> ().enabled = true;
+		currentWhale.GetComponent<Rigidbody2D> ().freezeRotation = false;
 		transform.position = whale.transform.position;
 		if (isCompGame) {
 			if (gameObject.activeSelf) {
