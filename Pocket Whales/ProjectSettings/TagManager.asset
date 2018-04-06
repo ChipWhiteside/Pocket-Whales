@@ -8,6 +8,9 @@ TagManager:
   - slider
   - Volume Text
   - Hello
+  - Terrain
+  - Splash
+  - Whale
   layers:
   - Default
   - TransparentFX

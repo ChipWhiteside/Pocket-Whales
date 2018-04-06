@@ -21,6 +21,8 @@ public class DragCircle : MonoBehaviour {
 
 	public Text powerText;
 
+	public GameObject splash;
+
 	private PlayerController playerController;
 
 	public bool isCompGame;
