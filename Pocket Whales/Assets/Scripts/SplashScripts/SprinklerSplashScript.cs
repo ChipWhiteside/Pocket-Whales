@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SprinklerSplashScript : MonoBehaviour {
+public class SprinklerSplashScript : MonoBehaviour, SplashInterface {
 
 	/*
 	 * Energy whale loses when hit by this splash 
@@ -68,7 +68,7 @@ public class SprinklerSplashScript : MonoBehaviour {
 			EffectOnTime ();
 	}
 
-	void OnCollisionEnter2D(Collision2D collision){
+	public void OnCollisionEnter2D(Collision2D collision){
 		if (collision.gameObject.CompareTag("Terrain")) {
 			EffectOnBounce ();
 		}
@@ -80,27 +80,31 @@ public class SprinklerSplashScript : MonoBehaviour {
 		}
 	}
 
-	void EffectOnLaunch() {
+	public void EffectOnLaunch() {
 
 	}
 
-	void EffectOnTime() {
+	public void EffectOnTime() {
 
 	}
 
-	void EffectOnHit() {
+	public void EffectOnHit() {
 		gameObject.GetComponent<Rigidbody2D> ().isKinematic = true; //freezes object
 		gameObject.GetComponent<Rigidbody2D> ().velocity = Vector3.zero;
 		EndTurn ();
 	}
 
-	void EffectOnBounce() {
+	public void EffectOnBounce() {
 		gameObject.GetComponent<Rigidbody2D> ().isKinematic = true; //freezes object
 		gameObject.GetComponent<Rigidbody2D> ().velocity = Vector3.zero;
 		EndTurn ();
 	}
 
-	void EndTurn() {
+	public void EffectOnTap() {
+
+	}
+
+	public void EndTurn() {
 		if (!endingTurn) {
 			endingTurn = true;
 			Destroy (gameObject);
