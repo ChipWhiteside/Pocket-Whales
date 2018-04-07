@@ -63,8 +63,8 @@ public class DragCircle : MonoBehaviour {
 	}
 
 	void UpdatePowerAngleText() {
-		float power = FindPower ();
-		float angle = FindAngle ();
+		int power = (int) FindPower ();
+		int angle = (int) FindAngle ();
 		angleText.text = angle.ToString() + "°";
 		powerText.text = power.ToString () + "%";
 	}
