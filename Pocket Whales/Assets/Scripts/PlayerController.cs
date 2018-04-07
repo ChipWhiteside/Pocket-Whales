@@ -29,6 +29,8 @@ public class PlayerController : MonoBehaviour, WhaleControllerInterface {
 
 	public float angle;
 
+	public string name;
+
 	public bool isComputerWhale;
 
 	public int playerNo; // 1 is the player, 2 is the computer
@@ -129,6 +131,9 @@ public class PlayerController : MonoBehaviour, WhaleControllerInterface {
 	public void LoseEnergy(int lostEnergy) {
 		energy -= lostEnergy;
 		energySlider.value = energy;
+		if (energy <= 0) {
+			control.EndGame (name);
+		}
 	}
 
 	/*

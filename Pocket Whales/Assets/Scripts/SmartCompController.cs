@@ -31,6 +31,8 @@ public class SmartCompController : MonoBehaviour, WhaleControllerInterface {
 
 	public float initialAngle;
 
+	public string name;
+
 	public int playerNo; // 1 is the player, 2 is the computer
 
 	public bool isComputerWhale;
@@ -153,6 +155,8 @@ public class SmartCompController : MonoBehaviour, WhaleControllerInterface {
 	public void LoseEnergy(int lostEnergy) {
 		energy -= lostEnergy;
 		energySlider.value = energy;
+		if (energy <= 0) 
+			control.EndGame (name);
 	}
 
 

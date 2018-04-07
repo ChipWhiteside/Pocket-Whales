@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ControlScript : MonoBehaviour {
 
@@ -25,6 +26,12 @@ public class ControlScript : MonoBehaviour {
 	public GameObject dragCircle;
 
 	private DragCircle dCircleScript;
+
+	public Text endGameText;
+
+	public Button endGameButton;
+
+	public GameObject endGame;
 
 	void Start()
 	{
@@ -58,7 +65,8 @@ public class ControlScript : MonoBehaviour {
 			player1.GetComponent<PlayerController> ().enabled = true;
 			turn = 1;
 
-		}
+		} else
+			return; //end the game
 		dCircleScript.SwitchTurn ();
 		canMove = true;
 		//print("Turn After: " + turn);
@@ -70,8 +78,10 @@ public class ControlScript : MonoBehaviour {
 	public void TakeControl(int player) {
 		if (turn == 1)
 			turn = 11; //arbitrary values to remember which players turn was last but keep control away from players
-		else
+		else if (turn == 2)
 			turn = 22;
+		else
+			turn = 3;
 	}
 
 	public void MoveR(Rigidbody2D rb) 
@@ -98,6 +108,12 @@ public class ControlScript : MonoBehaviour {
 		}
 		looping = false;
 		rb.velocity = new Vector2 (0, 0);
+	}
+
+	public void EndGame(string winnerName) {
+		TakeControl (3);
+		endGameText.text = "Congratulations " + winnerName + "!";
+		endGame.SetActive (true);
 	}
 
 
