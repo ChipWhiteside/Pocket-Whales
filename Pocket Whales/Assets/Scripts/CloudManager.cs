@@ -21,8 +21,8 @@ public class CloudManager : MonoBehaviour {
 	void Start () {
 		time = Random.Range (4f, 18f);
 		numClouds = 0;
-		cloudsAllowed = Random.Range (7f, 20f);
-		bCloudsAllowed = Random.Range (13f, 25f);
+		cloudsAllowed = Random.Range (7f, 12f);
+		bCloudsAllowed = Random.Range (9f, 15f);
 
 		timeStore = time;
 		cloudStart = new Vector3(originCloud.transform.position.x, originCloud.transform.position.y, originCloud.transform.position.z);
@@ -75,13 +75,13 @@ public class CloudManager : MonoBehaviour {
 		numClouds++;
 		CloudScript newCloudScript = newCloud.GetComponent<CloudScript> ();
 		//newCloud (Sorting Layer: Piece) (Order in Layer: 1)
-		newCloudScript.setValues (newCloud.transform.position.x, Random.Range (2f, 5f), Random.Range (.45f, .6f), newCloud.transform.position.y);
+		newCloudScript.setValues (newCloud.transform.position.x, Random.Range (1f, 2.5f), Random.Range (.45f, .6f), newCloud.transform.position.y);
 	}
 
 	void spawnBCloud(float xVal) {
 		GameObject newBCloud = Instantiate(backgroundOCloud, new Vector3(xVal, Random.Range(8.5f, 30f)), backgroundOCloud.transform.rotation);
 		numBClouds++;
 		CloudScript newBCloudScript = newBCloud.GetComponent<CloudScript> ();
-		newBCloudScript.setValues (newBCloud.transform.position.x, Random.Range (.5f, 1.5f), Random.Range (.15f, .25f), newBCloud.transform.position.y);
+		newBCloudScript.setValues (newBCloud.transform.position.x, Random.Range (.25f, .75f), Random.Range (.15f, .25f), newBCloud.transform.position.y);
 	}
 }
