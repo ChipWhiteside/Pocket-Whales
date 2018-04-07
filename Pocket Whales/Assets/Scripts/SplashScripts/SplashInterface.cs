@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface SplashInterface : MonoBehaviour {
+public interface SplashInterface {
 
 	void Start ();
 	
