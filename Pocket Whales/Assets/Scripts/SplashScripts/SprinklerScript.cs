@@ -42,16 +42,6 @@ public class SprinklerScript : MonoBehaviour, SplashInterface {
 	private ControlScript controlScript;
 
 	/*
-	 * SplashManager Game Object
-	 */
-	public GameObject splashManager;
-
-	/*
-	 * SplashManagerScript
-	 */
-	private SplashManagerScript splashManagerScript;
-
-	/*
 	 * Is the turn already ending
 	 */
 	private bool endingTurn;
@@ -82,7 +72,6 @@ public class SprinklerScript : MonoBehaviour, SplashInterface {
 		effectTimer = 0; //always starts at zero
 		timeUntilEffect = 0; //when the special effect should happen
 		controlScript = control.GetComponent<ControlScript> ();
-		splashManagerScript = splashManager.GetComponent<SplashManagerScript> ();
 		endingTurn = false;
 		secondaryTimer = 0;
 		secondaryAngle = 45;
@@ -118,14 +107,10 @@ public class SprinklerScript : MonoBehaviour, SplashInterface {
 		if (collision.gameObject.CompareTag("Whale")) {
 			EffectOnHit (collision.gameObject);
 		}
-		if (collision.gameObject.CompareTag ("OutOfBounds")) {
-			EndTurn ();
-		}
 	}
 
 	public void EffectOnLaunch() {
-		splashManagerScript.AddToSplashes (gameObject);
-		splashManagerScript.IgnoreSplashes (gameObject);
+
 	}
 
 	public void EffectOnTime() {
@@ -151,8 +136,17 @@ public class SprinklerScript : MonoBehaviour, SplashInterface {
 
 	public void EndTurn() {
 		if (!endingTurn) { //so we only try to end the turn once
-			endingTurn = true;
-			StartCoroutine(WaitToEnd(4F));
+			StartCoroutine(Wait(4F));
+		}
+	}
+
+	void DestroyAllObjects()
+	{
+		allSplashes = GameObject.FindGameObjectsWithTag ("Splash");
+
+		for(var i = 0 ; i < allSplashes.Length ; i++)
+		{
+			Destroy(allSplashes[i]);
 		}
 	}
 
@@ -183,12 +177,11 @@ public class SprinklerScript : MonoBehaviour, SplashInterface {
 		splashrb.AddForce(dir*power);
 	}
 
-	IEnumerator WaitToEnd(float time) {
-		print ("Start wait to end");
+	IEnumerator Wait(float time) {
 		yield return new WaitForSeconds(time);
-		splashManagerScript.DestroySplashes ();
+		Destroy (gameObject);
+		DestroyAllObjects ();
 		controlScript.SwitchPlayerControl ();
-		print ("Through wait to end");
 	}
 
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public interface WhaleControllerInterface {
 
-	void LoseEnergy (int lostEnergy);
+	bool IsComputer ();
 
-	string GetName ();
+	void LoseEnergy (int lostEnergy);
 }

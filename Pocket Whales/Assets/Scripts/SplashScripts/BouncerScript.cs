@@ -87,9 +87,6 @@ public class BouncerScript : MonoBehaviour, SplashInterface {
 		if (collision.gameObject.CompareTag("Whale")) {
 			EffectOnHit (collision.gameObject);
 		}
-		if (collision.gameObject.CompareTag ("OutOfBounds")) {
-			EndTurn ();
-		}
 	}
 
 	public void EffectOnLaunch() {
