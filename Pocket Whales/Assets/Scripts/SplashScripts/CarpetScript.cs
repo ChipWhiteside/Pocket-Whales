@@ -89,7 +89,7 @@ public class CarpetScript : MonoBehaviour, SplashInterface {
 		timer += Time.deltaTime;
 		if (Input.GetMouseButtonDown (0))
 			EffectOnTap ();
-		if (carpetsDropped && timer >= .025f && carpetsLaunched < 10) {
+		if (carpetsDropped && timer >= .035f && carpetsLaunched < 10) {
 			DropBombs ();
 		}
 		despawnTimer += Time.deltaTime;
