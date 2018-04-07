@@ -5,11 +5,6 @@ using UnityEngine;
 public class CarpetSplashScript : MonoBehaviour, SplashInterface {
 
 	/*
-	 * Every active splash
-	 */
-	private GameObject[] allSplashes;
-
-	/*
 	 * Energy whale loses when hit by this splash 
 	 */
 	private int energyEffect;
@@ -35,14 +30,14 @@ public class CarpetSplashScript : MonoBehaviour, SplashInterface {
 	private float despawnTimer;
 
 	/*
-	 * Reference to the control script
-	 */ 
-	private ControlScript controlScript;
-
-	/*
 	 * Controller Game Object
 	 */
 	public GameObject control;
+
+	/*
+	 * ControlScript
+	 */
+	private ControlScript controlScript;
 
 	/*
 	 * Is the turn already ending
@@ -52,8 +47,8 @@ public class CarpetSplashScript : MonoBehaviour, SplashInterface {
 
 	// Use this for initialization
 	void Start () {
-		energyEffect = 10;
-		maxActiveTime = 20;
+		energyEffect = 3;
+		maxActiveTime = 7;
 		despawnTimer = 0; //always starts at zero
 		effectTimer = 0; //always starts at zero
 		timeUntilEffect = 0; //when the special effect should happen
@@ -62,64 +57,59 @@ public class CarpetSplashScript : MonoBehaviour, SplashInterface {
 
 		EffectOnLaunch ();
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
 		despawnTimer += Time.deltaTime;
+		effectTimer += Time.deltaTime;
 		if (despawnTimer >= maxActiveTime)
 			EndTurn ();
+		if (effectTimer >= timeUntilEffect)
+			EffectOnTime ();
 	}
 
-	public void OnCollisionEnter2D (Collision2D collision) {
+	public void OnCollisionEnter2D(Collision2D collision){
+		if (collision.gameObject.CompareTag("Terrain")) {
+			EffectOnBounce ();
+		}
+		if (collision.gameObject.CompareTag("Splash")) {
+			Physics2D.IgnoreCollision(collision.gameObject.GetComponent<Collider2D>(), gameObject.GetComponent<Collider2D>());
+		}
+		if (collision.gameObject.CompareTag("Whale")) {
+			EffectOnHit (collision.gameObject);
+		}
+	}
+
+	public void EffectOnLaunch() {
 
 	}
 
-	public void EffectOnLaunch () {
+	public void EffectOnTime() {
 
 	}
 
-	public void EffectOnTime () {
-
+	public void EffectOnHit(GameObject whale) {
+		whale.GetComponent<WhaleControllerInterface> ().LoseEnergy (energyEffect);
+		gameObject.GetComponent<Rigidbody2D> ().isKinematic = true; //freezes object
+		gameObject.GetComponent<Rigidbody2D> ().velocity = Vector3.zero;
+		EndTurn ();
 	}
 
-	public void EffectOnHit (GameObject whale) {
-
+	public void EffectOnBounce() {
+		gameObject.GetComponent<Rigidbody2D> ().isKinematic = true; //freezes object
+		gameObject.GetComponent<Rigidbody2D> ().velocity = Vector3.zero;
+		EndTurn ();
 	}
 
-	public void EffectOnTap () {
-
-	}
-
-	public void EffectOnBounce () {
+	public void EffectOnTap() {
 
 	}
 
 	public void EndTurn() {
-
-	}
-
-	/**
-	 * When the player clicks/taps the screen
-	 */
-	void OnMouseDown() {
-		EffectOnTap ();
-	}
-
-	void DestroyAllObjects()
-	{
-		allSplashes = GameObject.FindGameObjectsWithTag ("Splash");
-
-		for(var i = 0 ; i < allSplashes.Length ; i++)
-		{
-			Destroy(allSplashes[i]);
+		if (!endingTurn) {
+			endingTurn = true;
+			Destroy (gameObject);
 		}
-	}
-
-	IEnumerator Wait(float time) {
-		yield return new WaitForSeconds(time);
-		Destroy (gameObject);
-		DestroyAllObjects ();
-		controlScript.SwitchPlayerControl ();
 	}
 
 }
