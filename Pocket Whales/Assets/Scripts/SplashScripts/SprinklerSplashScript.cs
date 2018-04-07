@@ -76,7 +76,7 @@ public class SprinklerSplashScript : MonoBehaviour, SplashInterface {
 			Physics2D.IgnoreCollision(collision.gameObject.GetComponent<Collider2D>(), gameObject.GetComponent<Collider2D>());
 		}
 		if (collision.gameObject.CompareTag("Whale")) {
-			EffectOnHit ();
+			EffectOnHit (collision.gameObject);
 		}
 	}
 
@@ -88,7 +88,8 @@ public class SprinklerSplashScript : MonoBehaviour, SplashInterface {
 
 	}
 
-	public void EffectOnHit() {
+	public void EffectOnHit(GameObject whale) {
+		whale.GetComponent<WhaleControllerInterface> ().LoseEnergy (energyEffect);
 		gameObject.GetComponent<Rigidbody2D> ().isKinematic = true; //freezes object
 		gameObject.GetComponent<Rigidbody2D> ().velocity = Vector3.zero;
 		EndTurn ();

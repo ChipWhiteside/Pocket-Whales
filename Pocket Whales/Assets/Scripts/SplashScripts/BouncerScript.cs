@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BouncerScript : MonoBehaviour {
+public class BouncerScript : MonoBehaviour, SplashInterface {
 
 	/*
 	 * Every active splash
@@ -77,7 +77,7 @@ public class BouncerScript : MonoBehaviour {
 			EndTurn ();
 	}
 
-	void OnCollisionEnter2D(Collision2D collision){
+	public void OnCollisionEnter2D(Collision2D collision){
 		if (collision.gameObject.CompareTag("Terrain")) {
 			EffectOnBounce ();
 		}
@@ -85,19 +85,21 @@ public class BouncerScript : MonoBehaviour {
 			Physics2D.IgnoreCollision(collision.gameObject.GetComponent<Collider2D>(), gameObject.GetComponent<Collider2D>());
 		}
 		if (collision.gameObject.CompareTag("Whale")) {
-			EffectOnHit ();
+			EffectOnHit (collision.gameObject);
 		}
 	}
 
-	void EffectOnLaunch() {
+	public void EffectOnLaunch() {
 
 	}
 
-	void EffectOnTime() {
+	public void EffectOnTime() {
 
 	}
 
-	void EffectOnHit() {
+	public void EffectOnHit(GameObject whale) {
+		
+		whale.GetComponent<WhaleControllerInterface> ().LoseEnergy (energyEffect); //could change playerController and SmartCompController to implement an interface so this would only need to be one line
 		if (bounceCount == 0) {
 
 		}
@@ -108,7 +110,7 @@ public class BouncerScript : MonoBehaviour {
 		bounceCount++;
 	}
 
-	void EffectOnBounce() {
+	public void EffectOnBounce() {
 		
 		if(bounceCount >= 7){
 			EndTurn ();
@@ -116,7 +118,11 @@ public class BouncerScript : MonoBehaviour {
 		bounceCount++;
 	}
 
-	void EndTurn() {
+	public void EffectOnTap() {
+
+	}
+
+	public void EndTurn() {
 		if (!endingTurn) { //so we only try to end the turn once
 			endingTurn = true;
 			Destroy (gameObject);

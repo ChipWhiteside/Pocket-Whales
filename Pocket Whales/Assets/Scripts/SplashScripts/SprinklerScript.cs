@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SprinklerScript : MonoBehaviour {
+public class SprinklerScript : MonoBehaviour, SplashInterface {
 
 	private GameObject[] allSplashes;
 
@@ -97,7 +97,7 @@ public class SprinklerScript : MonoBehaviour {
 			EffectOnTime ();
 	}
 
-	void OnCollisionEnter2D(Collision2D collision){
+	public void OnCollisionEnter2D(Collision2D collision){
 		if (collision.gameObject.CompareTag("Terrain")) {
 			EffectOnBounce ();
 		}
@@ -105,31 +105,36 @@ public class SprinklerScript : MonoBehaviour {
 			Physics2D.IgnoreCollision(collision.gameObject.GetComponent<Collider2D>(), gameObject.GetComponent<Collider2D>());
 		}
 		if (collision.gameObject.CompareTag("Whale")) {
-			EffectOnHit ();
+			EffectOnHit (collision.gameObject);
 		}
 	}
 
-	void EffectOnLaunch() {
+	public void EffectOnLaunch() {
 
 	}
 
-	void EffectOnTime() {
+	public void EffectOnTime() {
 		
 	}
 
-	void EffectOnHit() {
+	public void EffectOnHit(GameObject whale) {
+		whale.GetComponent<WhaleControllerInterface> ().LoseEnergy (energyEffect);
 		gameObject.GetComponent<Rigidbody2D> ().isKinematic = true;
 		gameObject.GetComponent<Rigidbody2D> ().velocity = Vector3.zero;
 		specialEffectStart = true;
 	}
 
-	void EffectOnBounce() {
+	public void EffectOnBounce() {
 		gameObject.GetComponent<Rigidbody2D> ().isKinematic = true;
 		gameObject.GetComponent<Rigidbody2D> ().velocity = Vector3.zero;
 		specialEffectStart = true;
 	}
 
-	void EndTurn() {
+	public void EffectOnTap() {
+
+	}
+
+	public void EndTurn() {
 		if (!endingTurn) { //so we only try to end the turn once
 			StartCoroutine(Wait(4F));
 		}

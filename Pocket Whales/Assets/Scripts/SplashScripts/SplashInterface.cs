@@ -19,7 +19,7 @@ public interface SplashInterface {
 	/**
 	 * The effect on the splash after it hits the whale
 	 */
-	void EffectOnHit ();
+	void EffectOnHit (GameObject whale);
 
 	/**
 	 * The effect on the splash when the screen is tapped again

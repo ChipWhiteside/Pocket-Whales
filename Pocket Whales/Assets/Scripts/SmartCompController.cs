@@ -1,8 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class SmartCompController : MonoBehaviour {
+public class SmartCompController : MonoBehaviour, WhaleControllerInterface {
+
+	private int energy;
+
+	public Slider energySlider;
 
 	private Rigidbody2D rb;
 
@@ -18,8 +23,6 @@ public class SmartCompController : MonoBehaviour {
 
 	public GameObject projectile;
 
-	public GameObject testProjectile;
-
 	private GameObject controller;
 
 	private ControlScript control;
@@ -29,6 +32,8 @@ public class SmartCompController : MonoBehaviour {
 	public float initialAngle;
 
 	public int playerNo; // 1 is the player, 2 is the computer
+
+	public bool isComputerWhale;
 
 	private bool compMoved;
 
@@ -40,6 +45,8 @@ public class SmartCompController : MonoBehaviour {
 
 	void Start ()
 	{
+		energy = 100;
+		energySlider.value = energy;
 		rb = GetComponent<Rigidbody2D> ();
 		sr = GetComponent<SpriteRenderer> ();
 		whaleActive = Resources.Load<Sprite>("Whale_Active");
@@ -128,17 +135,24 @@ public class SmartCompController : MonoBehaviour {
 		Destroy (obj);
 	}
 
-	IEnumerator LaunchAnimation() {
-		yield return new WaitForSeconds(0.5f);
-		sr.sprite = whaleIdle;
-	}
-
 	Vector3 CalculateTrajectoryVelocity(Vector3 origin, Vector3 target, float t)
 	{
 		float vx = (target.x - origin.x) / t;
 		float vz = (target.z - origin.z) / t;
 		float vy = ((target.y - origin.y) - 0.5f * Physics.gravity.y * t * t) / t;
 		return new Vector3(vx, vy, vz);
+	}
+
+	/*
+	 * Used in Splashes to tell if PlayerScript or SmartCompScript is needed
+	 */
+	public bool IsComputer() {
+		return isComputerWhale;
+	}
+
+	public void LoseEnergy(int lostEnergy) {
+		energy -= lostEnergy;
+		energySlider.value = energy;
 	}
 
 

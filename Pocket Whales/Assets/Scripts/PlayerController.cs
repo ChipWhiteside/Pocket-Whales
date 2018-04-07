@@ -1,8 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class PlayerController : MonoBehaviour {
+public class PlayerController : MonoBehaviour, WhaleControllerInterface {
+
+	private int energy;
+
+	public Slider energySlider;
 
 	private Rigidbody2D rb;
 
@@ -16,8 +21,6 @@ public class PlayerController : MonoBehaviour {
 
 	public GameObject projectile;
 
-	public GameObject testProjectile;
-
 	private GameObject controller;
 
 	private ControlScript control;
@@ -26,20 +29,22 @@ public class PlayerController : MonoBehaviour {
 
 	public float angle;
 
+	public bool isComputerWhale;
+
 	public int playerNo; // 1 is the player, 2 is the computer
 
 	private bool compMoved = false;
 
 	void Start ()
 	{
+		energy = 100;
+		energySlider.value = energy;
 		rb = GetComponent<Rigidbody2D> ();
 		sr = GetComponent<SpriteRenderer> ();
 		whaleActive = Resources.Load<Sprite>("Whale_Active");
 		whaleIdle = Resources.Load<Sprite> ("Whale_Idle");
 		controller = GameObject.Find("Controller");
 		control = controller.GetComponent<ControlScript>();
-		//InvokeRepeating("LaunchTestProjectile", 0.3f, 0.2f); //for the sight line
-		//Time.timeScale = 0.5f;
 	}
 
 	void Update ()
@@ -121,12 +126,17 @@ public class PlayerController : MonoBehaviour {
 	}
 	*/
 
-	IEnumerator LaunchAnimation() {
-		yield return new WaitForSeconds(0.5f);
-		sr.sprite = whaleIdle;
+	public void LoseEnergy(int lostEnergy) {
+		energy -= lostEnergy;
+		energySlider.value = energy;
 	}
 
-
+	/*
+	 * Used in Splashes to tell if PlayerScript or SmartCompScript is needed
+	 */
+	public bool IsComputer() {
+		return isComputerWhale;
+	}
 
 	/*void OnTriggerEnter(Collider other)
 	{
