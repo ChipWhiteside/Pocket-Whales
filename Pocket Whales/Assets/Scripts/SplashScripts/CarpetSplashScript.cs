@@ -82,7 +82,7 @@ public class CarpetSplashScript : MonoBehaviour, SplashInterface {
 
 	}
 
-	public void EffectOnHit () {
+	public void EffectOnHit (GameObject whale) {
 
 	}
 

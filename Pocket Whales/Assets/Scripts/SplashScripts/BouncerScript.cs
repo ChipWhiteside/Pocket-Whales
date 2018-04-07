@@ -96,14 +96,9 @@ public class BouncerScript : MonoBehaviour, SplashInterface {
 	public void EffectOnTime() {
 
 	}
-
-<<<<<<< HEAD
-	public void EffectOnHit(GameObject whale) {
 		
+	public void EffectOnHit(GameObject whale) {
 		whale.GetComponent<WhaleControllerInterface> ().LoseEnergy (energyEffect); //could change playerController and SmartCompController to implement an interface so this would only need to be one line
-=======
-	public void EffectOnHit() {
->>>>>>> 37462a273cab96ca3f94811f87bb3e0fcfc8a83e
 		if (bounceCount == 0) {
 
 		}
