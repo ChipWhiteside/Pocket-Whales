@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BouncerScript : MonoBehaviour {
+public class BouncerScript : MonoBehaviour, SplashInterface {
 
 	/*
 	 * Every active splash
@@ -77,7 +77,7 @@ public class BouncerScript : MonoBehaviour {
 			EndTurn ();
 	}
 
-	void OnCollisionEnter2D(Collision2D collision){
+	public void OnCollisionEnter2D(Collision2D collision){
 		if (collision.gameObject.CompareTag("Terrain")) {
 			EffectOnBounce ();
 		}
@@ -89,15 +89,15 @@ public class BouncerScript : MonoBehaviour {
 		}
 	}
 
-	void EffectOnLaunch() {
+	public void EffectOnLaunch() {
 
 	}
 
-	void EffectOnTime() {
+	public void EffectOnTime() {
 
 	}
 
-	void EffectOnHit() {
+	public void EffectOnHit() {
 		if (bounceCount == 0) {
 
 		}
@@ -108,7 +108,7 @@ public class BouncerScript : MonoBehaviour {
 		bounceCount++;
 	}
 
-	void EffectOnBounce() {
+	public void EffectOnBounce() {
 		
 		if(bounceCount >= 7){
 			EndTurn ();
@@ -116,7 +116,11 @@ public class BouncerScript : MonoBehaviour {
 		bounceCount++;
 	}
 
-	void EndTurn() {
+	public void EffectOnTap() {
+
+	}
+
+	public void EndTurn() {
 		if (!endingTurn) { //so we only try to end the turn once
 			endingTurn = true;
 			Destroy (gameObject);
