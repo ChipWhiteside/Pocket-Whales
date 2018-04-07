@@ -46,7 +46,7 @@ public class SmartCompController : MonoBehaviour, WhaleControllerInterface {
 	void Start ()
 	{
 		name = "Computer";
-		energy = 10;
+		energy = 100;
 		energySlider.value = energy;
 		rb = GetComponent<Rigidbody2D> ();
 		sr = GetComponent<SpriteRenderer> ();

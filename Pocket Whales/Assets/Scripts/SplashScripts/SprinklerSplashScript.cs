@@ -40,6 +40,16 @@ public class SprinklerSplashScript : MonoBehaviour, SplashInterface {
 	private ControlScript controlScript;
 
 	/*
+	 * SplashManager Game Object
+	 */
+	public GameObject splashManager;
+
+	/*
+	 * SplashManagerScript
+	 */
+	private SplashManagerScript splashManagerScript;
+
+	/*
 	 * Is the turn already ending
 	 */
 	private bool endingTurn;
@@ -47,12 +57,13 @@ public class SprinklerSplashScript : MonoBehaviour, SplashInterface {
 
 	// Use this for initialization
 	void Start () {
-		energyEffect = 3;
+		energyEffect = 1;
 		maxActiveTime = 7;
 		despawnTimer = 0; //always starts at zero
 		effectTimer = 0; //always starts at zero
 		timeUntilEffect = 0; //when the special effect should happen
 		controlScript = control.GetComponent<ControlScript> ();
+		splashManagerScript = splashManager.GetComponent<SplashManagerScript> ();
 		endingTurn = false;
 
 		EffectOnLaunch ();
@@ -72,9 +83,6 @@ public class SprinklerSplashScript : MonoBehaviour, SplashInterface {
 		if (collision.gameObject.CompareTag("Terrain")) {
 			EffectOnBounce ();
 		}
-		if (collision.gameObject.CompareTag("Splash")) {
-			Physics2D.IgnoreCollision(collision.gameObject.GetComponent<Collider2D>(), gameObject.GetComponent<Collider2D>());
-		}
 		if (collision.gameObject.CompareTag("Whale")) {
 			EffectOnHit (collision.gameObject);
 		}
@@ -84,7 +92,8 @@ public class SprinklerSplashScript : MonoBehaviour, SplashInterface {
 	}
 
 	public void EffectOnLaunch() {
-
+		splashManagerScript.AddToSplashes (gameObject);
+		splashManagerScript.IgnoreSplashes (gameObject);
 	}
 
 	public void EffectOnTime() {
@@ -97,7 +106,7 @@ public class SprinklerSplashScript : MonoBehaviour, SplashInterface {
 	}
 
 	public void EffectOnBounce() {
-		EndTurn ();
+
 	}
 
 	public void EffectOnTap() {
@@ -107,6 +116,7 @@ public class SprinklerSplashScript : MonoBehaviour, SplashInterface {
 	public void EndTurn() {
 		if (!endingTurn) {
 			endingTurn = true;
+			splashManagerScript.RemoveFromSplashes (gameObject);
 			Destroy (gameObject);
 		}
 	}

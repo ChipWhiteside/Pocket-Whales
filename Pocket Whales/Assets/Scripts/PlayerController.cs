@@ -38,7 +38,7 @@ public class PlayerController : MonoBehaviour, WhaleControllerInterface {
 	void Start ()
 	{
 		name = "Player1";
-		energy = 10;
+		energy = 100;
 		energySlider.value = energy;
 		rb = GetComponent<Rigidbody2D> ();
 		sr = GetComponent<SpriteRenderer> ();
