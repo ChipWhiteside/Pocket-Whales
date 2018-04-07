@@ -89,6 +89,9 @@ public class CarpetScript : MonoBehaviour, SplashInterface {
 		timer += Time.deltaTime;
 		if (Input.GetMouseButtonDown (0))
 			EffectOnTap ();
+		if (carpetsDropped && timer >= .025f && carpetsLaunched < 10) {
+			DropBombs ();
+		}
 		despawnTimer += Time.deltaTime;
 		if (despawnTimer >= maxActiveTime)
 			EndTurn ();
@@ -112,18 +115,13 @@ public class CarpetScript : MonoBehaviour, SplashInterface {
 	}
 
 	public void EffectOnTap () {
-		print ("carpetsDropped 1: " + carpetsDropped);
-		if (!carpetsDropped) {
-			print ("carpetsDropped 2: " + carpetsDropped);
-			while (carpetsLaunched < 5) {
-				if (timer >= .3f) {
-					timer = 0;
-					Launch (270f, 500f, 0, -1);
-					carpetsLaunched++;
-				}
-			}
-			carpetsDropped = true;
-		}
+		carpetsDropped = true;
+	}
+
+	void DropBombs(){
+		timer = 0;
+		carpetsLaunched++;
+		Launch (270f, 500f, 0, -2);
 	}
 
 	private void Launch(float angle, float power, float xStart, float yStart) {
