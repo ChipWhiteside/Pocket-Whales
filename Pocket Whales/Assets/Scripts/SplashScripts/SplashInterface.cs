@@ -4,26 +4,22 @@ using UnityEngine;
 
 public interface SplashInterface {
 
-	void Start ();
-	
-	void Update ();
-
-	void OnCollisionEnter2D ();
+	void OnCollisionEnter2D (Collision2D collision);
 
 	/**
 	 * The effect on the splash when you launch
 	 */
-	void EffectOnLaunch();
+	void EffectOnLaunch ();
 
 	/**
 	 * The effect on the splash after an amount of time
 	 */
-	void EffectOnTime();
+	void EffectOnTime ();
 
 	/**
 	 * The effect on the splash after it hits the whale
 	 */
-	void EffectOnHit();
+	void EffectOnHit ();
 
 	/**
 	 * The effect on the splash when the screen is tapped again
@@ -33,10 +29,10 @@ public interface SplashInterface {
 	/**
 	 * The effect on the splash after it hits the ground
 	 */
-	void EffectOnBounce();
+	void EffectOnBounce ();
 
 	/**
 	 * Ends the current players turn and activates the other whale
 	 */
-	void EndTurn();
+	void EndTurn ();
 }
