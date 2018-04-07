@@ -2005,7 +2005,6 @@ GameObject:
   - component: {fileID: 1766054756}
   - component: {fileID: 1766054755}
   - component: {fileID: 1766054757}
-  - component: {fileID: 1766054758}
   m_Layer: 0
   m_Name: Ground
   m_TagString: Terrain
@@ -2232,17 +2231,6 @@ PolygonCollider2D:
       - {x: 78.43, y: -21.484}
       - {x: 78.43, y: -6.8549657}
       - {x: 72.8388, y: -6.8549657}
---- !u!114 &1766054758
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1766054754}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c22eca6ee5597418494775052208e147, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1811055744
 GameObject:
   m_ObjectHideFlags: 0
@@ -2621,7 +2609,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1966771512}
   - component: {fileID: 1966771511}
-  - component: {fileID: 1966771513}
   m_Layer: 0
   m_Name: Controller
   m_TagString: Untagged
@@ -2666,17 +2653,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1966771513
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1966771510}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bd456fe9849f74ba795f19f6f9bc4bb3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1974287023
 GameObject:
   m_ObjectHideFlags: 0

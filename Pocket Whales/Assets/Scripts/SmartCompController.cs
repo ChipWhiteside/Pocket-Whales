@@ -35,8 +35,6 @@ public class SmartCompController : MonoBehaviour, WhaleControllerInterface {
 
 	public int playerNo; // 1 is the player, 2 is the computer
 
-	public bool isComputerWhale;
-
 	private bool compMoved;
 
 	private float rangeLeft = -3f; //inclusive
@@ -47,7 +45,8 @@ public class SmartCompController : MonoBehaviour, WhaleControllerInterface {
 
 	void Start ()
 	{
-		energy = 100;
+		name = "Computer";
+		energy = 10;
 		energySlider.value = energy;
 		rb = GetComponent<Rigidbody2D> ();
 		sr = GetComponent<SpriteRenderer> ();
@@ -144,19 +143,16 @@ public class SmartCompController : MonoBehaviour, WhaleControllerInterface {
 		float vy = ((target.y - origin.y) - 0.5f * Physics.gravity.y * t * t) / t;
 		return new Vector3(vx, vy, vz);
 	}
-
-	/*
-	 * Used in Splashes to tell if PlayerScript or SmartCompScript is needed
-	 */
-	public bool IsComputer() {
-		return isComputerWhale;
-	}
-
+		
 	public void LoseEnergy(int lostEnergy) {
 		energy -= lostEnergy;
 		energySlider.value = energy;
 		if (energy <= 0) 
-			control.EndGame (name);
+			control.EndGame (gameObject);
+	}
+
+	public string GetName() {
+		return name;
 	}
 
 

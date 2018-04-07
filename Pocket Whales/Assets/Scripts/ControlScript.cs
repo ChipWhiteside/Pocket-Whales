@@ -110,9 +110,16 @@ public class ControlScript : MonoBehaviour {
 		rb.velocity = new Vector2 (0, 0);
 	}
 
-	public void EndGame(string winnerName) {
-		TakeControl (3);
-		endGameText.text = "Congratulations " + winnerName + "!";
+	public void EndGame(GameObject winner) {
+		TakeControl (3); //No one can do anything anymore
+
+		if (winner.Equals (player1)) {
+			WhaleControllerInterface script = player1.GetComponent<WhaleControllerInterface> ();
+			endGameText.text = "Congratulations " + script.GetName () + "!";
+		} else {
+			WhaleControllerInterface script = player2.GetComponent<WhaleControllerInterface> ();
+			endGameText.text = "Congratulations " + script.GetName () + "!";
+		}
 		endGame.SetActive (true);
 	}
 
