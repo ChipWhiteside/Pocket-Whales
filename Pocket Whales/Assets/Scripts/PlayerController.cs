@@ -75,7 +75,7 @@ public class PlayerController : MonoBehaviour, WhaleControllerInterface {
 
 	public void Launch(float angle, float power) {
 		if (control.turn == playerNo && !control.looping) {
-			Vector3 pos = new Vector3 (0, 1, 0);
+			Vector3 pos = new Vector3 (0, 0, 0);
 
 			gameObject.GetComponent<Rigidbody2D> ().isKinematic = true; //so the whale doesn't move or get hit during its turn
 			gameObject.GetComponent<Collider2D> ().enabled = false;
@@ -87,7 +87,7 @@ public class PlayerController : MonoBehaviour, WhaleControllerInterface {
 			sr.sprite = whaleActive;
 			Rigidbody2D splashrb = splash.GetComponent<Rigidbody2D> ();
 			Vector3 dir = Quaternion.AngleAxis(angle, Vector3.forward) * Vector3.right;
-			splashrb.AddForce(dir*power);
+			splashrb.velocity =dir*power;
 			control.TakeControl (control.turn);
 			compMoved = false;
 			//StartCoroutine (WaitUntilInactive(splash, splashrb, control));
