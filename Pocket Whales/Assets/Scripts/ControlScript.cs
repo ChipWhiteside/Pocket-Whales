@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ControlScript : MonoBehaviour {
 
@@ -19,7 +20,18 @@ public class ControlScript : MonoBehaviour {
 	public float moveSpeed; //how fast the whale can move
 
 	public bool isCompGame; //if this is a player vs. comp game
+
 	public bool playerHit;
+
+	public GameObject dragCircle;
+
+	private DragCircle dCircleScript;
+
+	public Text endGameText;
+
+	public Button endGameButton;
+
+	public GameObject endGame;
 
 	void Start()
 	{
@@ -27,6 +39,7 @@ public class ControlScript : MonoBehaviour {
 		playerHit = false;
 		looping = false;
 		turn = 1;
+		dCircleScript = dragCircle.GetComponent<DragCircle> ();
 	}
 		
 	/*
@@ -36,20 +49,25 @@ public class ControlScript : MonoBehaviour {
 	{
 		//print("Turn: " + turn);
 		if (turn == 1 | turn == 11) {
-			player1.GetComponent<PlayerController> ().enabled = false;
-			turn = 2;
 			if (isCompGame)
 				player2.GetComponent<SmartCompController> ().enabled = true;
-			else
+			else {
 				player2.GetComponent<PlayerController> ().enabled = true;
+			}
+			player1.GetComponent<PlayerController> ().enabled = false;
+			turn = 2;
 		} else if (turn == 2 | turn == 22) {
-			if (isCompGame)
+			if (isCompGame) {
 				player2.GetComponent<SmartCompController> ().enabled = false;
-			else
+			} else {
 				player2.GetComponent<PlayerController> ().enabled = false;
-			turn = 1;
+			}
 			player1.GetComponent<PlayerController> ().enabled = true;
-		}
+			turn = 1;
+
+		} else
+			return; //end the game
+		dCircleScript.SwitchTurn ();
 		canMove = true;
 		//print("Turn After: " + turn);
 	}
@@ -60,8 +78,10 @@ public class ControlScript : MonoBehaviour {
 	public void TakeControl(int player) {
 		if (turn == 1)
 			turn = 11; //arbitrary values to remember which players turn was last but keep control away from players
-		else
+		else if (turn == 2)
 			turn = 22;
+		else
+			turn = 3;
 	}
 
 	public void MoveR(Rigidbody2D rb) 
@@ -88,6 +108,19 @@ public class ControlScript : MonoBehaviour {
 		}
 		looping = false;
 		rb.velocity = new Vector2 (0, 0);
+	}
+
+	public void EndGame(GameObject winner) {
+		TakeControl (3); //No one can do anything anymore
+
+		if (winner.Equals (player1)) {
+			WhaleControllerInterface script = player2.GetComponent<WhaleControllerInterface> ();
+			endGameText.text = "Congratulations " + script.GetName () + "!";
+		} else {
+			WhaleControllerInterface script = player1.GetComponent<WhaleControllerInterface> ();
+			endGameText.text = "Congratulations " + script.GetName () + "!";
+		}
+		endGame.SetActive (true);
 	}
 
 
