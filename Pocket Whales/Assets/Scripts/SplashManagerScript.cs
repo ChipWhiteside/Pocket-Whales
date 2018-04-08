@@ -44,4 +44,8 @@ public class SplashManagerScript : MonoBehaviour {
 		}
 		allSplashes.Clear ();
 	}
+
+	public bool IsEmpty() {
+		return allSplashes.Count == 0;
+	}
 }

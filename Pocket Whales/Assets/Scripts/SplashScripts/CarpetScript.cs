@@ -40,6 +40,16 @@ public class CarpetScript : MonoBehaviour, SplashInterface {
 	private ControlScript controlScript;
 
 	/*
+	 * SplashManager Game Object
+	 */
+	public GameObject splashManager;
+
+	/*
+	 * SplashManagerScript
+	 */
+	private SplashManagerScript splashManagerScript;
+
+	/*
 	 * The number of carpetSplashes that have been dropped
 	 */
 	private int carpetsLaunched;
@@ -73,12 +83,13 @@ public class CarpetScript : MonoBehaviour, SplashInterface {
 	void Start () {
 		carpetsLaunched = 0;
 		carpetsDropped = false;
-		energyEffect = 10;
+		energyEffect = 1;
 		maxActiveTime = 20;
 		despawnTimer = 0; //always starts at zero
 		effectTimer = 0; //always starts at zero
 		timeUntilEffect = 0; //when the special effect should happen
 		controlScript = control.GetComponent<ControlScript> ();
+		splashManagerScript = splashManager.GetComponent<SplashManagerScript> ();
 		endingTurn = false;
 
 		EffectOnLaunch ();
@@ -98,11 +109,22 @@ public class CarpetScript : MonoBehaviour, SplashInterface {
 	}
 
 	public void OnCollisionEnter2D (Collision2D collision) {
-
+		if (collision.gameObject.CompareTag("Terrain")) {
+			EffectOnBounce ();
+		}
+		if (collision.gameObject.CompareTag("Splash")) {
+			Physics2D.IgnoreCollision(collision.gameObject.GetComponent<Collider2D>(), gameObject.GetComponent<Collider2D>());
+		}
+		if (collision.gameObject.CompareTag("Whale")) {
+			EffectOnHit (collision.gameObject);
+		}
+		if (collision.gameObject.CompareTag ("OutOfBounds")) {
+			EndTurn ();
+		}
 	}
 
 	public void EffectOnLaunch () {
-
+		splashManagerScript.AddToSplashes (gameObject);
 	}
 
 	public void EffectOnTime () {
@@ -110,12 +132,14 @@ public class CarpetScript : MonoBehaviour, SplashInterface {
 	}
 
 	public void EffectOnHit (GameObject whale) {
-		//could change playerController and SmartCompController to implement an interface so this would only need to be one line
-		whale.GetComponent<WhaleControllerInterface> ().LoseEnergy (energyEffect); 
+		whale.GetComponent<WhaleControllerInterface> ().LoseEnergy (energyEffect);
+		EndTurn(); 
 	}
 
 	public void EffectOnTap () {
 		carpetsDropped = true;
+		splashManagerScript.RemoveFromSplashes (gameObject);
+		StartCoroutine (CheckSplashManager());
 	}
 
 	void DropBombs(){
@@ -141,10 +165,12 @@ public class CarpetScript : MonoBehaviour, SplashInterface {
 	 * Destroys all splashes, then switches the turn to the other whale
 	 */
 	public void EndTurn() {
+		print ("end turn");
+		print (endingTurn);
 		if (!endingTurn) { //so we only try to end the turn once
 			endingTurn = true;
 			Destroy (gameObject);
-			DestroyAllObjects ();
+			splashManagerScript.DestroySplashes ();
 			controlScript.SwitchPlayerControl ();
 		}
 	}
@@ -156,18 +182,19 @@ public class CarpetScript : MonoBehaviour, SplashInterface {
 		EffectOnTap ();
 	}
 
-	void DestroyAllObjects()
-	{
-		allSplashes = GameObject.FindGameObjectsWithTag ("Splash");
-
-		for(var i = 0 ; i < allSplashes.Length ; i++)
-		{
-			Destroy(allSplashes[i]);
+	/*
+	 * If all the dropped splashes have been destroyed
+	 */
+	IEnumerator CheckSplashManager(){
+		bool hold = true;
+		while (hold){
+			print ("Checking splashManager");
+			yield return new WaitForSeconds(1f);
+			print (splashManagerScript.IsEmpty ());
+			if (splashManagerScript.IsEmpty ()) {
+				EndTurn ();
+				hold = false;
+			}
 		}
 	}
-
-	IEnumerator Wait(float time) {
-		yield return new WaitForSeconds(time);
-	}
-
 }

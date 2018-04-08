@@ -1278,6 +1278,11 @@ Prefab:
       propertyPath: control
       value: 
       objectReference: {fileID: 1966771510}
+    - target: {fileID: 114574334532168798, guid: 67152d6717fa64d40aadfe82520baa70,
+        type: 2}
+      propertyPath: splashManager
+      value: 
+      objectReference: {fileID: 426720217}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 67152d6717fa64d40aadfe82520baa70, type: 2}
   m_IsPrefabParent: 0
@@ -2634,7 +2639,7 @@ Prefab:
         type: 2}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: f67f28ca70de24569bf82561fb0c7e6c, type: 2}
+      objectReference: {fileID: 2100000, guid: 93610a87ece7a41e29a73d4b16031423, type: 2}
     - target: {fileID: 1605709086953494, guid: e46a770b57fe04b959dbf9ce3ac300dd, type: 2}
       propertyPath: m_TagString
       value: Whale
