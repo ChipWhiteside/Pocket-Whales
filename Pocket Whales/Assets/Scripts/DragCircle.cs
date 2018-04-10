@@ -27,6 +27,12 @@ public class DragCircle : MonoBehaviour {
 
 	public bool isCompGame;
 
+	public GameObject camera;
+
+	private CameraControl cameraControl;
+
+	public Camera playerCam;
+
 	public Color c1 = Color.yellow;
 	public Color c2 = Color.red;
 	public int lengthOfLineRenderer = 20;
@@ -37,6 +43,7 @@ public class DragCircle : MonoBehaviour {
 		turnStarted = false;
 		transform.position = currentWhale.transform.position;
 		lengthOfLineRenderer = 20;
+		cameraControl = camera.GetComponent<CameraControl> ();
 
 		LineRenderer lineRenderer = GetComponent<LineRenderer>();
 		lineRenderer.material = new Material(Shader.Find("Particles/Additive"));
@@ -62,18 +69,18 @@ public class DragCircle : MonoBehaviour {
 	void OnMouseDown()
 	{
 		turnStarted = true;
-		screenPoint = Camera.main.WorldToScreenPoint (transform.position);
-		offset = transform.position - Camera.main.ScreenToWorldPoint (new Vector3 (Input.mousePosition.x, Input.mousePosition.y, screenPoint.z));
+		screenPoint = playerCam.WorldToScreenPoint (transform.position);
+		offset = transform.position - playerCam.ScreenToWorldPoint (new Vector3 (Input.mousePosition.x, Input.mousePosition.y, screenPoint.z));
 	}
 
 	void OnMouseDrag()
 	{
 		Vector3 curScreenPoint = new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPoint.z);
-		Vector3 curPosition = Camera.main.ScreenToWorldPoint(curScreenPoint) + offset;
+		Vector3 curPosition = playerCam.ScreenToWorldPoint(curScreenPoint) + offset;
 		transform.position = curPosition;
 		UpdatePowerAngleText ();
 		PlotTrajectory ();
-			
+		cameraControl.setFieldOfView (FindPower ());
 	}
 
 	void OnMouseUp() {
@@ -101,13 +108,15 @@ public class DragCircle : MonoBehaviour {
 	}
 
 	float FindPower (){
-		float whaleX = currentWhale.transform.position.x;
-		float whaleY = currentWhale.transform.position.y;
-		float circleX = transform.position.x;
-		float circleY = transform.position.y;
+		Vector3 whaleScreenPosition = playerCam.WorldToScreenPoint (currentWhale.transform.position);
+		Vector3 circleScreenPosition = playerCam.WorldToScreenPoint (transform.position);
+		float whaleX = whaleScreenPosition.x;
+		float whaleY = whaleScreenPosition.y;
+		float circleX = circleScreenPosition.x;
+		float circleY = circleScreenPosition.y;
 		float x = Mathf.Pow (whaleX - circleX, 2F);
 		float y = Mathf.Pow (whaleY - circleY, 2F);
-		return Mathf.Sqrt (x + y) * 3;
+		return Mathf.Sqrt (x + y) / 5;
 
 	}
 
@@ -149,7 +158,7 @@ public class DragCircle : MonoBehaviour {
 		for (int i = 0; i < lengthOfLineRenderer; i++)
 		{
 			points [i] = PlotTrajectoryAtTime (whale.transform.position, dir * (FindPower ()), j);
-			j += .075f;
+			j += .03f;
 		}
 		lineRenderer.SetPositions(points);
 	}
