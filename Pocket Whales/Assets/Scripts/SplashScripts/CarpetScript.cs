@@ -133,7 +133,7 @@ public class CarpetScript : MonoBehaviour, SplashInterface {
 
 	public void EffectOnHit (GameObject whale) {
 		whale.GetComponent<WhaleControllerInterface> ().LoseEnergy (energyEffect);
-		EndTurn(); 
+		StartCoroutine(WaitToEndTurn(4f)); 
 	}
 
 	public void EffectOnTap () {
@@ -173,6 +173,11 @@ public class CarpetScript : MonoBehaviour, SplashInterface {
 			splashManagerScript.DestroySplashes ();
 			controlScript.SwitchPlayerControl ();
 		}
+	}
+
+	IEnumerator WaitToEndTurn(float time){
+		yield return new WaitForSeconds (time);
+		EndTurn();
 	}
 
 	/**

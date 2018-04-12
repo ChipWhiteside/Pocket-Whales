@@ -184,11 +184,9 @@ public class SprinklerScript : MonoBehaviour, SplashInterface {
 	}
 
 	IEnumerator WaitToEnd(float time) {
-		print ("Start wait to end");
 		yield return new WaitForSeconds(time);
 		splashManagerScript.DestroySplashes ();
 		controlScript.SwitchPlayerControl ();
-		print ("Through wait to end");
 	}
 
 }

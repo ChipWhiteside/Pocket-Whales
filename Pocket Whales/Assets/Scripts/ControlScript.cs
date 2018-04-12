@@ -33,6 +33,8 @@ public class ControlScript : MonoBehaviour {
 
 	public GameObject endGame;
 
+	public GameObject camera;
+
 	void Start()
 	{
 		canMove = true;
