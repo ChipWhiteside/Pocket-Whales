@@ -1080,8 +1080,6 @@ MonoBehaviour:
   whale1: {fileID: 1126147967}
   whale2: {fileID: 1754846295}
   splashManager: {fileID: 426720217}
-  startMarker: {fileID: 1341479530}
-  endMarker: {fileID: 882991675}
   elapsed: 0
   duration: 1
 --- !u!4 &709989573
@@ -2190,6 +2188,7 @@ MonoBehaviour:
   isCompGame: 1
   camera: {fileID: 709989571}
   playerCam: {fileID: 882991674}
+  mainCam: {fileID: 494005536}
   c1: {r: 1, g: 1, b: 1, a: 1}
   c2: {r: 0, g: 0.08965492, b: 1, a: 1}
   lengthOfLineRenderer: 20

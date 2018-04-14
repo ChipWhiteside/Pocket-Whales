@@ -33,12 +33,17 @@ public class DragCircle : MonoBehaviour {
 
 	public Camera playerCam;
 
+	public Camera mainCam;
+
+	private Transform mainCamOriginalTransform;
+
 	public Color c1 = Color.yellow;
 	public Color c2 = Color.red;
 	public int lengthOfLineRenderer = 20;
 
 	// Use this for initialization
 	void Start () {
+		mainCamOriginalTransform = mainCam.transform;
 		currentWhale = whale;
 		turnStarted = false;
 		transform.position = currentWhale.transform.position;
@@ -88,6 +93,8 @@ public class DragCircle : MonoBehaviour {
 		float angle = FindAngle ();
 		playerController = currentWhale.GetComponent<PlayerController> ();
 		playerController.Launch (angle, power);
+		cameraControl.AlignCameras ();
+		cameraControl.Zoom (mainCamOriginalTransform.position, 15f, 30f, mainCam.orthographicSize);
 	}
 
 	void UpdatePowerAngleText() {
