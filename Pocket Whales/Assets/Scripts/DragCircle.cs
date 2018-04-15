@@ -94,7 +94,8 @@ public class DragCircle : MonoBehaviour {
 		playerController = currentWhale.GetComponent<PlayerController> ();
 		playerController.Launch (angle, power);
 		cameraControl.AlignCameras ();
-		cameraControl.Zoom (mainCamOriginalTransform.position, 15f, 30f, mainCam.orthographicSize);
+		cameraControl.SwitchCamera ();
+		cameraControl.Zoom (mainCamOriginalTransform.position, 15f, 30f, mainCam.orthographicSize, false);
 	}
 
 	void UpdatePowerAngleText() {
