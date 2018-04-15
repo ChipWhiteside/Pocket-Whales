@@ -66,8 +66,8 @@ public class CameraControl : MonoBehaviour {
 			float distCovered = (Time.time - startTime) * speed; //how much distance has been covered
 			float fracJourney = distCovered / journeyLength; //starts at 0 and grows until it reaches destination where it = 1
 			float camSize = zoomToSize + ((1 - fracJourney) * camSizeDif); //starts at 30, ends at 10; uses fracJourney as a percentage of 20 to add to 10 to use as the camera size
-			Camera.main.transform.position = Vector3.Lerp (startPos, endPos, fracJourney); //sets the camera position
-			Camera.main.orthographicSize = camSize; //sets camera size				print (fracJourney);
+			mainCamera.transform.position = Vector3.Lerp (startPos, endPos, fracJourney); //sets the camera position
+			mainCamera.orthographicSize = camSize; //sets camera size				print (fracJourney);
 			if (fracJourney >= 1) {
 				print ("In if statment");
 				zooming = false;
