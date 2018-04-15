@@ -35,4 +35,9 @@ public interface SplashInterface {
 	 * Ends the current players turn and activates the other whale
 	 */
 	void EndTurn ();
+
+	/**
+	 * 
+	 */
+	float getCost ();
 }

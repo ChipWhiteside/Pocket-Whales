@@ -74,6 +74,11 @@ public class SprinklerScript : MonoBehaviour, SplashInterface {
 	 */
 	private int sprinklesLaunched; 
 
+	/*
+	 * Cost of firing this splash
+	 */
+	private float cost = 100.0f;
+
 	// Use this for initialization
 	void Start () {
 		energyEffect = 1;
@@ -187,6 +192,10 @@ public class SprinklerScript : MonoBehaviour, SplashInterface {
 		yield return new WaitForSeconds(time);
 		splashManagerScript.DestroySplashes ();
 		controlScript.SwitchPlayerControl ();
+	}
+
+	public float getCost() {
+		return cost;
 	}
 
 }
