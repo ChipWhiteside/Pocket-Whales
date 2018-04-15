@@ -10,14 +10,17 @@ public class ProfileScript : MonoBehaviour {
 	 */
     private string username = GameManager.username;
 
-    public Text user;
+    public Text prof;
 
-    public void Start()
+    void Start()
     {
-        user = GameObject.Find("Username").GetComponent<Text>();
+        prof = GameObject.Find("Profile").GetComponent<Text>();
+        StartCoroutine(setProfile(username));
     }
-
-    
+    private void Update()
+    {
+       
+    }
 
 
     public IEnumerator setProfile(string Username)
@@ -27,6 +30,12 @@ public class ProfileScript : MonoBehaviour {
         WWW www = new WWW("https://csweb.wheaton.edu/~pocketwhales/getProfile.php", form);
         yield return www;
         string reply = www.text;
-        user.text = reply;
+        string[] toPrint = reply.Split(new char[0]);
+        int i = 0;
+        while (i < toPrint.Length)
+        {
+            prof.text += toPrint[i] + "\n\n";
+            i++;
+        }
     }
 }
