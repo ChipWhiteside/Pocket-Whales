@@ -74,6 +74,17 @@ public class SprinklerScript : MonoBehaviour, SplashInterface {
 	 */
 	private int sprinklesLaunched; 
 
+	/*
+	 * Cost of firing this splash
+	 */
+	private float cost = 100.0f;
+
+	/*
+	 * The reward for hitting the enemy whale with this splash
+	 */
+	private float reward = 50.0f;
+
+
 	// Use this for initialization
 	void Start () {
 		energyEffect = 1;
@@ -189,4 +200,14 @@ public class SprinklerScript : MonoBehaviour, SplashInterface {
 		controlScript.SwitchPlayerControl ();
 	}
 
+	public float getCost() {
+		return cost;
+	}
+
+	/**
+	 * Returns the reward for landing the splash
+	 */
+	public float getReward () {
+		return reward;
+	}
 }

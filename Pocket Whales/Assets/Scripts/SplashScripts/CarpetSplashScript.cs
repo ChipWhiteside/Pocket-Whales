@@ -54,6 +54,16 @@ public class CarpetSplashScript : MonoBehaviour, SplashInterface {
 	 */
 	private bool endingTurn;
 
+	/*
+	 * The cost of firing this splash
+	 */
+	private float cost = 0.0f;
+
+	/*
+	 * The reward for hitting the enemy whale with this splash
+	 */
+	private float reward = 5.0f;
+
 
 	// Use this for initialization
 	void Start () {
@@ -123,4 +133,14 @@ public class CarpetSplashScript : MonoBehaviour, SplashInterface {
 		}
 	}
 
+	public float getCost() {
+		return cost;
+	}
+
+	/**
+	 * Returns the reward for landing the splash
+	 */
+	public float getReward () {
+		return reward;
+	}
 }

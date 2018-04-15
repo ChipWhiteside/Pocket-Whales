@@ -77,8 +77,7 @@ public class Login : MonoBehaviour {
 		form.AddField ("username", username);
 		form.AddField ("password", password);
         //open a connection to our server, this is not very robust but it helps with tests
-        //WWW www = new WWW ("https://csweb.wheaton.edu/~pocketwhales/Login.php", form);
-        WWW www = new WWW("localhost/pocketwhales.php", form);
+        WWW www = new WWW ("https://csweb.wheaton.edu/~pocketwhales/Login.php", form);
         //wait until server has sent everything to unity
         yield return www;
 

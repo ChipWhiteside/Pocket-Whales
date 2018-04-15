@@ -35,6 +35,8 @@ public class PlayerController : MonoBehaviour, WhaleControllerInterface {
 
 	private bool compMoved = false;
 
+	public float money = 1000.0f;
+
 	void Start ()
 	{
 		name = "Player1";
@@ -73,24 +75,32 @@ public class PlayerController : MonoBehaviour, WhaleControllerInterface {
 		}
 	}
 
-	public void Launch(float angle, float power) {
-		if (control.turn == playerNo && !control.looping) {
-			Vector3 pos = new Vector3 (0, 0, 0);
+	public void Launch(float angle, float power, GameObject splashOption) {
+		float moneyNeeded = projectile.GetComponent<SplashInterface> ().getCost ();
+		if (money >= moneyNeeded) {
+			print ("Here come the money");
+			if (control.turn == playerNo && !control.looping) {
+				money -= moneyNeeded;
+				Vector3 pos = new Vector3 (0, 0, 0);
 
-			gameObject.GetComponent<Rigidbody2D> ().isKinematic = true; //so the whale doesn't move or get hit during its turn
-			gameObject.GetComponent<Collider2D> ().enabled = false;
-			gameObject.GetComponent<Rigidbody2D> ().velocity = Vector3.zero;
-			gameObject.GetComponent<Rigidbody2D> ().freezeRotation = true;
+				gameObject.GetComponent<Rigidbody2D> ().isKinematic = true; //so the whale doesn't move or get hit during its turn
+				gameObject.GetComponent<Collider2D> ().enabled = false;
+				gameObject.GetComponent<Rigidbody2D> ().velocity = Vector3.zero;
+				gameObject.GetComponent<Rigidbody2D> ().freezeRotation = true;
 
-			GameObject splash = Instantiate (projectile, transform.position + pos, transform.rotation); //projectile gets same position and rotation as whale
-			splash.SetActive (true);
-			sr.sprite = whaleActive;
-			Rigidbody2D splashrb = splash.GetComponent<Rigidbody2D> ();
-			Vector3 dir = Quaternion.AngleAxis(angle, Vector3.forward) * Vector3.right;
-			splashrb.velocity =dir*power;
-			control.TakeControl (control.turn);
-			compMoved = false;
-			//StartCoroutine (WaitUntilInactive(splash, splashrb, control));
+				print ("Prepare for launch");
+				GameObject splash = Instantiate (splashOption, transform.position + pos, transform.rotation); //projectile gets same position and rotation as whale
+				splash.SetActive (true);
+				sr.sprite = whaleActive;
+				Rigidbody2D splashrb = splash.GetComponent<Rigidbody2D> ();
+				Vector3 dir = Quaternion.AngleAxis (angle, Vector3.forward) * Vector3.right;
+				splashrb.velocity = dir * power;
+				control.TakeControl (control.turn);
+				compMoved = false;
+				//StartCoroutine (WaitUntilInactive(splash, splashrb, control));
+			}
+		} else {
+			print ("Insufficient funds...\nNeeded: " + money + "   Current: " + moneyNeeded);
 		}
 	}
 
@@ -147,4 +157,11 @@ public class PlayerController : MonoBehaviour, WhaleControllerInterface {
 		}
 	}*/
 
+	public void GotAHit(float reward) {
+		money += reward;
+	}
+
+	public void ChooseSplash() {
+
+	}
 }
