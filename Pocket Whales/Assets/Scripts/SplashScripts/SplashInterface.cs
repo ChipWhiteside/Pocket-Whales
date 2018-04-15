@@ -37,7 +37,12 @@ public interface SplashInterface {
 	void EndTurn ();
 
 	/**
-	 * 
+	 * Returns the cost of launching the splash
 	 */
 	float getCost ();
+
+	/**
+	 * Returns the reward for landing the splash
+	 */
+	float getReward ();
 }

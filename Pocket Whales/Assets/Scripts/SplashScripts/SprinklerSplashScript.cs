@@ -59,6 +59,11 @@ public class SprinklerSplashScript : MonoBehaviour, SplashInterface {
 	 */
 	private float cost = 0.0f;
 
+	/*
+	 * The reward for hitting the enemy whale with this splash
+	 */
+	private float reward = 2.5f;
+
 
 	// Use this for initialization
 	void Start () {
@@ -130,4 +135,10 @@ public class SprinklerSplashScript : MonoBehaviour, SplashInterface {
 		return cost;
 	}
 
+	/**
+	 * Returns the reward for landing the splash
+	 */
+	public float getReward () {
+		return reward;
+	}
 }

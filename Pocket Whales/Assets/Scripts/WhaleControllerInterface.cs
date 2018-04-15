@@ -6,5 +6,9 @@ public interface WhaleControllerInterface {
 
 	void LoseEnergy (int lostEnergy);
 
+	void ChooseSplash();
+
 	string GetName ();
+
+	void GotAHit(float reward);
 }

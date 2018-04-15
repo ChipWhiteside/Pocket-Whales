@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 /*
  * if this idea causes bugs and crashes we might be able to just use GetObjects by tags but I feel like that would be slower
@@ -8,6 +9,8 @@ using UnityEngine;
 public class SplashManagerScript : MonoBehaviour {
 
 	private List<GameObject> allSplashes;
+	public GameObject[] splashOptions;
+	public Dropdown dropdown;
 
 	// Use this for initialization
 	void Start () {

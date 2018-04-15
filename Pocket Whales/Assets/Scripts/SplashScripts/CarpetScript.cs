@@ -84,6 +84,11 @@ public class CarpetScript : MonoBehaviour, SplashInterface {
 	 */
 	private float cost = 50.0f;
 
+	/*
+	 * The reward for hitting the enemy whale with this splash
+	 */
+	private float reward = 50.0f;
+
 
 	// Use this for initialization
 	void Start () {
@@ -211,5 +216,12 @@ public class CarpetScript : MonoBehaviour, SplashInterface {
 
 	public float getCost () {
 		return cost;
+	}
+
+	/**
+	 * Returns the reward for landing the splash
+	 */
+	public float getReward () {
+		return reward;
 	}
 }
