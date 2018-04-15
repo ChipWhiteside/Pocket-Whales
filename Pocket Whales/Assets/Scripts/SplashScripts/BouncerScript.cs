@@ -64,6 +64,11 @@ public class BouncerScript : MonoBehaviour, SplashInterface {
 	 */
 	private float cost = 50.0f;
 
+	/*
+	 * The reward for hitting the enemy whale with this splash
+	 */
+	private float reward = 25.0f;
+
 	// Use this for initialization
 	void Start () {
 		energyEffect = 10;
@@ -121,7 +126,7 @@ public class BouncerScript : MonoBehaviour, SplashInterface {
 	}
 		
 	public void EffectOnHit(GameObject whale) {
-		targetWhale.GetComponent<WhaleControllerInterface> ();
+		ownerWhale.GetComponent<WhaleControllerInterface> ().GotAHit(reward);
 		whale.GetComponent<WhaleControllerInterface> ().LoseEnergy (energyEffect); //could change playerController and SmartCompController to implement an interface so this would only need to be one line
 		if (bounceCount == 0) {
 
@@ -165,6 +170,13 @@ public class BouncerScript : MonoBehaviour, SplashInterface {
 
 	public float getCost() {
 		return cost;
+	}
+
+	/**
+	 * Returns the reward for landing the splash
+	 */
+	public float getReward () {
+		return reward;
 	}
 
 }

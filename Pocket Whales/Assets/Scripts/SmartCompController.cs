@@ -42,6 +42,8 @@ public class SmartCompController : MonoBehaviour, WhaleControllerInterface {
 
 	public GameObject angleAimPoint; //how the AI will find the angle to shoot to make it over the mountain
 
+	public float money = 1000.0f;
+
 
 	void Start ()
 	{
@@ -76,6 +78,8 @@ public class SmartCompController : MonoBehaviour, WhaleControllerInterface {
 			print ("rangeX = " + rangeX);
 			Vector3 vector = CalculateTrajectoryVelocity(transform.position, playerWhale.transform.position + range, 5);
 			splashrb.velocity = vector; //FIRE!
+			money  -= projectile.GetComponent<SplashInterface> ().getCost ();
+
 			control.TakeControl (control.turn);
 
 			//FireProjectile ();
@@ -153,6 +157,14 @@ public class SmartCompController : MonoBehaviour, WhaleControllerInterface {
 
 	public string GetName() {
 		return name;
+	}
+
+	public void GotAHit (float reward) {
+		money += reward;
+	}
+
+	public void ChooseSplash () {
+
 	}
 
 
