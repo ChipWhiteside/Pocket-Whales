@@ -54,6 +54,11 @@ public class SprinklerSplashScript : MonoBehaviour, SplashInterface {
 	 */
 	private bool endingTurn;
 
+	/*
+	 * The cost to fire this splash
+	 */
+	private float cost = 0.0f;
+
 
 	// Use this for initialization
 	void Start () {
@@ -119,6 +124,10 @@ public class SprinklerSplashScript : MonoBehaviour, SplashInterface {
 			splashManagerScript.RemoveFromSplashes (gameObject);
 			Destroy (gameObject);
 		}
+	}
+
+	public float getCost() {
+		return cost;
 	}
 
 }

@@ -56,6 +56,11 @@ public class BouncerScript : MonoBehaviour, SplashInterface {
 
 	private Vector2 firstBounceVelocityNormalized;
 
+	/*
+	 * Cost to fire the shot
+	 */
+	private float cost = 50.0f;
+
 	// Use this for initialization
 	void Start () {
 		energyEffect = 10;
@@ -140,6 +145,10 @@ public class BouncerScript : MonoBehaviour, SplashInterface {
 		{
 			Destroy(allSplashes[i]);
 		}
+	}
+
+	public float getCost() {
+		return cost;
 	}
 
 }

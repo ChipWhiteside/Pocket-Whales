@@ -79,6 +79,12 @@ public class CarpetScript : MonoBehaviour, SplashInterface {
 	 */
 	public GameObject carpetSplash;
 
+	/*
+	 * Cost to fire this splash
+	 */
+	private float cost = 50.0f;
+
+
 	// Use this for initialization
 	void Start () {
 		carpetsLaunched = 0;
@@ -201,5 +207,9 @@ public class CarpetScript : MonoBehaviour, SplashInterface {
 				hold = false;
 			}
 		}
+	}
+
+	public float getCost () {
+		return cost;
 	}
 }

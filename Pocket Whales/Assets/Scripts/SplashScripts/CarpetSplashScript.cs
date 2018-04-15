@@ -54,6 +54,11 @@ public class CarpetSplashScript : MonoBehaviour, SplashInterface {
 	 */
 	private bool endingTurn;
 
+	/*
+	 * The cost of firing this splash
+	 */
+	private float cost = 0.0f;
+
 
 	// Use this for initialization
 	void Start () {
@@ -121,6 +126,10 @@ public class CarpetSplashScript : MonoBehaviour, SplashInterface {
 			Destroy (gameObject);
 			splashManagerScript.RemoveFromSplashes (gameObject);
 		}
+	}
+
+	public float getCost() {
+		return cost;
 	}
 
 }
