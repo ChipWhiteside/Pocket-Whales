@@ -69,6 +69,8 @@ public class BouncerScript : MonoBehaviour, SplashInterface {
 	 */
 	private float reward = 25.0f;
 
+	private bool isPlayerTurn;
+
 	// Use this for initialization
 	void Start () {
 		energyEffect = 10;
@@ -79,13 +81,7 @@ public class BouncerScript : MonoBehaviour, SplashInterface {
 		controlScript = control.GetComponent<ControlScript> ();
 		endingTurn = false;
 		bounceCount = 0;
-
-		EffectOnLaunch ();
-	}
-
-	void Awake()
-	{
-		bool isPlayerTurn = controlScript.turn == 1;
+		isPlayerTurn = controlScript.turn == 1;
 		if (isPlayerTurn) {
 			ownerWhale = controlScript.player1;
 			targetWhale = controlScript.player2;
@@ -93,6 +89,7 @@ public class BouncerScript : MonoBehaviour, SplashInterface {
 			ownerWhale = controlScript.player2;
 			targetWhale = controlScript.player1;
 		}
+		EffectOnLaunch ();
 	}
 
 	// Update is called once per frame

@@ -42,6 +42,8 @@ public class CameraControl : MonoBehaviour {
 	private float cameraSizeEnd = 10.0f;
 	private float camSizeDif;
 	private float zoomToSize;
+	private float camSize;
+	private bool zoomingIn;
 
 	public float elapsed = 0.0f;
 	public float duration = 5.0f;
@@ -49,6 +51,7 @@ public class CameraControl : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		startTime = Time.time + waitTime;
+		zoomingIn = false;
 
 		mainCamera.orthographic = true;
 		camSwitch = true;
@@ -65,9 +68,15 @@ public class CameraControl : MonoBehaviour {
 		if (zooming) {
 			float distCovered = (Time.time - startTime) * speed; //how much distance has been covered
 			float fracJourney = distCovered / journeyLength; //starts at 0 and grows until it reaches destination where it = 1
-			float camSize = zoomToSize + ((1 - fracJourney) * camSizeDif); //starts at 30, ends at 10; uses fracJourney as a percentage of 20 to add to 10 to use as the camera size
-			mainCamera.transform.position = Vector3.Lerp (startPos, endPos, fracJourney); //sets the camera position
-			mainCamera.orthographicSize = camSize; //sets camera size				print (fracJourney);
+			if (zoomingIn) {
+				camSize = zoomToSize + ((1 - fracJourney) * camSizeDif); //starts at 30, ends at 10; uses fracJourney as a percentage of 20 to add to 10 to use as the camera size
+				Camera.main.transform.position = Vector3.Lerp (startPos, endPos, fracJourney); //sets the camera position
+				Camera.main.orthographicSize = camSize; //sets camera size				print (fracJourney);
+			} else {
+				camSize = zoomToSize + (fracJourney * camSizeDif);
+				Camera.main.transform.position = Vector3.Lerp (startPos, endPos, fracJourney); //sets the camera position
+				Camera.main.orthographicSize = camSize; //sets camera size				print (fracJourney);
+			}
 			if (fracJourney >= 1) {
 				print ("In if statment");
 				zooming = false;
@@ -89,6 +98,7 @@ public class CameraControl : MonoBehaviour {
 
 	public void SwitchCamera() {
 		camSwitch = !camSwitch;
+		print ("camSwitch");
 		mainCamera.gameObject.SetActive (camSwitch);
 		playerCamera.gameObject.SetActive (!camSwitch);
 	}
@@ -100,16 +110,17 @@ public class CameraControl : MonoBehaviour {
 	/*
 	 * So the coroutine can be clled from another class
 	 */
-	public void Zoom(Vector3 camEndPos, float camMoveSpeed, float endCamSize, float startCamSize) {
-		StartCoroutine (ZoomHelper(camEndPos, camMoveSpeed, endCamSize, startCamSize));
+			public void Zoom(Vector3 camEndPos, float camMoveSpeed, float endCamSize, float startCamSize, bool zoomingDir) {
+		StartCoroutine (ZoomHelper(camEndPos, camMoveSpeed, endCamSize, startCamSize, zoomingDir));
 	}
 
 	/*
 	 * zooms mainCamera
 	 */
-	IEnumerator ZoomHelper(Vector3 camEndPos, float camMoveSpeed, float endCamSize, float startCamSize) {
+	IEnumerator ZoomHelper(Vector3 camEndPos, float camMoveSpeed, float endCamSize, float startCamSize, bool zoomingDir) {
 		//deactivate drag circle
 		//yield return new WaitForSeconds (2f);
+		zoomingIn = zoomingDir;
 		startPos = mainCamera.transform.position;
 		endPos = camEndPos;
 		targetPos = camEndPos;
@@ -126,7 +137,7 @@ public class CameraControl : MonoBehaviour {
 	 */
 	IEnumerator WaitAndCall(){
 		yield return new WaitForSeconds (2f);
-		Zoom(currentWhale.transform.position, 15f, 10.0f, 30.0f);
+		Zoom(currentWhale.transform.position, 15f, 10.0f, 30.0f, true);
 	}
 	/*
 	 * MainCamera set to playerCam's Position

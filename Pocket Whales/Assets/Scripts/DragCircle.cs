@@ -37,9 +37,9 @@ public class DragCircle : MonoBehaviour {
 
 	private Transform mainCamOriginalTransform;
 
-	public Dropdown dropdown;
-
 	public GameObject[] splashOptions;
+
+	public Dropdown dropdown;
 
 	public Color c1 = Color.yellow;
 	public Color c2 = Color.red;
@@ -98,7 +98,8 @@ public class DragCircle : MonoBehaviour {
 		playerController = currentWhale.GetComponent<PlayerController> ();
 		playerController.Launch (angle, power, splashOptions[dropdown.value]);
 		cameraControl.AlignCameras ();
-		cameraControl.Zoom (mainCamOriginalTransform.position, 15f, 30f, mainCam.orthographicSize);
+		cameraControl.SwitchCamera ();
+		cameraControl.Zoom (mainCamOriginalTransform.position, 15f, 30f, mainCam.orthographicSize, false);
 	}
 
 	void UpdatePowerAngleText() {

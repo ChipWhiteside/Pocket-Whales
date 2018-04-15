@@ -37,11 +37,8 @@ public class PlayerController : MonoBehaviour, WhaleControllerInterface {
 
 	public float money = 1000.0f;
 
-	private bool pickedSplash;
-
 	void Start ()
 	{
-		pickedSplash = false;
 		name = "Player1";
 		energy = 100;
 		energySlider.value = energy;
@@ -81,7 +78,8 @@ public class PlayerController : MonoBehaviour, WhaleControllerInterface {
 	public void Launch(float angle, float power, GameObject splashOption) {
 		float moneyNeeded = projectile.GetComponent<SplashInterface> ().getCost ();
 		if (money >= moneyNeeded) {
-			if (control.turn == playerNo && !control.looping && pickedSplash) {
+			print ("Here come the money");
+			if (control.turn == playerNo && !control.looping) {
 				money -= moneyNeeded;
 				Vector3 pos = new Vector3 (0, 0, 0);
 
@@ -90,6 +88,7 @@ public class PlayerController : MonoBehaviour, WhaleControllerInterface {
 				gameObject.GetComponent<Rigidbody2D> ().velocity = Vector3.zero;
 				gameObject.GetComponent<Rigidbody2D> ().freezeRotation = true;
 
+				print ("Prepare for launch");
 				GameObject splash = Instantiate (splashOption, transform.position + pos, transform.rotation); //projectile gets same position and rotation as whale
 				splash.SetActive (true);
 				sr.sprite = whaleActive;

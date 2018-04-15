@@ -1091,7 +1091,7 @@ MonoBehaviour:
   - {fileID: 37104174}
   - {fileID: 787502834}
   - {fileID: 73201459}
-  m_Dropdown: {fileID: 1040455033}
+  dropdown: {fileID: 0}
 --- !u!4 &426720219
 Transform:
   m_ObjectHideFlags: 0
@@ -3008,6 +3008,11 @@ MonoBehaviour:
   camera: {fileID: 709989571}
   playerCam: {fileID: 882991674}
   mainCam: {fileID: 494005536}
+  splashOptions:
+  - {fileID: 37104174}
+  - {fileID: 787502834}
+  - {fileID: 73201459}
+  dropdown: {fileID: 1040455033}
   c1: {r: 1, g: 1, b: 1, a: 1}
   c2: {r: 0, g: 0.08965492, b: 1, a: 1}
   lengthOfLineRenderer: 20
@@ -3600,6 +3605,16 @@ Prefab:
       propertyPath: m_Material
       value: 
       objectReference: {fileID: 6200000, guid: 967ca25c47e624d2dbeeb76875ebc4b8, type: 2}
+    - target: {fileID: 114406245229065262, guid: abf344bc2e4b048b8b116ca10f3ec906,
+        type: 2}
+      propertyPath: ownerWhale
+      value: 
+      objectReference: {fileID: 1126147967}
+    - target: {fileID: 114406245229065262, guid: abf344bc2e4b048b8b116ca10f3ec906,
+        type: 2}
+      propertyPath: targetWhale
+      value: 
+      objectReference: {fileID: 1754846295}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: abf344bc2e4b048b8b116ca10f3ec906, type: 2}
   m_IsPrefabParent: 0
@@ -4546,6 +4561,11 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 114532874599239776, guid: e46a770b57fe04b959dbf9ce3ac300dd,
+        type: 2}
+      propertyPath: splashOptions.Array.size
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 4511509501238740, guid: e46a770b57fe04b959dbf9ce3ac300dd, type: 2}
       propertyPath: m_LocalPosition.x
       value: -31
@@ -4667,6 +4687,21 @@ Prefab:
       propertyPath: name
       value: Player1
       objectReference: {fileID: 0}
+    - target: {fileID: 114532874599239776, guid: e46a770b57fe04b959dbf9ce3ac300dd,
+        type: 2}
+      propertyPath: splashOptions.Array.data[0]
+      value: 
+      objectReference: {fileID: 37104174}
+    - target: {fileID: 114532874599239776, guid: e46a770b57fe04b959dbf9ce3ac300dd,
+        type: 2}
+      propertyPath: splashOptions.Array.data[2]
+      value: 
+      objectReference: {fileID: 73201459}
+    - target: {fileID: 114532874599239776, guid: e46a770b57fe04b959dbf9ce3ac300dd,
+        type: 2}
+      propertyPath: splashOptions.Array.data[1]
+      value: 
+      objectReference: {fileID: 787502834}
     m_RemovedComponents:
     - {fileID: 61873900983197036, guid: e46a770b57fe04b959dbf9ce3ac300dd, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: e46a770b57fe04b959dbf9ce3ac300dd, type: 2}
