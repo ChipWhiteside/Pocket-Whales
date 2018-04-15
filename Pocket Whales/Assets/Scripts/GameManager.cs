@@ -69,4 +69,8 @@ public class GameManager : MonoBehaviour {
 	public void About(){
 		SceneManager.LoadScene ("AboutGame");
 	}
+    public void viewProfile()
+    {
+        SceneManager.LoadScene("ViewProfile");
+    }
 }
