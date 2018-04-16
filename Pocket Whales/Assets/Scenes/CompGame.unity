@@ -1087,11 +1087,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efea552091f27492db2d484881fa3367, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  splashOptions:
-  - {fileID: 37104174}
-  - {fileID: 787502834}
-  - {fileID: 73201459}
-  dropdown: {fileID: 0}
 --- !u!4 &426720219
 Transform:
   m_ObjectHideFlags: 0
@@ -5345,6 +5340,21 @@ Prefab:
       propertyPath: m_FlipX
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114089468492175994, guid: e07db18466f914ed1ac8fd4984c63774,
+        type: 2}
+      propertyPath: cameraControl
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 114089468492175994, guid: e07db18466f914ed1ac8fd4984c63774,
+        type: 2}
+      propertyPath: camera
+      value: 
+      objectReference: {fileID: 709989571}
+    - target: {fileID: 114089468492175994, guid: e07db18466f914ed1ac8fd4984c63774,
+        type: 2}
+      propertyPath: mainCam
+      value: 
+      objectReference: {fileID: 494005536}
     m_RemovedComponents:
     - {fileID: 61487682085132076, guid: e07db18466f914ed1ac8fd4984c63774, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: e07db18466f914ed1ac8fd4984c63774, type: 2}
