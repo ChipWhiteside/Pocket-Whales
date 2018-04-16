@@ -37,13 +37,15 @@ public class SmartCompController : MonoBehaviour, WhaleControllerInterface {
 
 	private bool compMoved;
 
-	private float rangeLeft = -3f; //inclusive
-	private float rangeRight = 3f; //inclusive
-
 	public GameObject angleAimPoint; //how the AI will find the angle to shoot to make it over the mountain
 
 	public float money = 1000.0f;
 
+	GameObject splash;
+
+	Vector3 whalePos;
+
+	bool flying = false;
 
 	void Start ()
 	{
@@ -69,20 +71,40 @@ public class SmartCompController : MonoBehaviour, WhaleControllerInterface {
 			gameObject.GetComponent<Rigidbody2D> ().velocity = Vector3.zero;
 			gameObject.GetComponent<Rigidbody2D> ().freezeRotation = true;
 
-			GameObject splash = Instantiate (projectile, transform.position + pos, transform.rotation); //projectile gets same position and rotation as whale
+			//each splash will find the player whales position and give it to the AI whale. Needs to be both an x and y value
+
+			splash = Instantiate (projectile, transform.position + pos, transform.rotation); //projectile gets same position and rotation as whale
 			splash.SetActive (true);
 			Rigidbody2D splashrb = splash.GetComponent<Rigidbody2D> ();
 
-			float rangeX = Random.Range (rangeLeft, rangeRight);
-			Vector3 range = new Vector3 (rangeX, 0, 0);
-			print ("rangeX = " + rangeX);
-			Vector3 vector = CalculateTrajectoryVelocity(transform.position, playerWhale.transform.position + range, 5);
+
+
+			whalePos = projectile.GetComponent<SplashInterface> ().getWhalePos (playerWhale.transform.position); //gets the location that the splash needs to go based on the type of splash
+			print("whalePos: " + whalePos);
+			Vector3 vector = CalculateTrajectoryVelocity(transform.position, whalePos, 5);
 			splashrb.velocity = vector; //FIRE!
 			money  -= projectile.GetComponent<SplashInterface> ().getCost ();
+
+			flying = true;
 
 			control.TakeControl (control.turn);
 
 			//FireProjectile ();
+		}
+		if (flying) {
+			if (splash.activeInHierarchy) {
+				print ("Splash.x: " + splash.transform.position.x);
+				print ("whalePos.x: " + whalePos.x);
+
+				//if (splash.name == "Carpet") {
+					print ("Name is Carpet");
+				float rand = Random.Range (10.0f, 20.0f);
+				if (splash.transform.position.x <= (whalePos.x + rand)) {
+						splash.GetComponent<SplashInterface> ().EffectOnTap ();
+						print ("is less than whalePos.x");
+					}
+				//}
+			}
 		}
 
 	}
