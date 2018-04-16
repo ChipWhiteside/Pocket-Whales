@@ -35,7 +35,7 @@ public class DragCircle : MonoBehaviour {
 
 	public Camera mainCam;
 
-	private Transform mainCamOriginalTransform;
+	private Vector3 mainCamOriginalPosition;
 
 	public GameObject[] splashOptions;
 
@@ -47,7 +47,8 @@ public class DragCircle : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		mainCamOriginalTransform = mainCam.transform;
+		//mainCamOriginalPosition = new Vector3(-29.5608f, 12.00515f, -10f);
+		mainCamOriginalPosition = new Vector3(0, 0, -10);
 		currentWhale = whale;
 		turnStarted = false;
 		transform.position = currentWhale.transform.position;
@@ -93,13 +94,17 @@ public class DragCircle : MonoBehaviour {
 	}
 
 	void OnMouseUp() {
+		print ("please");
+		cameraControl.AlignCameras ();
 		float power = FindPower ();
 		float angle = FindAngle ();
 		playerController = currentWhale.GetComponent<PlayerController> ();
 		playerController.Launch (angle, power, splashOptions[dropdown.value]);
-		cameraControl.AlignCameras ();
-		cameraControl.SwitchCamera ();
-		cameraControl.Zoom (mainCamOriginalTransform.position, 15f, 30f, mainCam.orthographicSize, false);
+		//print ("camSwitch dragCircle");
+		cameraControl.Zoom (mainCamOriginalPosition, 15f, 20f, mainCam.orthographicSize, false);
+		cameraControl.SwitchCamera (); //switch the active camera
+		cameraControl.SwitchWhale(); //switch the current following whale for player cam
+		//print ("Cam" + mainCamOriginalTransform.position.x + mainCamOriginalTransform.position.y + mainCamOriginalTransform.position.z);
 	}
 
 	void UpdatePowerAngleText() {
@@ -137,17 +142,20 @@ public class DragCircle : MonoBehaviour {
 		currentWhale.GetComponent<Collider2D> ().enabled = true;
 		currentWhale.GetComponent<Rigidbody2D> ().freezeRotation = false;
 		transform.position = whale.transform.position;
+		SwitchWhale ();
+		//print ("switchCam DC switchTurn");
+		cameraControl.SwitchCamera ();
+		//cameraControl.Zoom(currentWhale.transform.position, 200f, 10.0f, 30.0f, true);
 		if (isCompGame) {
 			if (gameObject.activeSelf) {
 				gameObject.SetActive (false);
-				print ("deactivate");
+				//print ("deactivate");
 			} else {
 				gameObject.SetActive (true);
-				print ("activate");
+				//print ("activate");
 			}
 		}
 		turnStarted = false;
-		SwitchWhale ();
 	}
 
 	void SwitchWhale() {

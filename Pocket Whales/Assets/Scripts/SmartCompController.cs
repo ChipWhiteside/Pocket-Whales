@@ -44,6 +44,13 @@ public class SmartCompController : MonoBehaviour, WhaleControllerInterface {
 
 	public float money = 1000.0f;
 
+	public GameObject camera;
+
+	private CameraControl cameraControl;
+
+	private Vector3 mainCamOriginalPosition;
+
+	public Camera mainCam;
 
 	void Start ()
 	{
@@ -56,6 +63,8 @@ public class SmartCompController : MonoBehaviour, WhaleControllerInterface {
 		whaleIdle = Resources.Load<Sprite> ("Whale_Idle");
 		controller = GameObject.Find("Controller");
 		control = controller.GetComponent<ControlScript>();
+		cameraControl = camera.GetComponent<CameraControl> ();
+		mainCamOriginalPosition = new Vector3(0, 0, -10);
 	}
 
 	void Update ()
@@ -75,10 +84,15 @@ public class SmartCompController : MonoBehaviour, WhaleControllerInterface {
 
 			float rangeX = Random.Range (rangeLeft, rangeRight);
 			Vector3 range = new Vector3 (rangeX, 0, 0);
-			print ("rangeX = " + rangeX);
+			//print ("rangeX = " + rangeX);
 			Vector3 vector = CalculateTrajectoryVelocity(transform.position, playerWhale.transform.position + range, 5);
 			splashrb.velocity = vector; //FIRE!
-			money  -= projectile.GetComponent<SplashInterface> ().getCost ();
+			cameraControl.AlignCameras ();
+			cameraControl.SwitchCamera ();
+			//print ("Cam" + mainCamOriginalTransform.position.x + mainCamOriginalTransform.position.y + mainCamOriginalTransform.position.z);
+			cameraControl.Zoom (mainCamOriginalPosition, 15f, 20f, mainCam.orthographicSize, false);
+			cameraControl.SwitchWhale(); //switch the current following whale for player cam
+			money -= projectile.GetComponent<SplashInterface> ().getCost ();
 
 			control.TakeControl (control.turn);
 

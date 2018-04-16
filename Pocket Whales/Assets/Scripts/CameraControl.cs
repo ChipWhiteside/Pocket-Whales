@@ -50,7 +50,7 @@ public class CameraControl : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		startTime = Time.time + waitTime;
+		startTime = Time.time;
 		zoomingIn = false;
 
 		mainCamera.orthographic = true;
@@ -71,17 +71,22 @@ public class CameraControl : MonoBehaviour {
 			if (zoomingIn) {
 				camSize = zoomToSize + ((1 - fracJourney) * camSizeDif); //starts at 30, ends at 10; uses fracJourney as a percentage of 20 to add to 10 to use as the camera size
 				Camera.main.transform.position = Vector3.Lerp (startPos, endPos, fracJourney); //sets the camera position
-				Camera.main.orthographicSize = camSize; //sets camera size				print (fracJourney);
+				Camera.main.orthographicSize = camSize; //sets camera size
+				if (fracJourney >= 1) {
+					zooming = false;
+					//activate dragCircle
+					//print ("camSwitch camControl");
+					SwitchCamera ();
+				}
 			} else {
 				camSize = zoomToSize + (fracJourney * camSizeDif);
 				Camera.main.transform.position = Vector3.Lerp (startPos, endPos, fracJourney); //sets the camera position
-				Camera.main.orthographicSize = camSize; //sets camera size				print (fracJourney);
-			}
-			if (fracJourney >= 1) {
-				print ("In if statment");
-				zooming = false;
-				//activate dragCircle
-				SwitchCamera ();
+				Camera.main.orthographicSize = camSize; //sets camera size
+				if (fracJourney >= 1) {
+					zooming = false;
+					//activate dragCircle
+					//SwitchCamera ();
+				}
 			}
 		}
 		else if (!zooming) {
@@ -98,7 +103,6 @@ public class CameraControl : MonoBehaviour {
 
 	public void SwitchCamera() {
 		camSwitch = !camSwitch;
-		print ("camSwitch");
 		mainCamera.gameObject.SetActive (camSwitch);
 		playerCamera.gameObject.SetActive (!camSwitch);
 	}
@@ -119,14 +123,16 @@ public class CameraControl : MonoBehaviour {
 	 */
 	IEnumerator ZoomHelper(Vector3 camEndPos, float camMoveSpeed, float endCamSize, float startCamSize, bool zoomingDir) {
 		//deactivate drag circle
-		//yield return new WaitForSeconds (2f);
+		startTime = Time.time;
 		zoomingIn = zoomingDir;
+		//print ("" + mainCamera.transform.position.x + mainCamera.transform.position.y + mainCamera.transform.position.z);
 		startPos = mainCamera.transform.position;
+		AlignCameras ();
 		endPos = camEndPos;
 		targetPos = camEndPos;
 		journeyLength = Vector3.Distance(startPos, endPos);
 		speed = camMoveSpeed;
-		camSizeDif = startCamSize - endCamSize;
+		camSizeDif = Mathf.Abs(startCamSize - endCamSize);
 		zoomToSize = endCamSize;
 		zooming = true;
 		yield return new WaitForSeconds (0f);
@@ -137,12 +143,13 @@ public class CameraControl : MonoBehaviour {
 	 */
 	IEnumerator WaitAndCall(){
 		yield return new WaitForSeconds (2f);
-		Zoom(currentWhale.transform.position, 15f, 10.0f, 30.0f, true);
+		Zoom(currentWhale.transform.position, 10f, 10.0f, 30.0f, true);
 	}
 	/*
 	 * MainCamera set to playerCam's Position
 	 */
 	public void AlignCameras() {
+		print ("align");
 		mainCamera.transform.position = playerCamera.transform.position;
 	}
 
