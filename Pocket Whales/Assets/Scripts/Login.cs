@@ -76,10 +76,10 @@ public class Login : MonoBehaviour {
 		WWWForm form = new WWWForm();
 		form.AddField ("username", username);
 		form.AddField ("password", password);
-		//open a connection to our server, this is not very robust but it helps with tests
-		WWW www = new WWW ("https://csweb.wheaton.edu/~pocketwhales/Login.php", form);
-		//wait until server has sent everything to unity
-		yield return www;
+        //open a connection to our server, this is not very robust but it helps with tests
+        WWW www = new WWW ("https://csweb.wheaton.edu/~pocketwhales/Login.php", form);
+        //wait until server has sent everything to unity
+        yield return www;
 
 		//what does the server say?
 		string reply = www.text;

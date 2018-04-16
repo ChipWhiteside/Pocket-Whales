@@ -1,8 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class PlayerController : MonoBehaviour {
+public class PlayerController : MonoBehaviour, WhaleControllerInterface {
+
+	private int energy;
+
+	public Slider energySlider;
 
 	private Rigidbody2D rb;
 
@@ -16,8 +21,6 @@ public class PlayerController : MonoBehaviour {
 
 	public GameObject projectile;
 
-	public GameObject testProjectile;
-
 	private GameObject controller;
 
 	private ControlScript control;
@@ -26,38 +29,29 @@ public class PlayerController : MonoBehaviour {
 
 	public float angle;
 
+	public string name; //Hopefully UserName for the player
+
 	public int playerNo; // 1 is the player, 2 is the computer
 
 	private bool compMoved = false;
 
+	public float money = 1000.0f;
+
 	void Start ()
 	{
+		name = "Player1";
+		energy = 100;
+		energySlider.value = energy;
 		rb = GetComponent<Rigidbody2D> ();
 		sr = GetComponent<SpriteRenderer> ();
 		whaleActive = Resources.Load<Sprite>("Whale_Active");
 		whaleIdle = Resources.Load<Sprite> ("Whale_Idle");
 		controller = GameObject.Find("Controller");
 		control = controller.GetComponent<ControlScript>();
-		//InvokeRepeating("LaunchTestProjectile", 0.3f, 0.2f); //for the sight line
-		//Time.timeScale = 0.5f;
 	}
 
 	void Update ()
 	{
-			
-		if (Input.GetKeyDown ("space") && control.turn == playerNo && !control.looping) {
-			//print("space key was pressed");
-			Vector3 pos = new Vector3 (0, 1, 0);
-			GameObject splash = Instantiate (projectile, transform.position + pos, transform.rotation); //projectile gets same position and rotation as whale
-			splash.SetActive (true);
-			sr.sprite = whaleActive;
-			StartCoroutine(LaunchAnimation());
-			Rigidbody2D splashrb = splash.GetComponent<Rigidbody2D> ();
-			Vector3 dir = Quaternion.AngleAxis(angle, Vector3.forward) * Vector3.right;
-			splashrb.AddForce(dir*force);
-			control.TakeControl (control.turn);
-			StartCoroutine (WaitUntilInactive(splash, splashrb, control));
-		}
 			
 	}
 
@@ -81,26 +75,33 @@ public class PlayerController : MonoBehaviour {
 		}
 	}
 
-	/*
-	 * Switches player control once the splash is finished acting
-	 */
-	IEnumerator WaitUntilInactive(GameObject obj, Rigidbody2D rb, ControlScript control) 
-	{
-		while (true) {
-			yield return new WaitForSeconds(1.0f); //check once a second to see if the turn has ended
-			//print("is sleeping?");
-			if (rb.IsSleeping ()) {
-				Destroy (obj);
-				//print ("Destroyed");
-				control.SwitchPlayerControl ();
+	public void Launch(float angle, float power, GameObject splashOption) {
+		float moneyNeeded = projectile.GetComponent<SplashInterface> ().getCost ();
+		if (money >= moneyNeeded) {
+			print ("Here come the money");
+			if (control.turn == playerNo && !control.looping) {
+				money -= moneyNeeded;
+				Vector3 pos = new Vector3 (0, 0, 0);
+
+				gameObject.GetComponent<Rigidbody2D> ().isKinematic = true; //so the whale doesn't move or get hit during its turn
+				gameObject.GetComponent<Collider2D> ().enabled = false;
+				gameObject.GetComponent<Rigidbody2D> ().velocity = Vector3.zero;
+				gameObject.GetComponent<Rigidbody2D> ().freezeRotation = true;
+
+				print ("Prepare for launch");
+				GameObject splash = Instantiate (splashOption, transform.position + pos, transform.rotation); //projectile gets same position and rotation as whale
+				splash.SetActive (true);
+				sr.sprite = whaleActive;
+				Rigidbody2D splashrb = splash.GetComponent<Rigidbody2D> ();
+				Vector3 dir = Quaternion.AngleAxis (angle, Vector3.forward) * Vector3.right;
+				splashrb.velocity = dir * power;
+				control.TakeControl (control.turn);
 				compMoved = false;
-				yield break;
+				//StartCoroutine (WaitUntilInactive(splash, splashrb, control));
 			}
+		} else {
+			print ("Insufficient funds...\nNeeded: " + money + "   Current: " + moneyNeeded);
 		}
-	}
-
-	void shoot() {
-
 	}
 
 
@@ -136,12 +137,17 @@ public class PlayerController : MonoBehaviour {
 	}
 	*/
 
-	IEnumerator LaunchAnimation() {
-		yield return new WaitForSeconds(0.5f);
-		sr.sprite = whaleIdle;
+	public void LoseEnergy(int lostEnergy) {
+		energy -= lostEnergy;
+		energySlider.value = energy;
+		if (energy <= 0) {
+			control.EndGame (gameObject);
+		}
 	}
 
-
+	public string GetName() {
+		return name;
+	}
 
 	/*void OnTriggerEnter(Collider other)
 	{
@@ -151,4 +157,11 @@ public class PlayerController : MonoBehaviour {
 		}
 	}*/
 
+	public void GotAHit(float reward) {
+		money += reward;
+	}
+
+	public void ChooseSplash() {
+
+	}
 }

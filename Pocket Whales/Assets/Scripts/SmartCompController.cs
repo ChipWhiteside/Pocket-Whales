@@ -1,8 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class SmartCompController : MonoBehaviour {
+public class SmartCompController : MonoBehaviour, WhaleControllerInterface {
+
+	private int energy;
+
+	public Slider energySlider;
 
 	private Rigidbody2D rb;
 
@@ -18,8 +23,6 @@ public class SmartCompController : MonoBehaviour {
 
 	public GameObject projectile;
 
-	public GameObject testProjectile;
-
 	private GameObject controller;
 
 	private ControlScript control;
@@ -27,6 +30,8 @@ public class SmartCompController : MonoBehaviour {
 	private LaunchSplash launchScript;
 
 	public float initialAngle;
+
+	public string name;
 
 	public int playerNo; // 1 is the player, 2 is the computer
 
@@ -37,9 +42,14 @@ public class SmartCompController : MonoBehaviour {
 
 	public GameObject angleAimPoint; //how the AI will find the angle to shoot to make it over the mountain
 
+	public float money = 1000.0f;
+
 
 	void Start ()
 	{
+		name = "Computer";
+		energy = 100;
+		energySlider.value = energy;
 		rb = GetComponent<Rigidbody2D> ();
 		sr = GetComponent<SpriteRenderer> ();
 		whaleActive = Resources.Load<Sprite>("Whale_Active");
@@ -53,6 +63,12 @@ public class SmartCompController : MonoBehaviour {
 
 		if (control.turn == 2 && !control.looping && compMoved) {
 			Vector3 pos = new Vector3 (0, 1, 0); //position of the computer whale but one up
+
+			gameObject.GetComponent<Rigidbody2D> ().isKinematic = true; //so the whale doesn't move or get hit during its turn
+			gameObject.GetComponent<Collider2D> ().enabled = false;
+			gameObject.GetComponent<Rigidbody2D> ().velocity = Vector3.zero;
+			gameObject.GetComponent<Rigidbody2D> ().freezeRotation = true;
+
 			GameObject splash = Instantiate (projectile, transform.position + pos, transform.rotation); //projectile gets same position and rotation as whale
 			splash.SetActive (true);
 			Rigidbody2D splashrb = splash.GetComponent<Rigidbody2D> ();
@@ -62,8 +78,9 @@ public class SmartCompController : MonoBehaviour {
 			print ("rangeX = " + rangeX);
 			Vector3 vector = CalculateTrajectoryVelocity(transform.position, playerWhale.transform.position + range, 5);
 			splashrb.velocity = vector; //FIRE!
+			money  -= projectile.GetComponent<SplashInterface> ().getCost ();
+
 			control.TakeControl (control.turn);
-			StartCoroutine (WaitUntilInactive(splash, splashrb, control));
 
 			//FireProjectile ();
 		}
@@ -90,25 +107,7 @@ public class SmartCompController : MonoBehaviour {
 			compMoved = true;
 		}
 	}
-
-	/*
-	 * Switches player control once the splash is finished acting
-	 */
-	IEnumerator WaitUntilInactive(GameObject obj, Rigidbody2D rb, ControlScript control) 
-	{
-		while (true) {
-			yield return new WaitForSeconds(1.0f); //check once a second to see if the turn has ended
-			//print("is sleeping?");
-			if (rb.IsSleeping ()) {
-				Destroy (obj);
-				//print ("Destroyed");
-				control.SwitchPlayerControl ();
-				compMoved = false;
-				yield break;
-			}
-		}
-	}
-
+		
 	public IEnumerator Pause(float p)
 	{
 		Time.timeScale = 0.1f;
@@ -141,17 +140,31 @@ public class SmartCompController : MonoBehaviour {
 		Destroy (obj);
 	}
 
-	IEnumerator LaunchAnimation() {
-		yield return new WaitForSeconds(0.5f);
-		sr.sprite = whaleIdle;
-	}
-
 	Vector3 CalculateTrajectoryVelocity(Vector3 origin, Vector3 target, float t)
 	{
 		float vx = (target.x - origin.x) / t;
 		float vz = (target.z - origin.z) / t;
 		float vy = ((target.y - origin.y) - 0.5f * Physics.gravity.y * t * t) / t;
 		return new Vector3(vx, vy, vz);
+	}
+		
+	public void LoseEnergy(int lostEnergy) {
+		energy -= lostEnergy;
+		energySlider.value = energy;
+		if (energy <= 0) 
+			control.EndGame (gameObject);
+	}
+
+	public string GetName() {
+		return name;
+	}
+
+	public void GotAHit (float reward) {
+		money += reward;
+	}
+
+	public void ChooseSplash () {
+
 	}
 
 
