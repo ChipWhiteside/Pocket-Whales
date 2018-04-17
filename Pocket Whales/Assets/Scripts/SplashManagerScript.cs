@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 /*
  * if this idea causes bugs and crashes we might be able to just use GetObjects by tags but I feel like that would be slower
@@ -43,5 +44,9 @@ public class SplashManagerScript : MonoBehaviour {
 				Destroy (o);
 		}
 		allSplashes.Clear ();
+	}
+
+	public bool IsEmpty() {
+		return allSplashes.Count == 0;
 	}
 }

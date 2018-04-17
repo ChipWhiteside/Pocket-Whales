@@ -54,6 +54,16 @@ public class SprinklerSplashScript : MonoBehaviour, SplashInterface {
 	 */
 	private bool endingTurn;
 
+	/*
+	 * The cost to fire this splash
+	 */
+	private float cost = 0.0f;
+
+	/*
+	 * The reward for hitting the enemy whale with this splash
+	 */
+	private float reward = 2.5f;
+
 
 	// Use this for initialization
 	void Start () {
@@ -121,4 +131,23 @@ public class SprinklerSplashScript : MonoBehaviour, SplashInterface {
 		}
 	}
 
+	public float getCost() {
+		return cost;
+	}
+
+	/**
+	 * Returns the reward for landing the splash
+	 */
+	public float getReward () {
+		return reward;
+	}
+
+	public Vector3 getWhalePos(Vector3 actualPos) {
+		float rangeLeft = -8f; //inclusive
+		float rangeRight = 8f; //inclusive
+
+		float rangeX = Random.Range (rangeLeft, rangeRight);
+		Vector3 pos = new Vector3 (rangeX, 0.0f, 0.0f);
+		return actualPos + pos;
+	}
 }

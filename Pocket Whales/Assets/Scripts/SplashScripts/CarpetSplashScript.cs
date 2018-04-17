@@ -40,19 +40,40 @@ public class CarpetSplashScript : MonoBehaviour, SplashInterface {
 	private ControlScript controlScript;
 
 	/*
+	 * SplashManager Game Object
+	 */
+	public GameObject splashManager;
+
+	/*
+	 * SplashManagerScript
+	 */
+	private SplashManagerScript splashManagerScript;
+
+	/*
 	 * Is the turn already ending
 	 */
 	private bool endingTurn;
+
+	/*
+	 * The cost of firing this splash
+	 */
+	private float cost = 0.0f;
+
+	/*
+	 * The reward for hitting the enemy whale with this splash
+	 */
+	private float reward = 5.0f;
 
 
 	// Use this for initialization
 	void Start () {
 		energyEffect = 3;
-		maxActiveTime = 7;
+		maxActiveTime = 10;
 		despawnTimer = 0; //always starts at zero
 		effectTimer = 0; //always starts at zero
 		timeUntilEffect = 0; //when the special effect should happen
 		controlScript = control.GetComponent<ControlScript> ();
+		splashManagerScript = splashManager.GetComponent<SplashManagerScript> ();
 		endingTurn = false;
 
 		EffectOnLaunch ();
@@ -78,10 +99,13 @@ public class CarpetSplashScript : MonoBehaviour, SplashInterface {
 		if (collision.gameObject.CompareTag("Whale")) {
 			EffectOnHit (collision.gameObject);
 		}
+		if (collision.gameObject.CompareTag ("OutOfBounds")) {
+			EndTurn ();
+		}
 	}
 
 	public void EffectOnLaunch() {
-
+		splashManagerScript.AddToSplashes (gameObject);
 	}
 
 	public void EffectOnTime() {
@@ -90,14 +114,10 @@ public class CarpetSplashScript : MonoBehaviour, SplashInterface {
 
 	public void EffectOnHit(GameObject whale) {
 		whale.GetComponent<WhaleControllerInterface> ().LoseEnergy (energyEffect);
-		gameObject.GetComponent<Rigidbody2D> ().isKinematic = true; //freezes object
-		gameObject.GetComponent<Rigidbody2D> ().velocity = Vector3.zero;
 		EndTurn ();
 	}
 
 	public void EffectOnBounce() {
-		gameObject.GetComponent<Rigidbody2D> ().isKinematic = true; //freezes object
-		gameObject.GetComponent<Rigidbody2D> ().velocity = Vector3.zero;
 		EndTurn ();
 	}
 
@@ -109,7 +129,27 @@ public class CarpetSplashScript : MonoBehaviour, SplashInterface {
 		if (!endingTurn) {
 			endingTurn = true;
 			Destroy (gameObject);
+			splashManagerScript.RemoveFromSplashes (gameObject);
 		}
 	}
 
+	public float getCost() {
+		return cost;
+	}
+
+	/**
+	 * Returns the reward for landing the splash
+	 */
+	public float getReward () {
+		return reward;
+	}
+
+	public Vector3 getWhalePos(Vector3 actualPos) {
+		float rangeLeft = -4f; //inclusive
+		float rangeRight = 4f; //inclusive
+
+		float rangeX = Random.Range (rangeLeft, rangeRight);
+		Vector3 pos = new Vector3 (rangeX, 15.0f, 0.0f);
+		return actualPos + pos;
+	}
 }

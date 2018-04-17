@@ -9,6 +9,9 @@ public class BouncerScript : MonoBehaviour, SplashInterface {
 	 */
 	private GameObject[] allSplashes;
 
+	public GameObject ownerWhale;
+	public GameObject targetWhale;
+
 	/*
 	 * Energy whale loses when hit by this splash 
 	 */
@@ -56,6 +59,18 @@ public class BouncerScript : MonoBehaviour, SplashInterface {
 
 	private Vector2 firstBounceVelocityNormalized;
 
+	/*
+	 * Cost to fire the shot
+	 */
+	private float cost = 50.0f;
+
+	/*
+	 * The reward for hitting the enemy whale with this splash
+	 */
+	private float reward = 25.0f;
+
+	private bool isPlayerTurn;
+
 	// Use this for initialization
 	void Start () {
 		energyEffect = 10;
@@ -66,7 +81,14 @@ public class BouncerScript : MonoBehaviour, SplashInterface {
 		controlScript = control.GetComponent<ControlScript> ();
 		endingTurn = false;
 		bounceCount = 0;
-
+		isPlayerTurn = controlScript.turn == 1;
+		if (isPlayerTurn) {
+			ownerWhale = controlScript.player1;
+			targetWhale = controlScript.player2;
+		} else {
+			ownerWhale = controlScript.player2;
+			targetWhale = controlScript.player1;
+		}
 		EffectOnLaunch ();
 	}
 
@@ -84,7 +106,7 @@ public class BouncerScript : MonoBehaviour, SplashInterface {
 		if (collision.gameObject.CompareTag("Splash")) {
 			Physics2D.IgnoreCollision(collision.gameObject.GetComponent<Collider2D>(), gameObject.GetComponent<Collider2D>());
 		}
-		if (collision.gameObject.CompareTag("Whale")) {
+		if (collision.gameObject.CompareTag(targetWhale.tag)) {
 			EffectOnHit (collision.gameObject);
 		}
 		if (collision.gameObject.CompareTag ("OutOfBounds")) {
@@ -101,6 +123,7 @@ public class BouncerScript : MonoBehaviour, SplashInterface {
 	}
 		
 	public void EffectOnHit(GameObject whale) {
+		ownerWhale.GetComponent<WhaleControllerInterface> ().GotAHit(reward);
 		whale.GetComponent<WhaleControllerInterface> ().LoseEnergy (energyEffect); //could change playerController and SmartCompController to implement an interface so this would only need to be one line
 		if (bounceCount == 0) {
 
@@ -140,6 +163,26 @@ public class BouncerScript : MonoBehaviour, SplashInterface {
 		{
 			Destroy(allSplashes[i]);
 		}
+	}
+
+	public float getCost() {
+		return cost;
+	}
+
+	/**
+	 * Returns the reward for landing the splash
+	 */
+	public float getReward () {
+		return reward;
+	}
+
+	public Vector3 getWhalePos(Vector3 actualPos) {
+		float rangeLeft = -2f; //inclusive
+		float rangeRight = 6f; //inclusive
+
+		float rangeX = Random.Range (rangeLeft, rangeRight);
+		Vector3 pos = new Vector3 (rangeX, 0.0f, 0.0f);
+		return actualPos + pos;
 	}
 
 }
