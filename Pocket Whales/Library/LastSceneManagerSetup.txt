@@ -1,1 +1,8 @@
+<<<<<<< HEAD
 sceneSetups: []
+=======
+sceneSetups:
+- path: Assets/Scenes/CompGame.unity
+  isLoaded: 1
+  isActive: 1
+>>>>>>> 9ed24834f63d32da74c17e7c6926dc217e7b9ec8

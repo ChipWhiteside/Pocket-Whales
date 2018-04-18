@@ -141,4 +141,13 @@ public class SprinklerSplashScript : MonoBehaviour, SplashInterface {
 	public float getReward () {
 		return reward;
 	}
+
+	public Vector3 getWhalePos(Vector3 actualPos) {
+		float rangeLeft = -8f; //inclusive
+		float rangeRight = 8f; //inclusive
+
+		float rangeX = Random.Range (rangeLeft, rangeRight);
+		Vector3 pos = new Vector3 (rangeX, 0.0f, 0.0f);
+		return actualPos + pos;
+	}
 }

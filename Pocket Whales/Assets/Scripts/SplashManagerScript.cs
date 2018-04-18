@@ -9,8 +9,6 @@ using UnityEngine.UI;
 public class SplashManagerScript : MonoBehaviour {
 
 	private List<GameObject> allSplashes;
-	public GameObject[] splashOptions;
-	public Dropdown dropdown;
 
 	// Use this for initialization
 	void Start () {
