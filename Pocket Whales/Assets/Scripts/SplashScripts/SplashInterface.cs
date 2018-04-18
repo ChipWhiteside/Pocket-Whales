@@ -45,4 +45,6 @@ public interface SplashInterface {
 	 * Returns the reward for landing the splash
 	 */
 	float getReward ();
+
+	Vector3 getWhalePos(Vector3 actualPos);
 }

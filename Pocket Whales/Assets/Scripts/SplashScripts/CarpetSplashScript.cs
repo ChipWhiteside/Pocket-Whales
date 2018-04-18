@@ -143,4 +143,13 @@ public class CarpetSplashScript : MonoBehaviour, SplashInterface {
 	public float getReward () {
 		return reward;
 	}
+
+	public Vector3 getWhalePos(Vector3 actualPos) {
+		float rangeLeft = -4f; //inclusive
+		float rangeRight = 4f; //inclusive
+
+		float rangeX = Random.Range (rangeLeft, rangeRight);
+		Vector3 pos = new Vector3 (rangeX, 15.0f, 0.0f);
+		return actualPos + pos;
+	}
 }

@@ -176,4 +176,13 @@ public class BouncerScript : MonoBehaviour, SplashInterface {
 		return reward;
 	}
 
+	public Vector3 getWhalePos(Vector3 actualPos) {
+		float rangeLeft = -2f; //inclusive
+		float rangeRight = 6f; //inclusive
+
+		float rangeX = Random.Range (rangeLeft, rangeRight);
+		Vector3 pos = new Vector3 (rangeX, 0.0f, 0.0f);
+		return actualPos + pos;
+	}
+
 }

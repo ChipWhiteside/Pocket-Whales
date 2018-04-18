@@ -17,6 +17,7 @@ public class ProfileScript : MonoBehaviour {
         prof = GameObject.Find("Profile").GetComponent<Text>();
         StartCoroutine(setProfile(username));
     }
+
     private void Update()
     {
        
