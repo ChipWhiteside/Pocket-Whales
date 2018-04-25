@@ -9,6 +9,7 @@ public class CloudScript : MonoBehaviour {
 	private CloudManager cloudMan; //reference to the cloud manager
 	private float numClouds;
 	private float cloudsAllowed;
+    private bool isBCloud = false;
 
 	public Color color; //the color of the cloud
 
@@ -33,13 +34,17 @@ public class CloudScript : MonoBehaviour {
 
 		transform.Translate(userDirection * speed * Time.deltaTime); 
 		if (transform.position.x <= leftBoundary) {
-			cloudMan.cloudsAllowed++;
+            if (isBCloud)
+                cloudMan.numBClouds--;
+            else
+                cloudMan.numClouds--;
 			Destroy (this.gameObject);			
 		}
 	}
 
-	public void setValues(float xVal, float speed, float scale, float height) {
-		this.speed = speed;
+	public void setValues(bool bCloud, float xVal, float speed, float scale, float height) {
+        isBCloud = bCloud;
+        this.speed = speed;
 		this.scale = scale;
 		transform.position = new Vector3(xVal, height, 0.0f);
 		transform.localScale += new Vector3 (scale, scale, scale);

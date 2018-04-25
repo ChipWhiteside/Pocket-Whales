@@ -21,15 +21,15 @@ public class CloudManager : MonoBehaviour {
 	void Start () {
 		time = Random.Range (4f, 18f);
 		numClouds = 0;
-		cloudsAllowed = Random.Range (7f, 12f);
-		bCloudsAllowed = Random.Range (9f, 15f);
+		cloudsAllowed = Random.Range (3f, 6f);
+		bCloudsAllowed = Random.Range (5f, 8f);
 
 		timeStore = time;
 		cloudStart = new Vector3(originCloud.transform.position.x, originCloud.transform.position.y, originCloud.transform.position.z);
 		bCloudStart = new Vector3(backgroundOCloud.transform.position.x, backgroundOCloud.transform.position.y, backgroundOCloud.transform.position.z);
 
-		int numCloudStart = (int) Random.Range (2f, 4f); //number of foregrounds clouds to be spawned at start
-		int numBCloudStart = (int) Random.Range (5f, 7f); //number of background clouds to be spawned at start
+        int numCloudStart = (int) Random.Range (1f, 3f); //number of foregrounds clouds to be spawned at start
+        int numBCloudStart = (int) Random.Range (3f, (bCloudsAllowed-1)); //number of background clouds to be spawned at start
 
 		while (numCloudStart > 0) { //spawn a random number of foreground clouds at start of game
 			spawnCloud (Random.Range (-40f, 40f));
@@ -71,17 +71,17 @@ public class CloudManager : MonoBehaviour {
 	}
 
 	void spawnCloud (float xVal) {
-		GameObject newCloud = Instantiate(originCloud, new Vector3(xVal, Random.Range(8.5f, 30f)), originCloud.transform.rotation);
+		GameObject newCloud = Instantiate(originCloud, new Vector3(xVal, Random.Range(8.5f, 20f)), originCloud.transform.rotation);
 		numClouds++;
 		CloudScript newCloudScript = newCloud.GetComponent<CloudScript> ();
 		//newCloud (Sorting Layer: Piece) (Order in Layer: 1)
-		newCloudScript.setValues (newCloud.transform.position.x, Random.Range (1f, 2.5f), Random.Range (.45f, .6f), newCloud.transform.position.y);
+		newCloudScript.setValues (false, newCloud.transform.position.x, Random.Range (1f, 2.5f), Random.Range (.45f, .6f), newCloud.transform.position.y);
 	}
 
 	void spawnBCloud(float xVal) {
-		GameObject newBCloud = Instantiate(backgroundOCloud, new Vector3(xVal, Random.Range(8.5f, 30f)), backgroundOCloud.transform.rotation);
+		GameObject newBCloud = Instantiate(backgroundOCloud, new Vector3(xVal, Random.Range(8.5f, 25f)), backgroundOCloud.transform.rotation);
 		numBClouds++;
 		CloudScript newBCloudScript = newBCloud.GetComponent<CloudScript> ();
-		newBCloudScript.setValues (newBCloud.transform.position.x, Random.Range (.25f, .75f), Random.Range (.15f, .25f), newBCloud.transform.position.y);
+        newBCloudScript.setValues (true, newBCloud.transform.position.x, Random.Range (.25f, .75f), Random.Range (.15f, .25f), newBCloud.transform.position.y);
 	}
 }
