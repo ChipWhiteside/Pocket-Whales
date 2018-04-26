@@ -3,7 +3,7 @@
     <Files>
       <File FileName="Assets/Scripts/CloudScripts/CloudManager.cs" Line="66" Column="49" />
       <File FileName="Assets/Scripts/CloudScripts/CloudScript.cs" Line="23" Column="27" />
-      <File FileName="Assets/Scripts/Leaderboard.cs" Line="67" Column="1" />
+      <File FileName="Assets/Scripts/Leaderboard.cs" Line="85" Column="10" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
