@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Text.RegularExpressions;
@@ -88,7 +89,9 @@ public class Login : MonoBehaviour {
 			Debug.Log ("in ");
 			GameManager.username = Username;
 
-		}
+            SceneManager.LoadScene("MainMenu");
+
+        }
 		Debug.Log (reply);
 	}
 }
