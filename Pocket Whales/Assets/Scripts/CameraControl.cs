@@ -104,6 +104,7 @@ public class CameraControl : MonoBehaviour {
 	public void SwitchCamera() {
 		camSwitch = !camSwitch;
 		mainCamera.gameObject.SetActive (camSwitch);
+		playerCamera.orthographicSize = 10;
 		playerCamera.gameObject.SetActive (!camSwitch);
 	}
 
