@@ -1,9 +1,10 @@
 ﻿<Properties StartupConfiguration="{6E6945CC-6C3C-0512-0881-F23ED5C6C055}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Leaderboard.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Music.cs">
     <Files>
       <File FileName="Assets/Scripts/CloudScripts/CloudManager.cs" Line="66" Column="49" />
       <File FileName="Assets/Scripts/CloudScripts/CloudScript.cs" Line="23" Column="27" />
-      <File FileName="Assets/Scripts/Leaderboard.cs" Line="85" Column="10" />
+      <File FileName="Assets/Scripts/Leaderboard.cs" Line="85" Column="43" />
+      <File FileName="Assets/Scripts/Music.cs" Line="4" Column="21" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
