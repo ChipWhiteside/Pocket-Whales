@@ -11,6 +11,7 @@ TagManager:
   - Terrain
   - Splash
   - Whale
+  - OutOfBounds
   layers:
   - Default
   - TransparentFX
@@ -23,7 +24,7 @@ TagManager:
   - Clouds
   - Ground
   - DragCircle
-  - 
+  - Splash
   - 
   - 
   - 
@@ -56,4 +57,10 @@ TagManager:
     locked: 0
   - name: SpriteGround
     uniqueID: 1864561567
+    locked: 0
+  - name: New Layer
+    uniqueID: 1672401161
+    locked: 0
+  - name: Splash
+    uniqueID: 3237697935
     locked: 0
