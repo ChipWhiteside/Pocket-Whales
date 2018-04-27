@@ -1,8 +1,4 @@
 sceneSetups:
-<<<<<<< HEAD
-- path: Assets/Scenes/Pocket Whales.unity
-=======
-- path: Assets/Scenes/CompGame.unity
->>>>>>> 52e811a041b4551c784468e24ecc453943bfce12
+- path: Assets/Scenes/MainMenu.unity
   isLoaded: 1
   isActive: 1

@@ -51,7 +51,7 @@ public class Music : MonoBehaviour {
 			Text[] texts = Text.FindObjectsOfType (typeof (Text)) as Text[];
 			//identify the one we want
 			volumeText = texts [1];
-			//udjust accordingly
+			//adjust accordingly
 			myMusic.volume = volume.value;
 			volumeText.text = "Volume: " + ((int)(volume.value * 100)).ToString();
 		}
