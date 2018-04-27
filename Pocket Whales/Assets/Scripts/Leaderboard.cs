@@ -64,11 +64,7 @@ public class Leaderboard : MonoBehaviour
         lead = GameObject.Find("Leaderboard").GetComponent<Text>();
 
         WWWForm form = new WWWForm();
-<<<<<<< HEAD
         //form.AddField("category", sort);
-=======
-       // form.AddField("category", sort);
->>>>>>> 52e811a041b4551c784468e24ecc453943bfce12
         WWW www = new WWW("https://csweb.wheaton.edu/~pocketwhales/getLeaderboard.php", form);
         yield return www;
         string reply = www.text;
@@ -86,11 +82,7 @@ public class Leaderboard : MonoBehaviour
         lead = GameObject.Find("Leaderboard").GetComponent<Text>();
 
         WWWForm form = new WWWForm();
-<<<<<<< HEAD
         //form.AddField("category", sort);
-=======
-       // form.AddField("category", sort);
->>>>>>> 52e811a041b4551c784468e24ecc453943bfce12
         WWW www = new WWW("https://csweb.wheaton.edu/~pocketwhales/getLeaderboard.php", form);
         yield return www;
         string reply = www.text;
