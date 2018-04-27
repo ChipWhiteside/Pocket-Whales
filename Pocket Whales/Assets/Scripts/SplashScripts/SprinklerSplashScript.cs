@@ -97,7 +97,7 @@ public class SprinklerSplashScript : MonoBehaviour, SplashInterface {
 			EffectOnHit (collision.gameObject);
 		}
 		if (collision.gameObject.CompareTag ("OutOfBounds")) {
-			EndTurn ();
+			//EndTurn ();
 		}
 	}
 
@@ -127,7 +127,8 @@ public class SprinklerSplashScript : MonoBehaviour, SplashInterface {
 		if (!endingTurn) {
 			endingTurn = true;
 			splashManagerScript.RemoveFromSplashes (gameObject);
-			Destroy (gameObject);
+			if(gameObject != null)
+				Destroy (gameObject);
 		}
 	}
 

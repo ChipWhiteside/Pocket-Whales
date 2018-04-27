@@ -130,16 +130,23 @@ public class NormalScript : MonoBehaviour, SplashInterface
     {
         ownerWhale.GetComponent<WhaleControllerInterface>().GotAHit(reward);
         whale.GetComponent<WhaleControllerInterface>().LoseEnergy(energyEffect); //could change playerController and SmartCompController to implement an interface so this would only need to be one line
+		StartCoroutine(WaitToEnd());
     }
 
     public void EffectOnBounce()
     {
+		StartCoroutine(WaitToEnd());
     }
 
     public void EffectOnTap()
     {
 
     }
+
+	IEnumerator WaitToEnd() {
+		yield return new WaitForSeconds(5f);
+		EndTurn();
+	}
 
     public void EndTurn()
     {

@@ -200,16 +200,21 @@ public class SprinklerScript : MonoBehaviour, SplashInterface {
 		controlScript.SwitchPlayerControl ();
 	}
 
+
 	public float getCost() {
 		return cost;
 	}
 
+
 	/**
 	 * Returns the reward for landing the splash
 	 */
+
 	public float getReward () {
 		return reward;
 	}
+
+	
 
 	public Vector3 getWhalePos(Vector3 actualPos) {
 		float rangeLeft = -8f; //inclusive
@@ -219,4 +224,5 @@ public class SprinklerScript : MonoBehaviour, SplashInterface {
 		Vector3 pos = new Vector3 (rangeX, 0.0f, 0.0f);
 		return actualPos + pos;
 	}
+
 }

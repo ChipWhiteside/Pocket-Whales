@@ -68,6 +68,7 @@ public class DragCircle : MonoBehaviour {
 			new GradientAlphaKey[] { new GradientAlphaKey(alpha, 0.0f), new GradientAlphaKey(alpha, 1.0f) }
 		);
 		lineRenderer.colorGradient = gradient;
+		gameObject.SetActive(false);
 	}
 	
 	// Update is called once per frame

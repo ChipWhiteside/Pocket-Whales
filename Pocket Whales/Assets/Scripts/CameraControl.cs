@@ -29,6 +29,8 @@ public class CameraControl : MonoBehaviour {
 	private Vector3 endPos;
 
 	private Vector3 targetPos;
+	
+	public GameObject dragCircle;
 
 	private float waitTime = 2.0f; //amount of time the game will show the whole map at beginning of match
 
@@ -74,7 +76,7 @@ public class CameraControl : MonoBehaviour {
 				Camera.main.orthographicSize = camSize; //sets camera size
 				if (fracJourney >= 1) {
 					zooming = false;
-					//activate dragCircle
+					dragCircle.SetActive(true);
 					//print ("camSwitch camControl");
 					SwitchCamera ();
 				}

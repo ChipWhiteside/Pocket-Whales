@@ -42,7 +42,7 @@ public class PlayerController : MonoBehaviour, WhaleControllerInterface {
 		name = "Player1";
 		energy = 100;
 		energySlider.value = energy;
-		rb = GetComponent<Rigidbody2D> ();
+		//rb = whaleComponent<Rigidbody2D> ();
 		sr = GetComponent<SpriteRenderer> ();
 		whaleActive = Resources.Load<Sprite>("Whale_Active");
 		whaleIdle = Resources.Load<Sprite> ("Whale_Idle");
@@ -76,10 +76,10 @@ public class PlayerController : MonoBehaviour, WhaleControllerInterface {
 	}
 
 	public void Launch(float angle, float power, GameObject splashOption) {
-		float moneyNeeded = projectile.GetComponent<SplashInterface> ().getCost ();
-		if (money >= moneyNeeded) {
+		//float moneyNeeded = projectile.GetComponent<SplashInterface> ().getCost ();
+		//if (money >= moneyNeeded) {
 			if (control.turn == playerNo && !control.looping) {
-				money -= moneyNeeded;
+				//money -= moneyNeeded;
 				Vector3 pos = new Vector3 (0, 0, 0);
 
 				gameObject.GetComponent<Rigidbody2D> ().isKinematic = true; //so the whale doesn't move or get hit during its turn
@@ -97,9 +97,9 @@ public class PlayerController : MonoBehaviour, WhaleControllerInterface {
 				compMoved = false;
 				//StartCoroutine (WaitUntilInactive(splash, splashrb, control));
 			}
-		} else {
-			print ("Insufficient funds...\nNeeded: " + money + "   Current: " + moneyNeeded);
-		}
+		//} else {
+		//	print ("Insufficient funds...\nNeeded: " + money + "   Current: " + moneyNeeded);
+		//}
 	}
 
 

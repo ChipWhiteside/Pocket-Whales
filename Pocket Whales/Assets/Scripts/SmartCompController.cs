@@ -102,7 +102,7 @@ public class SmartCompController : MonoBehaviour, WhaleControllerInterface {
 			//print ("Cam" + mainCamOriginalTransform.position.x + mainCamOriginalTransform.position.y + mainCamOriginalTransform.position.z);
 			cameraControl.Zoom (mainCamOriginalPosition, 15f, 20f, mainCam.orthographicSize, false);
 			cameraControl.SwitchWhale(); //switch the current following whale for player cam
-			money -= projectile.GetComponent<SplashInterface> ().getCost ();
+			//money -= projectile.GetComponent<SplashInterface> ().getCost ();
 
 			flying = true;
 
