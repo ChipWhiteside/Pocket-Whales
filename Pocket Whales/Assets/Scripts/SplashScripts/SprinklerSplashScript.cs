@@ -67,7 +67,7 @@ public class SprinklerSplashScript : MonoBehaviour, SplashInterface {
 
 	// Use this for initialization
 	void Start () {
-		energyEffect = 1;
+		energyEffect = 3;
 		maxActiveTime = 7;
 		despawnTimer = 0; //always starts at zero
 		effectTimer = 0; //always starts at zero

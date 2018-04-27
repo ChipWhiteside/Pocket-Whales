@@ -73,7 +73,7 @@ public class BouncerScript : MonoBehaviour, SplashInterface {
 
 	// Use this for initialization
 	void Start () {
-		energyEffect = 10;
+		energyEffect = 7;
 		maxActiveTime = 20;
 		despawnTimer = 0; //always starts at zero
 		effectTimer = 0; //always starts at zero

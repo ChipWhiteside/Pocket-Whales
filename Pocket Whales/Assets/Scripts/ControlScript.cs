@@ -34,6 +34,8 @@ public class ControlScript : MonoBehaviour {
 	public GameObject endGame;
 
 	public GameObject camera;
+	
+	private CameraControl cameraControl;
 
 	void Start()
 	{
@@ -42,6 +44,7 @@ public class ControlScript : MonoBehaviour {
 		looping = false;
 		turn = 1;
 		dCircleScript = dragCircle.GetComponent<DragCircle> ();
+		cameraControl = camera.GetComponent<CameraControl> ();
 	}
 		
 	/*
@@ -114,7 +117,7 @@ public class ControlScript : MonoBehaviour {
 
 	public void EndGame(GameObject winner) {
 		TakeControl (3); //No one can do anything anymore
-
+		cameraControl.EndGame();
 		if (winner.Equals (player1)) {
 			WhaleControllerInterface script = player2.GetComponent<WhaleControllerInterface> ();
 			endGameText.text = "Congratulations " + script.GetName () + "!";

@@ -7,6 +7,8 @@ public class CameraControl : MonoBehaviour {
 	public Camera mainCamera;
 
 	public Camera playerCamera;
+	
+	public Camera fullCamera;
 
 	private bool camSwitch;
 
@@ -105,9 +107,9 @@ public class CameraControl : MonoBehaviour {
 
 	public void SwitchCamera() {
 		camSwitch = !camSwitch;
-		mainCamera.gameObject.SetActive (camSwitch);
 		playerCamera.orthographicSize = 10;
 		playerCamera.gameObject.SetActive (!camSwitch);
+		mainCamera.gameObject.SetActive (camSwitch);
 	}
 
 	public void setFieldOfView(float power){ //change field of view for playerCam
@@ -156,6 +158,12 @@ public class CameraControl : MonoBehaviour {
 		mainCamera.transform.position = playerCamera.transform.position;
 	}
 
+	public void EndGame() {
+		fullCamera.gameObject.SetActive(true);
+		playerCamera.gameObject.SetActive (false);
+		mainCamera.gameObject.SetActive (false);
+	}
+	
 	public void FollowSplash (){
 
 	}
